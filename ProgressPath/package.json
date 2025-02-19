@@ -1,25 +1,37 @@
 {
   "name": "main",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "bootcamp project 3",
+  "main": "server.js",
   "scripts": {
-    "start": "node server/server.js",
-    "start:dev": "concurrently \"cd server && npm run watch\" \"wait-on tcp:3001 && cd client && npm run dev\"",
-    "server": "cd server && npm start",
-    "server:dev": "cd server && npm run dev",
+    "test": "test",
+    "start": "cd server && npm run build && node dist/server.js",
+    "dev": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
+    "dev:build": "npm run build && concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
     "install": "cd server && npm i && cd ../client && npm i",
-    "client:build": "cd client && npm run build",
-    "client:dev": "cd client && npm run dev",
-    "seed": "cd server && npm run seed",
     "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
-    "render-build": "npm install && npm run build"
+    "render-build": "npm install && npm run build",
+    "render-start": "cd server && npm start"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "wait-on": "^7.2.0"
+    "@types/jwt-decode": "^2.2.1",
+    "@types/node": "^22.13.1",
+    "@types/react-dom": "^19.0.3",
+    "@types/react-router-dom": "^5.3.3",
+    "concurrently": "^8.2.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.12.11",
+    "@types/express": "^5.0.0",
+    "apollo-server-express": "^3.13.0",
+    "express": "^4.21.2",
+    "graphql": "^16.10.0",
+    "jwt-decode": "^4.0.0",
+    "react": "^19.0.0",
+    "react-router-dom": "^7.1.5"
   }
 }

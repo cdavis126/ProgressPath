@@ -1,7 +1,15 @@
 import { User } from '../models/index.js';
+
+interface IUser {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  isCorrectPassword(password: string): Promise<boolean>;
+}
 import { signToken, AuthenticationError } from '../utils/auth.js';
 
-// Define types for the arguments
 interface AddUserArgs {
   input: {
     firstName: string;
@@ -22,13 +30,13 @@ interface UserArgs {
 
 const resolvers = {
   Query: {
-    users: async () => {
+    users: async (): Promise<IUser[]> => {
       return User.find();
     },
-    user: async (_parent: any, { email }: UserArgs) => {
+    user: async (_parent: any, { email }: UserArgs): Promise<IUser | null> => {
       return User.findOne({ email });
     },
-    me: async (_parent: any, _args: any, context: any) => {
+    me: async (_parent: any, _args: any, context: any): Promise<IUser | null> => {
       if (context.user) {
         return User.findOne({ _id: context.user._id });
       }
@@ -36,7 +44,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    addUser: async (_parent: any, { input }: AddUserArgs) => {
+    addUser: async (_parent: any, { input }: AddUserArgs): Promise<{ token: string, user: IUser }> => {
       const { firstName, lastName, email, password } = input;
       
       // Check if the user already exists
@@ -48,9 +56,9 @@ const resolvers = {
       // Create the new user
       const user = await User.create({ firstName, lastName, email, password });
       const token = signToken(user.firstName, user.lastName, user.email);
-      return { token, user };
+      return { token, user: user.toObject() as IUser };
     },
-    login: async (_parent: any, { email, password }: LoginUserArgs) => {
+    login: async (_parent: any, { email, password }: LoginUserArgs): Promise<{ token: string, user: IUser }> => {
       const user = await User.findOne({ email });
       if (!user) {
         throw new AuthenticationError('Could not authenticate user.');
@@ -60,10 +68,9 @@ const resolvers = {
         throw new AuthenticationError('Could not authenticate user.');
       }
       const token = signToken(user.firstName, user.lastName, user.email);
-      return { token, user };
+      return { token, user: user.toObject() as IUser };
     },
   },
 };
 
 export default resolvers;
-
