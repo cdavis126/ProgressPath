@@ -6,7 +6,7 @@ const Dashboard = () => {
     <div>
       <Navbar />
 	    <Header />
-      <div>
+      <div style={{ marginTop: '50px', paddingLeft: '30px' }}>
         <h1>Goal Section</h1>
         <p>This is the goal section placeholder</p>
       </div>
