@@ -16,8 +16,8 @@ const Navbar = () => {
           <Link to="/add" className="nav-icon white-text">
             <i className="bi bi-patch-plus-fill"/> {/* Eventually Link to Habit Modal*/}
           </Link>
-          <Link to="/contact" className="nav-icon white-text">
-          <i className="bi bi-chat-heart"/> {/* Eventually Link to Contact Us Page or Modal */}
+          <Link to="/Searchboard" className="nav-icon white-text">
+          <i className="bi bi-search-heart"></i> {/* Eventually Link to API Board Page */}
           </Link>
           <Link to="/profile" className="nav-icon white-text">
             <i className="bi bi-person-circle"/> {/* Eventually Link to Profile Modal*/}

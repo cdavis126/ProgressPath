@@ -3,8 +3,8 @@
 const Home = () => {
     return (
         <div style={{ textAlign: 'center', padding: '50px' }}>
-            <h1>PageName</h1>
-            <p>This page is under construction.</p>
+            <h1>Home Page</h1>
+            <p>This page is the homepage.</p>
         </div>
     );
 };

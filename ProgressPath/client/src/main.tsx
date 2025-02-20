@@ -6,6 +6,7 @@ import App from './App.jsx';
 import ErrorPage from './pages/Error';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
+import Searchboard from './pages/Searchboard';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,9 @@ const router = createBrowserRouter([
       }, {
         path: '/dashboard',
         element: <Dashboard />
+      }, {
+        path: '/searchboard',
+        element: <Searchboard />
       }
     ]
   },
