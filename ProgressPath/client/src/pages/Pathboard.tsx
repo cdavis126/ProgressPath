@@ -8,17 +8,16 @@ const Pathboard = () => {
     <div>
       <Navbar />
       <Carousel />
-      <div style={{ marginTop: '50px', paddingLeft: '30px' }}>
-        <h1>Idea Pathway</h1>
+      <div style={{ marginTop: '50px', textAlign: 'center', padding: '0 30px' }}>
+        <h1 style={{ color: '#f4989c', fontSize: '2.5rem' }}>Idea Pathway</h1>
+        <p style={{ fontSize: '1.5rem', color: '#EBD2B4'}}>
+          Filter or search to discover your path!
+        </p>
       </div>
-      <FilterBar />
       <SearchBar />
-      <div style={{ marginTop: '50px', paddingLeft: '30px' }}>
-        <h1>- The Ideas You Loved</h1>
-        <p>This is the Saved Inspiration placeholder</p>
-      </div>
-      <div style={{ marginTop: '50px', paddingLeft: '30px' }}>
-        <h1>- The Ideas You Loved</h1>
+      <FilterBar />
+      <div style={{ marginTop: '50px', textAlign: 'left', padding: '0 30px' }}>
+        <h1>Path's You Loved</h1>
         <p>This is the Saved Inspiration placeholder</p>
       </div>
     </div>
