@@ -1,17 +1,20 @@
 import Navbar from '../components/Navbar';
 import Carousel from '../components/Carousel';
-import SearchCollection from '../components/Collection/SearchCollection';
+import FilterBar from '../components/PathBoard/filterbar';
 
-const Searchboard = () => {
+const Pathboard = () => {
   return (
     <div>
       <Navbar />
       <Carousel />
       <div style={{ marginTop: '50px', paddingLeft: '30px' }}>
-        <h1>- Idea Collection</h1>
-        <p>This is the Inspiration placeholder</p>
+        <h1>Idea Pathway</h1>
       </div>
-      <SearchCollection/>
+      <FilterBar />
+      <div style={{ marginTop: '50px', paddingLeft: '30px' }}>
+        <h1>- The Ideas You Loved</h1>
+        <p>This is the Saved Inspiration placeholder</p>
+      </div>
       <div style={{ marginTop: '50px', paddingLeft: '30px' }}>
         <h1>- The Ideas You Loved</h1>
         <p>This is the Saved Inspiration placeholder</p>
@@ -20,4 +23,4 @@ const Searchboard = () => {
   );
 };
 
-export default Searchboard;
+export default Pathboard;

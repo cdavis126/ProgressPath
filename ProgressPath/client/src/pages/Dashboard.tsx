@@ -7,8 +7,8 @@ const Dashboard = () => {
       <Navbar />
 	    <Header />
       <div style={{ marginTop: '50px', paddingLeft: '30px' }}>
-        <h1>Goal Section</h1>
-        <p>This is the goal section placeholder</p>
+        <h1>Path Section</h1>
+        <p>This is the path/goal section placeholder</p>
       </div>
     </div>
   );
