@@ -1,0 +1,76 @@
+.idea-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .idea-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .idea-card-image {
+    position: relative;
+  }
+  
+  .idea-card-img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+  }
+  
+  .save-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: #f4989c;
+    font-size: 1.0rem;
+  }
+  
+  .heart-icon {
+    transition: color 0.3s ease;
+  }
+  
+  .save-btn:hover .heart-icon {
+    color: #ff5f6d;
+  }
+  
+  .idea-card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  .idea-card-category {
+    font-size: 1rem;
+    color: #6c5ce7;
+    margin: 5px 0;
+  }
+  
+  .idea-card-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.4;
+    margin-top: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .visit-btn {
+    margin-top: 15px;
+    width: 100%;
+    border-radius: 20px;
+  }
+  
+  
+  
