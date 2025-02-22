@@ -1,25 +1,18 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
-// Define an interface for the User document
-interface IUser extends Document {
-  firstName: string;
-  lastName: string;
+// Interface for the User document
+export interface UserDocument extends Document {
+  id: string;
+  username: string;
   email: string;
   password: string;
   isCorrectPassword(password: string): Promise<boolean>;
 }
 
-// Define the schema for the User document
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema<UserDocument>(
   {
-    firstName: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-    },
-    lastName: {
+    username: {
       type: String,
       required: true,
       unique: true,
@@ -34,7 +27,6 @@ const userSchema = new Schema<IUser>(
     password: {
       type: String,
       required: true,
-      minlength: 5,
     },
   },
   {
@@ -44,7 +36,7 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-userSchema.pre<IUser>('save', async function (next) {
+userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
@@ -53,10 +45,10 @@ userSchema.pre<IUser>('save', async function (next) {
   next();
 });
 
-userSchema.methods.isCorrectPassword = async function (password: string): Promise<boolean> {
+userSchema.methods.isCorrectPassword = async function (password: string) {
   return bcrypt.compare(password, this.password);
 };
 
-const User = model<IUser>('User', userSchema);
+const User = model<UserDocument>('User', userSchema);
 
 export default User;
