@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { FaSearch } from 'react-icons/fa';
-import './search.css';
+import './searchbar.css';
 
-const SearchCollection = () => {
+const SearchBar = () => {
   const [searchInput, setSearchInput] = useState('');
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -21,7 +21,7 @@ const SearchCollection = () => {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             type="text"
-            size="lg"
+            size="sm"
             placeholder="Search for an idea"
             className="search-input"
           />
@@ -32,7 +32,8 @@ const SearchCollection = () => {
   );
 };
 
-export default SearchCollection;
+export default SearchBar;
+
 
 
 
