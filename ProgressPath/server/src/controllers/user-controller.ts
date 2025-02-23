@@ -2,15 +2,27 @@ import type { Request, Response } from 'express';
 import User from '../models/User.js';
 import { signToken } from '../services/auth.js';
 
-// Get single user by their id or username
+// Get single user by their ID or username (and populate saved and skipped ideas)
 export const getSingleUser = async (req: Request, res: Response) => {
-  const foundUser = await User.findOne({
-    $or: [{ _id: req.user ? req.user._id : req.params.id }, { username: req.params.username }],
-  });
-  if (!foundUser) {
-    return res.status(400).json({ message: 'Cannot find a user with this id!' });
+  try {
+    const foundUser = await User.findOne({
+      $or: [
+        { _id: req.user ? req.user._id : req.params.id },
+        { username: req.params.username },
+      ],
+    })
+      .select('-__v')
+      .populate('savedIdeas')
+      .populate('skippedIdeas');
+
+    if (!foundUser) {
+      return res.status(400).json({ message: 'Cannot find a user with this id or username!' });
+    }
+
+    return res.json(foundUser);
+  } catch (err) {
+    return res.status(500).json(err);
   }
-  return res.json(foundUser);
 };
 
 // Create a user, sign a token, and send it back (to signup form)
