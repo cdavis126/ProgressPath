@@ -36,3 +36,35 @@ export const login = async (req: Request, res: Response) => {
   const token = signToken(user.username, user.password, user._id);
   return res.json({ token, user });
 };
+
+// Update existing user
+export const updateUser = async (req: Request, res: Response) => {
+  try {
+    const dbUserData = await User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $set: req.body },
+      { new: true }
+    );
+    if (!dbUserData) {
+      return res.status(404).json({ message: 'No user with this ID' });
+    }
+    res.json(dbUserData);
+  } catch (err) {
+    res.status(500).json({ message: 'Error updating user', error: err });
+  }
+};
+
+// Delete a user
+export const deleteUser = async (req: Request, res: Response): Promise<Response | void> => {
+  try {
+    const dbUserData = await User.findOneAndDelete({ _id: req.params.userId });
+
+    if (!dbUserData) {
+      return res.status(404).json({ message: 'No user with this ID' });
+    }
+
+    res.json({ message: 'User successfully deleted!' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error deleting user', error: err });
+  }
+};
