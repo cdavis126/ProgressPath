@@ -69,7 +69,7 @@ const resolvers = {
       const token = signToken(user.username, user.email, user._id);
       return { token, user: user.toObject() };
     },
-    saveIdea: async (_parent: unknown, { ideaData }: { ideaData: { title: string, description: string, image: string, categoryId: string, heartIcon: boolean, skipIcon: boolean } }, context: Context) => {
+    saveIdea: async (_parent: unknown, { ideaData }: { ideaData: { title: string, description: string, image: string, categoryId: string, saveIdea: boolean, skipIdea: boolean } }, context: Context) => {
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in!');
       }
@@ -80,7 +80,7 @@ const resolvers = {
       const ideaPrompt = await IdeaPrompt.create({ ...ideaData, category: category._id });
       const user = await User.findByIdAndUpdate(
         context.user._id,
-        { $addToSet: { savedIdeas: ideaPrompt._id } }, // Push the idea's ID, ensuring no duplicates
+        { $addToSet: { savedIdeas: ideaPrompt._id } },
         { new: true, runValidators: true }
       ).populate('savedIdeas');
       if (!user) {

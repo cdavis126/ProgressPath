@@ -1,33 +1,57 @@
-const typeDefs = `
+import { gql } from 'graphql-tag';
+
+const typeDefs = gql`
+  type Category {
+    _id: ID!
+    name: String!
+  }
+  type IdeaPrompt {
+    _id: ID!
+    title: String!
+    description: String!
+    image: String!
+    category: Category
+    saveIdea: Boolean!
+    skipIdea: Boolean!
+  }
   type User {
-    _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    password: String
+    _id: ID!
+    username: String!
+    email: String!
+    savedIdeas: [IdeaPrompt]
+    skippedIdeas: [IdeaPrompt]
+  }
+  type Auth {
+    token: String!
+    user: User!
   }
 
   input UserInput {
-    firstName: String!
-    lastName: String!
+    username: String!
     email: String!
     password: String!
   }
-  
-  type Auth {
-    token: ID!
-    user: User
+  input IdeaPromptInput {
+    title: String!
+    description: String!
+    image: String!
+    categoryId: String!
+    saveIdea: Boolean!
+    skipIdea: Boolean!
   }
 
   type Query {
-    users: [User]
-    user(email: String!): User
     me: User
+    getAllIdeas: [IdeaPrompt]
+    getIdeaPromptsByCategory(categoryId: String!): [IdeaPrompt]
   }
 
   type Mutation {
-    addUser(input: UserInput!): Auth
-    login(email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth!
+    addUser(username: String!, email: String!, password: String!): Auth!
+    saveIdea(ideaData: IdeaPromptInput!): User
+    removeIdea(ideaId: String!): User
+    skipIdea(ideaId: String!): User
   }
 `;
 
