@@ -1,0 +1,71 @@
+/* Login Page Layout */
+.login-container {
+    padding-top: 80px;
+}
+
+/* Left Column (Form Section) */
+.form-section {
+    background: white;
+    padding: 40px;
+    border-right: 2px solid #EBD2B4;
+}
+
+/* Form Styling */
+.form-section h2 {
+    color: black;
+}
+
+.form-section .btn-primary {
+    background-color: #F4989C;
+    border-color: #F4989C;
+}
+
+.form-section .btn-primary:hover {
+    background-color: #ACECF7;
+    border-color: #ACECF7;
+}
+
+/* Sign Up Link */
+.signup-text {
+    color: black;
+}
+
+.bold-link {
+    font-weight: bold;
+    color: #F4989C;
+    text-decoration: none;
+}
+
+.bold-link:hover {
+    color: #ACECF7;
+}
+
+/* Right Column (Marketing Section) */
+.marketing-section {
+    padding: 40px;
+    background: #D6F6DD;
+    text-align: center;
+}
+
+.marketing-header {
+    color: black;
+    font-weight: bold;
+}
+
+.marketing-list {
+    list-style: none;
+    padding: 0;
+}
+
+.marketing-list li {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.goal-text {
+    color: black;
+}
