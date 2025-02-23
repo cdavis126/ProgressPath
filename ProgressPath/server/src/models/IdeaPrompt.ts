@@ -1,12 +1,12 @@
-import { Schema, type Document } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
 export interface IdeaPromptDocument extends Document {
   title: string;
   description: string;
   image: string;
   category: Schema.Types.ObjectId;
-  heartIcon: boolean;
-  skipIcon: boolean;
+  savedIdeas: boolean;
+  skippedIdeas: boolean;
 }
 
 const ideaPromptSchema = new Schema<IdeaPromptDocument>({
@@ -27,14 +27,17 @@ const ideaPromptSchema = new Schema<IdeaPromptDocument>({
     ref: 'Category',
     required: true,
   },
-  heartIcon: {
+  savedIdeas: {
     type: Boolean,
     default: false,
   },
-  skipIcon: {
+  skippedIdeas: {
     type: Boolean,
     default: false,
   },
 });
 
-export default ideaPromptSchema;
+const IdeaPrompt = model<IdeaPromptDocument>('IdeaPrompt', ideaPromptSchema);
+
+export default IdeaPrompt;
+
