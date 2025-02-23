@@ -1,13 +1,19 @@
 import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
-// Interface for the User document
+// Import schema from IdeaPrompt.js
+import ideaPromptSchema from './IdeaPrompt.js';
+import type { IdeaPromptDocument } from './IdeaPrompt.js';
+
 export interface UserDocument extends Document {
   id: string;
   username: string;
   email: string;
   password: string;
+  savedIdeas: IdeaPromptDocument[];
+  skippedIdeas: IdeaPromptDocument[];
   isCorrectPassword(password: string): Promise<boolean>;
+  ideaCount: number;
 }
 
 const userSchema = new Schema<UserDocument>(
@@ -16,23 +22,30 @@ const userSchema = new Schema<UserDocument>(
       type: String,
       required: true,
       unique: true,
-      trim: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      match: [/.+@.+\..+/, 'Must match an email address!'],
+      match: [/.+@.+\..+/, 'Must use a valid email address'],
     },
     password: {
       type: String,
       required: true,
     },
+    savedIdeas: [{
+      type: Schema.Types.ObjectId,
+      ref: 'IdeaPrompt',
+    }],
+    skippedIdeas: [{
+      type: Schema.Types.ObjectId,
+      ref: 'IdeaPrompt',
+    }],
   },
   {
-    timestamps: true,
-    toJSON: { getters: true },
-    toObject: { getters: true },
+    toJSON: {
+      virtuals: true,
+    },
   }
 );
 
@@ -46,9 +59,14 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.methods.isCorrectPassword = async function (password: string) {
-  return bcrypt.compare(password, this.password);
+  return await bcrypt.compare(password, this.password);
 };
+
+userSchema.virtual('ideaCount').get(function () {
+  return this.savedIdeas.length;
+});
 
 const User = model<UserDocument>('User', userSchema);
 
 export default User;
+
