@@ -5,8 +5,8 @@ export interface IdeaPromptDocument extends Document {
   description: string;
   image: string;
   category: Schema.Types.ObjectId;
-  savedIdeas: boolean;
-  skippedIdeas: boolean;
+  saveIdeas: boolean;
+  skipIdeas: boolean;
 }
 
 const ideaPromptSchema = new Schema<IdeaPromptDocument>({
@@ -27,11 +27,11 @@ const ideaPromptSchema = new Schema<IdeaPromptDocument>({
     ref: 'Category',
     required: true,
   },
-  savedIdeas: {
+  saveIdeas: {
     type: Boolean,
     default: false,
   },
-  skippedIdeas: {
+  skipIdeas: {
     type: Boolean,
     default: false,
   },
