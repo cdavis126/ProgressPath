@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'node:path';
 import type { Request, Response } from 'express';
-import db from './config/connection.js'
+import db from './config/connection.js';
 import routes from './routes/index.js';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
@@ -10,13 +10,12 @@ import { authenticateToken } from './services/auth.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
 });
 
 const startApolloServer = async () => {
@@ -30,11 +29,13 @@ const startApolloServer = async () => {
   app.use(express.json());
   app.use(routes);
 
-  app.use('/graphql', expressMiddleware(server as any,
-    {
-      context: authenticateToken as any
+  app.use('/graphql', expressMiddleware(server as any, {
+    context: async ({ req }) => {
+      const user = authenticateToken({ req });
+      return { user };
     }
-  ));
+  }));
+  
 
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../../client/dist')));

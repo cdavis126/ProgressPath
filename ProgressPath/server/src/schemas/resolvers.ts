@@ -35,18 +35,26 @@ const resolvers = {
     getAllIdeas: async (_parent: unknown, _args: unknown, _context: Context) => {
       return await IdeaPrompt.find().populate('category');
     },
-
     // Get idea prompts by category ID
     getIdeaPromptsByCategory: async (_parent: unknown, { categoryId }: { categoryId: string }, _context: Context) => {
       return await IdeaPrompt.find({ category: categoryId }).populate('category');
     },
-
     // Find current logged-in user
     me: async (_parent: unknown, _args: unknown, context: Context) => {
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in!');
       }
-      const user = await User.findOne({ _id: context.user._id }).populate('savedIdeas').populate('skippedIdeas');
+      const user = await User.findOne({ _id: context.user._id })
+        .populate('savedIdeas')
+        .populate('skippedIdeas');
+      return user;
+    },
+    // Get user by ID
+    getUserById: async (_parent: unknown, { userId }: { userId: string }, context: Context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You are not authenticated!');
+      }
+      const user = await User.findById(userId).populate('savedIdeas').populate('skippedIdeas');
       return user;
     },
   },
@@ -115,7 +123,21 @@ const resolvers = {
         throw new AuthenticationError('User not found!');
       }
       return user;
-    }
-  }
+    },
+    updateUser: async (_parent: unknown, { userId, username, email }: { userId: string, username: string, email: string }, context: Context) => {
+      if (!context.user || context.user._id !== userId) {
+        throw new AuthenticationError('You are not authorized to update this user!');
+      }
+      const user = await User.findByIdAndUpdate(
+        userId,
+        { username, email },
+        { new: true, runValidators: true }
+      );
+      if (!user) {
+        throw new AuthenticationError('User not found!');
+      }
+      return user;
+    },
+  },
 };
 export default resolvers;

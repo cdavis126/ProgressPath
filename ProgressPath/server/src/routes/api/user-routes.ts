@@ -5,7 +5,7 @@ import { authenticateToken } from '../../services/auth.js';
 const router = express.Router();
 
 // Create a new user
-router.post('/', authenticateToken, createUser);
+router.route('/').post(createUser).put(authenticateToken);
 
 // Get single user
 router.get('/:userId', authenticateToken, getSingleUser);

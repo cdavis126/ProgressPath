@@ -44,14 +44,16 @@ const typeDefs = gql`
     me: User
     getAllIdeas: [IdeaPrompt]
     getIdeaPromptsByCategory(categoryId: String!): [IdeaPrompt]
+    getUserById(userId: String!): User
   }
 
   type Mutation {
-    login(email: String!, password: String!): Auth!
-    addUser(username: String!, email: String!, password: String!): Auth!
-    saveIdea(ideaData: IdeaPromptInput!): User
-    removeIdea(ideaId: String!): User
-    skipIdea(ideaId: String!): User
+  login(email: String!, password: String!): Auth!
+  addUser(username: String!, email: String!, password: String!): Auth!
+  saveIdea(ideaData: IdeaPromptInput!): User
+  removeIdea(ideaId: String!): User
+  skipIdea(ideaId: String!): User
+  updateUser(userId: String!, username: String, email: String, password: String): User  # Added updateUser mutation
   }
 `;
 

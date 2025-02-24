@@ -4,23 +4,19 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const authenticateToken = ({ req }: any) => {
-  let token = req.body.token || req.query.token || req.headers.authorization;
-
-  if (req.headers.authorization) {
-    token = token.split(' ').pop().trim();
-  }
-
+  let token = req.headers.authorization?.split(' ').pop()?.trim();
+  
   if (!token) {
-    return req;
+    return { user: null };
   }
 
   try {
-    const { data }: any = jwt.verify(token, process.env.JWT_SECRET_KEY || '', { maxAge: '2hr' });
-    req.user = data;
+    const { data }: any = jwt.verify(token, process.env.JWT_SECRET_KEY || '', { maxAge: '2h' });
+    return { user: data };
   } catch (err) {
     console.log('Invalid token');
+    return { user: null };
   }
-  return req;
 };
 
 export const signToken = (username: string, email: string, _id: unknown) => {
