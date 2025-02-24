@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "ESNext",  // Or "ES2020" if you prefer
+    "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",  // Ensures that TypeScript resolves modules like Node.js
     "resolveJsonModule": true,
     "esModuleInterop": true,  // Ensures compatibility with CommonJS and ES Modules
     "rootDir": "src",  // Make sure this points to your source directory
     "outDir": "dist",  // Output directory for compiled files
     "skipLibCheck": true,  // Skip checking declaration files
+    "baseUrl": "src",
     "strict": true  // Enables strict mode
   },
   "include": ["src/**/*"],  // Ensure all TypeScript files in src are included

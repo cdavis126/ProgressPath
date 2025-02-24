@@ -9,15 +9,18 @@
     "start": "node dist/server.js",
     "start:prod": "NODE_ENV=production node dist/server.js",
     "watch": "nodemon dist/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "ts-node src/seeds/seed.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.10.4",
+    "@types/bcryptjs": "^2.4.6",
     "apollo-server-express": "^3.13.0",
     "bcrypt": "^5.0.0",
+    "bcryptjs": "^3.0.2",
     "dotenv": "^16.4.7",
     "express": "^4.19.2",
     "graphql": "^16.10.0",
@@ -30,6 +33,7 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.14.8",
     "nodemon": "^3.1.0",
-    "typescript": "^5.4.5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
   }
 }

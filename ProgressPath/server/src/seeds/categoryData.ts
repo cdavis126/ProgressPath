@@ -1,13 +1,7 @@
-import db from '../config/connection';
 import { Category } from '../models';
-import cleanDB from './cleanDB';
 
 const seedCategories = async (): Promise<void> => {
   try {
-    await db();
-    await cleanDB();
-
-    // Defined categories
     const categories = [
       { _id: 1, name: 'Mindset' },
       { _id: 2, name: 'Creativity' },
@@ -20,8 +14,9 @@ const seedCategories = async (): Promise<void> => {
 
     for (const { _id, name } of categories) {
       const existingCategory = await Category.findOne({ name });
+
       if (!existingCategory) {
-        const category = new Category({ _id: _id, name });
+        const category = new Category({ _id, name });
         await category.save();
         console.log(`Category created: ${name}`);
       } else {
@@ -29,14 +24,12 @@ const seedCategories = async (): Promise<void> => {
       }
     }
 
-    console.log('Seeding completed successfully!');
-    process.exit(0);
+    console.log('Category seeding completed successfully!');
   } catch (error) {
     console.error('Error seeding categories:', error);
-    process.exit(1);
   }
 };
 
-seedCategories();
+export default seedCategories;
 
 

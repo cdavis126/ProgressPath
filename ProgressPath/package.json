@@ -11,7 +11,8 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
     "render-build": "npm install && npm run build",
-    "render-start": "cd server && npm start"
+    "render-start": "cd server && npm start",
+    "seed": "cd server && npm run seed"
   },
   "author": "",
   "license": "ISC",

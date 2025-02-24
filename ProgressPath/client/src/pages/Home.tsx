@@ -1,10 +1,13 @@
-//import statements
+import Nav from '../components/Navbar/NavLimited';
 
 const Home = () => {
     return (
-        <div style={{ textAlign: 'center', padding: '50px' }}>
-            <h1>Home Page</h1>
-            <p>This page is the homepage.</p>
+        <div>
+            <Nav />
+            <div style={{ marginTop: '50px', textAlign: 'center', padding: '50px' }}>
+                <h1>Home Page</h1>
+                <p>This page is the homepage.</p>
+            </div>
         </div>
     );
 };

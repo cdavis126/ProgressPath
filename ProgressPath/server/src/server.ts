@@ -1,12 +1,11 @@
 import express from 'express';
 import path from 'node:path';
-import type { Request, Response } from 'express';
+import { typeDefs, resolvers } from './schemas/index.js';
+import { authenticateToken } from './services/auth.js';
 import db from './config/connection.js';
 import routes from './routes/index.js';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
-import { typeDefs, resolvers } from './schemas/index.js';
-import { authenticateToken } from './services/auth.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -20,7 +19,7 @@ const server = new ApolloServer({
 
 const startApolloServer = async () => {
   await server.start();
-  await db(); 
+  await db();
 
   const PORT = process.env.PORT || 3001;
   const app = express();
@@ -39,7 +38,7 @@ const startApolloServer = async () => {
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../../client/dist')));
 
-    app.get('*', (_req: Request, res: Response) => {
+    app.get('*', (_req, res) => {
       res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
     });
   }
