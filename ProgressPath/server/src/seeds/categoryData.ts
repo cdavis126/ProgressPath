@@ -1,6 +1,6 @@
 import { Category } from '../models';
 
-const seedCategories = async (): Promise<void> => {
+const seedCategory = async (): Promise<void> => {
   try {
     const categories = [
       { _id: 1, name: 'Mindset' },
@@ -30,6 +30,6 @@ const seedCategories = async (): Promise<void> => {
   }
 };
 
-export default seedCategories;
+export default seedCategory;
 
 

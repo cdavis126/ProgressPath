@@ -1,7 +1,7 @@
 declare namespace Express {
   interface Request {
     user?: {
-      _id: unknown;
+      _id: mongoose.Types.ObjectId | string;
       username: string;
     };
   }

@@ -24,7 +24,6 @@ export const seedUsers = async (): Promise<void> => {
       },
     ];
 
-    // Hash passwords
     for (const user of users) {
       const existingUser = await User.findOne({ email: user.email });
       if (existingUser) {
@@ -32,11 +31,9 @@ export const seedUsers = async (): Promise<void> => {
         continue;
       }
 
-      // Hash the password
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(user.password, salt);
 
-      // Create and save the user
       const newUser = new User({
         ...user,
         password: hashedPassword,

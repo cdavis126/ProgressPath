@@ -1,6 +1,6 @@
-import { IdeaPrompt, Category } from '../models';
+import { Idea, Category } from '../models';
 
-export const seedIdeaPrompts = async (): Promise<void> => {
+export const seedIdea = async (): Promise<void> => {
   try {
     const categories = await Category.find();
 
@@ -54,7 +54,7 @@ export const seedIdeaPrompts = async (): Promise<void> => {
       },
     ];
 
-    await IdeaPrompt.insertMany(ideaPrompts);
+    await Idea.insertMany(ideaPrompts);
 
     console.log('Idea Prompts seeded successfully!');
   } catch (error) {

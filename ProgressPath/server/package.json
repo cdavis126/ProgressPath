@@ -10,7 +10,7 @@
     "start:prod": "NODE_ENV=production node dist/server.js",
     "watch": "nodemon dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "ts-node src/seeds/seed.ts"
+    "seed": "node dist/seeds/seed.js"
   },
   "keywords": [],
   "author": "",
@@ -25,7 +25,7 @@
     "express": "^4.19.2",
     "graphql": "^16.10.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.4.3"
+    "mongoose": "^8.10.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

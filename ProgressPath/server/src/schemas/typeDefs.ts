@@ -1,59 +1,51 @@
 import { gql } from 'graphql-tag';
 
 const typeDefs = gql`
-  type Category {
+  type User {
     _id: ID!
-    name: String!
+    username: String!
+    email: String!
+    savedIdeas: [Idea]
   }
-  type IdeaPrompt {
+  type Idea {
     _id: ID!
     title: String!
     description: String!
     image: String!
     category: Category
-    saveIdea: Boolean!
-    skipIdea: Boolean!
   }
-  type User {
+  type Category {
     _id: ID!
-    username: String!
-    email: String!
-    savedIdeas: [IdeaPrompt]
-    skippedIdeas: [IdeaPrompt]
+    name: String!
   }
   type Auth {
     token: String!
     user: User!
   }
-
   input UserInput {
     username: String!
     email: String!
     password: String!
   }
-  input IdeaPromptInput {
-    title: String!
-    description: String!
-    image: String!
-    categoryId: String!
-    saveIdea: Boolean!
-    skipIdea: Boolean!
+  input IdeaInput {
+    _id: ID
+    title: String
+    description: String
+    image: String
+    categoryId: ID
   }
-
   type Query {
     me: User
-    getAllIdeas: [IdeaPrompt]
-    getIdeaPromptsByCategory(categoryId: String!): [IdeaPrompt]
-    getUserById(userId: String!): User
+    getIdeas(filter: String, category: ID): [Idea]
   }
 
   type Mutation {
-  login(email: String!, password: String!): Auth!
-  addUser(username: String!, email: String!, password: String!): Auth!
-  saveIdea(ideaData: IdeaPromptInput!): User
-  removeIdea(ideaId: String!): User
-  skipIdea(ideaId: String!): User
-  updateUser(userId: String!, username: String, email: String, password: String): User  # Added updateUser mutation
+    login(email: String!, password: String!): Auth!
+    addUser(username: String!, email: String!, password: String!): Auth!
+    saveIdea(ideaData: IdeaInput!): User
+    removeIdea(ideaId: String!): User
+    skipIdea(ideaId: String!): User
+    updateUser(userId: String!, username: String, email: String, password: String): User
   }
 `;
 

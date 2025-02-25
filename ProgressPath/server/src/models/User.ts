@@ -1,17 +1,16 @@
-import { Schema, model, type Document } from 'mongoose';
+import mongoose, { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 // Import schema from IdeaPrompt.js
-import ideaPromptSchema from './IdeaPrompt.js';
-import type { IdeaPromptDocument } from './IdeaPrompt.js';
+import ideasSchema from './Idea.js';
+import type { IdeaDocument } from './Idea.js';
 
 export interface UserDocument extends Document {
-  id: string;
+  _id: mongoose.Types.ObjectId;
   username: string;
   email: string;
   password: string;
-  savedIdeas: IdeaPromptDocument[];
-  skippedIdeas: IdeaPromptDocument[];
+  savedIdeas: IdeaDocument[];
   isCorrectPassword(password: string): Promise<boolean>;
   ideaCount: number;
 }
@@ -33,14 +32,7 @@ const userSchema = new Schema<UserDocument>(
       type: String,
       required: true,
     },
-    savedIdeas: [{
-      type: Schema.Types.ObjectId,
-      ref: 'IdeaPrompt',
-    }],
-    skippedIdeas: [{
-      type: Schema.Types.ObjectId,
-      ref: 'IdeaPrompt',
-    }],
+    savedIdeas: [ideasSchema],
   },
   {
     toJSON: {
@@ -67,6 +59,5 @@ userSchema.virtual('ideaCount').get(function () {
 });
 
 const User = model<UserDocument>('User', userSchema);
-
 export default User;
 

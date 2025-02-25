@@ -1,29 +1,28 @@
-import { IdeaPrompt, User, Category } from '../models/index.js';
+import mongoose from 'mongoose';
+import { Idea, User, Category } from '../models/index.js';
 import { signToken } from '../services/auth.js';
 import { AuthenticationError } from 'apollo-server-errors';
 
 // Define types
-interface IdeaPrompt {
-  _id: string;
+interface User {
+  _id: mongoose.Types.ObjectId;
+  username: string;
+  email: string;
+  ideaCount: number;
+  savedIdeas: Idea[];
+}
+interface Idea {
+  _id: mongoose.Types.ObjectId;
   title: string;
   description: string;
   image: string;
-  category: string;
-  saveIdea: boolean;
-  skipIdea: boolean;
-}
-interface User {
-  _id: string;
-  username: string;
-  email: string;
-  savedIdeas: IdeaPrompt[];
-  skippedIdeas: IdeaPrompt[];
+  category: mongoose.Types.ObjectId;
 }
 interface SaveIdeaArgs {
-  ideaData: IdeaPrompt;
+  ideaData: Idea;
 }
-interface SkipIdeaArgs {
-  ideaId: string;
+interface RemoveIdeaArgs {
+  _id: mongoose.Types.ObjectId;
 }
 interface Context {
   user?: User;
@@ -31,113 +30,68 @@ interface Context {
 
 const resolvers = {
   Query: {
-    // Get all idea prompts
-    getAllIdeas: async (_parent: unknown, _args: unknown, _context: Context) => {
-      return await IdeaPrompt.find().populate('category');
-    },
-    // Get idea prompts by category ID
-    getIdeaPromptsByCategory: async (_parent: unknown, { categoryId }: { categoryId: string }, _context: Context) => {
-      return await IdeaPrompt.find({ category: categoryId }).populate('category');
-    },
-    // Find current logged-in user
     me: async (_parent: unknown, _args: unknown, context: Context) => {
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in!');
       }
-      const user = await User.findOne({ _id: context.user._id })
-        .populate('savedIdeas')
-        .populate('skippedIdeas');
-      return user;
+      const user = await User.findOne({ _id: context.user._id }).populate('savedIdeas');
+      return user as User | null;
     },
-    // Get user by ID
-    getUserById: async (_parent: unknown, { userId }: { userId: string }, context: Context) => {
-      if (!context.user) {
-        throw new AuthenticationError('You are not authenticated!');
+    getIdeas: async (_parent: unknown, { categoryId }: { categoryId?: mongoose.Types.ObjectId }, context: Context) => {
+      let filter = {};
+
+      if (categoryId) {
+        filter = { category: categoryId };
       }
-      const user = await User.findById(userId).populate('savedIdeas').populate('skippedIdeas');
-      return user;
+
+      const ideas = await Idea.find(filter).populate('category');
+      return ideas;
     },
   },
 
   Mutation: {
-    login: async (_parent: unknown, { email, password }: { email: string, password: string }) => {
+    login: async (_parent: unknown, { email, password }: { email: string, password: string }): Promise<{ token: string, user: User }> => {
       const user = await User.findOne({ $or: [{ username: email }, { email }] });
       if (!user) {
-        throw new AuthenticationError('Can\'t find this user');
+        throw new AuthenticationError(`Can't find this user`);
       }
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
         throw new AuthenticationError('Wrong password!');
       }
       const token = signToken(user.username, user.email, user._id);
-      return { token, user: user.toObject() };
+      return { token, user: user.toObject() as User };
     },
-    addUser: async (_parent: unknown, { username, email, password }: { username: string, email: string, password: string }) => {
+    addUser: async (_parent: unknown, { username, email, password }: { username: string, email: string, password: string }): Promise<{ token: string, user: User }> => {
       const user = await User.create({ username, email, password });
       const token = signToken(user.username, user.email, user._id);
-      return { token, user: user.toObject() };
+      return { token, user: user.toObject() as User };
     },
-    saveIdea: async (_parent: unknown, { ideaData }: { ideaData: { title: string, description: string, image: string, categoryId: string, saveIdea: boolean, skipIdea: boolean } }, context: Context) => {
+    saveIdea: async (_parent: unknown, { ideaData }: SaveIdeaArgs, context: Context): Promise<User | null> => {
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in!');
       }
-      const category = await Category.findById(ideaData.categoryId);
-      if (!category) {
-        throw new AuthenticationError('Category not found!');
-      }
-      const ideaPrompt = await IdeaPrompt.create({ ...ideaData, category: category._id });
-      const user = await User.findByIdAndUpdate(
-        context.user._id,
-        { $addToSet: { savedIdeas: ideaPrompt._id } },
+      return await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $addToSet: { savedIdeas: ideaData } },
         { new: true, runValidators: true }
-      ).populate('savedIdeas');
-      if (!user) {
-        throw new AuthenticationError('User not found!');
-      }
-      return user;
+      );
     },
-    removeIdea: async (_parent: unknown, { ideaId }: { ideaId: string }, context: Context) => {
+    removeIdea: async (_parent: unknown, { _id }: RemoveIdeaArgs, context: Context) => {
       if (!context.user) {
         throw new AuthenticationError('You need to be logged in!');
       }
       const user = await User.findOneAndUpdate(
         { _id: context.user._id },
-        { $pull: { savedIdeas: ideaId } },
+        { $pull: { savedIdeas: _id } },
         { new: true }
       );
       if (!user) {
         throw new AuthenticationError('User not found!');
       }
       return user;
-    },
-    skipIdea: async (_parent: unknown, { ideaId }: { ideaId: string }, context: Context) => {
-      if (!context.user) {
-        throw new AuthenticationError('You need to be logged in!');
-      }
-      const user = await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $push: { skippedIdeas: ideaId } },
-        { new: true }
-      );
-      if (!user) {
-        throw new AuthenticationError('User not found!');
-      }
-      return user;
-    },
-    updateUser: async (_parent: unknown, { userId, username, email }: { userId: string, username: string, email: string }, context: Context) => {
-      if (!context.user || context.user._id !== userId) {
-        throw new AuthenticationError('You are not authorized to update this user!');
-      }
-      const user = await User.findByIdAndUpdate(
-        userId,
-        { username, email },
-        { new: true, runValidators: true }
-      );
-      if (!user) {
-        throw new AuthenticationError('User not found!');
-      }
-      return user;
-    },
+    }
   },
 };
+
 export default resolvers;

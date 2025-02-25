@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "bootcamp project 3",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "test",
     "start": "cd server && npm run build && node dist/server.js",

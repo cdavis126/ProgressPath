@@ -1,25 +1,25 @@
 import db from '../config/connection.js';
 import cleanDB from './cleanDB.js';
-import seedCategories from './categoryData.js';
+import seedCategory from './categoryData.js';
 import { seedUsers } from './userData.js';
-import { seedIdeaPrompts } from './ideaData.js';
+import { seedIdea } from './ideaData.js';
 
 const seedDatabase = async (): Promise<void> => {
   
   try {
     await db();
-    await cleanDB();
+    //await cleanDB();
 
     // Seed Categories
-    await seedCategories();
+    //await seedCategories();
     console.log('Categories seeded successfully!');
 
     // Seed Users
-    await seedUsers();
+    //await seedUsers();
     console.log('Users seeded successfully!');
 
     // Seed Idea Prompts
-    await seedIdeaPrompts();
+   // await seedIdeaPrompts();
     console.log('Idea Prompts seeded successfully!');
 
     console.log('Seeding completed successfully!');
