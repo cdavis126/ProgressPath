@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "./NavLimited.css";
+import "../../assets/Styles/NavLimited.css";
 
 const NavLimited: React.FC = () => {
   return (
