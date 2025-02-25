@@ -1,0 +1,81 @@
+/* Navbar Container */
+.custom-navbar {
+    background: linear-gradient(90deg, #DAC4F7, #F4989C);
+    padding: 12px 20px;
+    border-bottom: 3px solid #EBD2B4;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar Brand (Logo + Text) */
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-brand i {
+    font-size: 1.8rem;
+    color: white !important;
+}
+
+/* Navbar Links */
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links .nav-item {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.nav-links .nav-item:hover {
+    color: #ACECF7;
+    transform: scale(1.05);
+}
+
+/* Navigation Icons */
+.nav-icon {
+    font-size: 1.6rem;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.nav-icon:hover {
+    color: #D6F6DD;
+}
+
+/*Navbar Buttons */
+.nav-buttons .btn {
+    padding: 10px 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.btn-outline-dark {
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-outline-dark:hover {
+    background: white;
+    color: #F4989C;
+}
+
+.btn-primary {
+    background-color: #F4989C;
+    border-color: #F4989C;
+}
+
+.btn-primary:hover {
+    background-color: #ACECF7;
+    border-color: #ACECF7;
+    transform: scale(1.05);
+}
