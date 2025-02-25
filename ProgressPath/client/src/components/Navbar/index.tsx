@@ -13,16 +13,16 @@ const Navbar = () => {
         </Link>
         {/* Right side of the navbar */}
         <div className="ml-auto d-flex align-items-center gap-3">
-          <Link to="/add" className="nav-icon white-text">
+          <Link to="/add" className="nav-icon">
             <i className="bi bi-patch-plus-fill"/> {/* Eventually Link to Habit Modal*/}
           </Link>
-          <Link to="/pathboard" className="nav-icon white-text">
-          <i className="bi bi-search-heart"></i> {/* Link to API PathBoard Page */}
+          <Link to="/pathboard" className="nav-icon">
+          <i className="bi bi-search-heart"></i>
           </Link>
-          <Link to="/profile" className="nav-icon white-text">
+          <Link to="/profile" className="nav-icon">
             <i className="bi bi-person-circle"/> {/* Eventually Link to Profile Modal*/}
           </Link>
-          <Link to="/" className="white-text">
+          <Link to="/" className="btn btn-outline">
             Logout
           </Link>
         </div>
