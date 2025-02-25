@@ -4,14 +4,8 @@ import { Link } from "react-router-dom";
 import NavLimited from "../components/Navbar/NavLimited"; 
 import "../assets/Styles/Login.css"; 
 
-// Define form state type
-interface LoginFormState {
-  email: string;
-  password: string;
-}
-
 const Login: React.FC = () => {
-  const [formData, setFormData] = useState<LoginFormState>({
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });

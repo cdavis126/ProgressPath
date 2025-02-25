@@ -4,20 +4,11 @@ import { Link } from "react-router-dom";
 import NavLimited from "../components/Navbar/NavLimited"; 
 import "../assets/Styles/Signup.css";
 
-// Define form state type
-interface SignUpFormState {
-  SU_firstName: string;
-  SU_lastName: string;
-  SU_email: string;
-  SU_password: string;
-}
-
 const SignUp: React.FC = () => {
-  const [formData, setFormData] = useState<SignUpFormState>({
-    SU_firstName: "",
-    SU_lastName: "",
-    SU_email: "",
-    SU_password: "",
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,24 +32,19 @@ const SignUp: React.FC = () => {
           <Col md={6} className="form-section">
             <h2 className="text-dark">Sign Up</h2>
             <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="SU_firstName">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control type="text" name="SU_firstName" placeholder="Enter first name" value={formData.SU_firstName} onChange={handleChange} required />
-              </Form.Group>
-
-              <Form.Group controlId="SU_lastName" className="mt-3">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control type="text" name="SU_lastName" placeholder="Enter last name" value={formData.SU_lastName} onChange={handleChange} required />
+              <Form.Group controlId="SU_username" className="mt-3">
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="text" name="SU_username" placeholder="Enter username" value={formData.username} onChange={handleChange} required />
               </Form.Group>
 
               <Form.Group controlId="SU_email" className="mt-3">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" name="SU_email" placeholder="Enter email" value={formData.SU_email} onChange={handleChange} required />
+                <Form.Control type="email" name="SU_email" placeholder="Enter email" value={formData.email} onChange={handleChange} required />
               </Form.Group>
 
               <Form.Group controlId="SU_password" className="mt-3">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" name="SU_password" placeholder="Create password" value={formData.SU_password} onChange={handleChange} required />
+                <Form.Control type="password" name="SU_password" placeholder="Create password" value={formData.password} onChange={handleChange} required />
               </Form.Group>
 
               <Button variant="primary" type="submit" className="mt-3">
