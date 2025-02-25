@@ -1,0 +1,47 @@
+.goal-display {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .goal-display h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .goal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .goal-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .goal-card h3 {
+    margin-top: 10px;
+  }
+  
+  .goal-icon {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  h3 {
+    text-align: center; /* Centers the text */
+    font-family: "Courier New", Courier, monospace; /* Change the font */
+    font-style: italic; /* Make it italic for a quote effect */
+    font-size: 1.5em; /* Increase font size */
+    font-weight: bold; /* Make it bold */
+    color: #333; /* Change text color */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
