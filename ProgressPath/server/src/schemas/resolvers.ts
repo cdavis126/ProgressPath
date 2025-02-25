@@ -52,6 +52,16 @@ const resolvers = {
       const ideas = await Idea.find(filter).populate('category');
       return ideas;
     },
+    searchIdeas: async (_parent: unknown, { searchTerm }: { searchTerm: string }) => {
+      const searchRegex = new RegExp(searchTerm, 'i');
+      const ideas = await Idea.find({
+        $or: [
+          { title: { $regex: searchRegex } },
+          { description: { $regex: searchRegex } },
+        ],
+      })
+      return ideas;
+    },
   },
 
   Mutation: {

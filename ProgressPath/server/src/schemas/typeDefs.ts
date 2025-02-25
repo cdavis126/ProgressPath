@@ -37,6 +37,7 @@ const typeDefs = gql`
   type Query {
     me: User
     getIdeas(filter: String, category: ID): [Idea]
+    searchIdeas(searchTerm: String!): [Idea]
   }
   type Mutation {
     login(email: String!, password: String!): Auth!
