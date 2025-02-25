@@ -32,20 +32,18 @@ const typeDefs = gql`
     title: String
     description: String
     image: String
-    categoryId: ID
+    category: ID
   }
   type Query {
     me: User
     getIdeas(filter: String, category: ID): [Idea]
   }
-
   type Mutation {
     login(email: String!, password: String!): Auth!
     addUser(username: String!, email: String!, password: String!): Auth!
     saveIdea(ideaData: IdeaInput!): User
-    removeIdea(ideaId: String!): User
-    skipIdea(ideaId: String!): User
-    updateUser(userId: String!, username: String, email: String, password: String): User
+    removeIdea(ideaId: ID!): User
+    updateUser(userId: ID!, username: String, email: String, password: String): User
   }
 `;
 

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 import { Idea, User, Category } from '../models/index.js';
 import { signToken } from '../services/auth.js';
 import { AuthenticationError } from 'apollo-server-errors';
@@ -8,7 +9,6 @@ interface User {
   _id: mongoose.Types.ObjectId;
   username: string;
   email: string;
-  ideaCount: number;
   savedIdeas: mongoose.Types.ObjectId[];
 }
 interface Idea {
@@ -26,6 +26,12 @@ interface RemoveIdeaArgs {
 }
 interface Context {
   user?: User;
+}
+
+interface UpdateUserInput {
+  username?: string;
+  email?: string;
+  password?: string;
 }
 
 const resolvers = {
@@ -67,6 +73,26 @@ const resolvers = {
       const token = signToken(user.username, user.email, user._id);
       const populatedUser = await user.populate('savedIdeas');
       return { token, user: populatedUser.toObject() as User };
+    },
+    updateUser: async (_: unknown, { username, email, password }: UpdateUserInput, context: Context) => {
+      if (!context.user) {
+        throw new AuthenticationError("You must be logged in to update your profile.");
+      }
+
+      const updatedFields: UpdateUserInput = {};
+      if (username) updatedFields.username = username;
+      if (email) updatedFields.email = email;
+      if (password) {
+        updatedFields.password = await bcrypt.hash(password, 10);
+      }
+
+      const updatedUser = await User.findByIdAndUpdate(
+        context.user._id,
+        updatedFields,
+        { new: true, runValidators: true }
+      ).populate('savedIdeas');
+
+      return updatedUser;
     },
     saveIdea: async (_parent: unknown, { ideaData }: SaveIdeaArgs, context: Context): Promise<User | null> => {
       if (!context.user) {
