@@ -1,0 +1,45 @@
+[
+    {
+      "title": "Mindset",
+      "description": "Mindset plays a key role in shaping personal success.",
+      "image": "/client/src/assets/Mindset/Mind.png",
+      "category": "Mindset"
+    },
+    {
+      "title": "Creativity",
+      "description": "Explore various strategies to enhance creative thinking.",
+      "image": "/client/src/assets/Creativity/MultipleLightBulbs.png",
+      "category": "Creativity"
+    },
+    {
+      "title": "Well-Being",
+      "description": "Important well-being practices to improve quality of life.",
+      "image": "/client/src/assets/WellBeing/StressManagement.png",
+      "category": "Well-Being"
+    },
+    {
+      "title": "Nutrition",
+      "description": "Understanding the role of nutrition in overall health.",
+      "image": "/client/src/assets/Nutrition/Diet.png",
+      "category": "Nutrition"
+    },
+    {
+      "title": "Growth",
+      "description": "How a growth mindset leads to ongoing learning and personal growth.",
+      "image": "/client/src/assets/Growth/Journaling.png",
+      "category": "Growth"
+    },
+    {
+      "title": "Fitness",
+      "description": "Tips for staying motivated to achieve fitness goals.",
+      "image": "/client/src/assets/Fitness/Exercise.png",
+      "category": "Fitness"
+    },
+    {
+      "title": "Productivity",
+      "description": "Effective strategies to enhance productivity in everyday activities.",
+      "image": "/client/src/assets/Productivity/Planner.png",
+      "category": "Productivity"
+    }
+]
+  

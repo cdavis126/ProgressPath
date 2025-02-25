@@ -9,7 +9,7 @@ interface User {
   username: string;
   email: string;
   ideaCount: number;
-  savedIdeas: Idea[];
+  savedIdeas: mongoose.Types.ObjectId[];
 }
 interface Idea {
   _id: mongoose.Types.ObjectId;
@@ -19,7 +19,7 @@ interface Idea {
   category: mongoose.Types.ObjectId;
 }
 interface SaveIdeaArgs {
-  ideaData: Idea;
+  ideaData: mongoose.Types.ObjectId;
 }
 interface RemoveIdeaArgs {
   _id: mongoose.Types.ObjectId;
@@ -43,7 +43,6 @@ const resolvers = {
       if (categoryId) {
         filter = { category: categoryId };
       }
-
       const ideas = await Idea.find(filter).populate('category');
       return ideas;
     },
@@ -60,12 +59,14 @@ const resolvers = {
         throw new AuthenticationError('Wrong password!');
       }
       const token = signToken(user.username, user.email, user._id);
-      return { token, user: user.toObject() as User };
+      const populatedUser = await user.populate('savedIdeas');
+      return { token, user: populatedUser.toObject() as User };
     },
     addUser: async (_parent: unknown, { username, email, password }: { username: string, email: string, password: string }): Promise<{ token: string, user: User }> => {
       const user = await User.create({ username, email, password });
       const token = signToken(user.username, user.email, user._id);
-      return { token, user: user.toObject() as User };
+      const populatedUser = await user.populate('savedIdeas');
+      return { token, user: populatedUser.toObject() as User };
     },
     saveIdea: async (_parent: unknown, { ideaData }: SaveIdeaArgs, context: Context): Promise<User | null> => {
       if (!context.user) {

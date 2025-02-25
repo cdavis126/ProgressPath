@@ -1,4 +1,5 @@
 import { User, Idea, Category } from '../models/index.js';
+import process from 'process';
 
 const cleanDB = async (): Promise<void> => {
   try {

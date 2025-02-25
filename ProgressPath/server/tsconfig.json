@@ -2,15 +2,16 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node",  // Ensures that TypeScript resolves modules like Node.js
+    "moduleResolution": "node",
     "resolveJsonModule": true,
-    "esModuleInterop": true,  // Ensures compatibility with CommonJS and ES Modules
-    "rootDir": "src",  // Make sure this points to your source directory
-    "outDir": "dist",  // Output directory for compiled files
-    "skipLibCheck": true,  // Skip checking declaration files
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "skipLibCheck": true,
     "baseUrl": "src",
-    "strict": true  // Enables strict mode
+    "strict": true
   },
-  "include": ["src/**/*"],  // Ensure all TypeScript files in src are included
-  "exclude": ["node_modules", "dist"]  // Exclude node_modules and dist
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

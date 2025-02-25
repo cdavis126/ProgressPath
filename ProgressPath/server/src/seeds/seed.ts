@@ -1,26 +1,46 @@
+import fs from 'fs';
 import db from '../config/connection.js';
+import { Idea, User, Category } from '../models/index.js';
 import cleanDB from './cleanDB.js';
-import seedCategory from './categoryData.js';
-import { seedUsers } from './userData.js';
-import { seedIdea } from './ideaData.js';
+import process from 'process';
+
+const userDataPath = './dist/seeds/userData.json';
+const ideaDataPath = './dist/seeds/ideaData.json';
+const categoryDataPath = './dist/seeds/categoryData.json';
+
+// Read the JSON files
+const userData = JSON.parse(fs.readFileSync(userDataPath, 'utf-8'));
+const ideaData = JSON.parse(fs.readFileSync(ideaDataPath, 'utf-8'));
+const categoryData = JSON.parse(fs.readFileSync(categoryDataPath, 'utf-8'));
 
 const seedDatabase = async (): Promise<void> => {
-  
   try {
     await db();
-    //await cleanDB();
+    await cleanDB();
 
     // Seed Categories
-    //await seedCategories();
-    console.log('Categories seeded successfully!');
+    for (const category of categoryData) {
+      const existingCategory = await Category.findOne({ name: category.name });
+      if (!existingCategory) {
+        await Category.create(category);
+        console.log(`Category '${category.name}' created.`);
+      }
+    }
+    const ideasToSeed = await Promise.all(ideaData.map(async (idea: { category: any; }) => {
+      const category = await Category.findOne({ name: idea.category });
+      if (category) {
+        return {
+          ...idea,
+          category: category._id,
+        };
+      }
+    }));
+
+    // Seed Ideas
+    await Idea.insertMany(ideasToSeed.filter((idea) => idea !== undefined));
 
     // Seed Users
-    //await seedUsers();
-    console.log('Users seeded successfully!');
-
-    // Seed Idea Prompts
-   // await seedIdeaPrompts();
-    console.log('Idea Prompts seeded successfully!');
+    await User.create(userData);
 
     console.log('Seeding completed successfully!');
     process.exit(0);
