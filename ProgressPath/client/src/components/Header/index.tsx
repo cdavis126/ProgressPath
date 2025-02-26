@@ -1,26 +1,33 @@
-import './header.css';
-import backgroundImage from "../../assets/PathArrows.jpg";
+import Typewriter from 'typewriter-effect';
 
-const Header = () => { 
+const Header = () => {
   return (
-    <header
-      className="header"
+    <header 
       style={{
-        backgroundImage: `url(${backgroundImage})`, 
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        marginTop: "120px",
+        textAlign: "center",
+        padding: "40px 20px",
       }}
-    >
-      <div className="overlay">
-        <div className="header-content">
-          <h1>Hi NAME!</h1> {/* Eventually Link to User's Name*/}
-          <p>Progress Your Path!</p>
-        </div>
+      >
+      <div 
+        style={{
+        fontSize: "3rem",
+        fontWeight: "700", 
+        color: "black",
+        lineHeight: "1.3",
+        }}
+      >
+        <Typewriter
+          options={{
+            strings: ['Welcome, USERNAME! 👋', 'Keep moving forward! 🚀', 'Let’s reach the next milestone! ✨', 'In it to WIN it!'],
+            autoStart: true,
+            loop: true,
+            delay: 120,
+          }}
+        />
       </div>
     </header>
   );
 };
 
 export default Header;
-
-

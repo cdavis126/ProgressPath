@@ -1,7 +1,7 @@
 /* Navbar Container */
 
 .custom-navbar {
-    background: linear-gradient(135deg,#f4989c, #dac4f7, #d6f6dd, #acecf7);
+    background: linear-gradient(135deg,#dac4f7 0%,#f4989c 100%);
     padding: 6px 10px;
     border-bottom: 3px solid #EBD2B4;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
