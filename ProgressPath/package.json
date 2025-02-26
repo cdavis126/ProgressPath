@@ -6,7 +6,7 @@
   "type": "module",
     "scripts": {
       "test": "test",
-      "start": "concurrently \"cd server && npm run build && node dist/server.js\" \"cd client && npm run start\"",
+      "start": "cd server && npm run build && node dist/server.js",
       "dev": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
       "install": "cd server && npm i && cd ../client && npm i",
       "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
