@@ -1,5 +1,5 @@
 import React from 'react';
-import './GoalDisplay.css';
+import './goaldisplay.css';
 import { FaRunning, FaAppleAlt, FaDumbbell, FaWeight } from 'react-icons/fa';
 
 const GoalDisplay: React.FC = () => {
