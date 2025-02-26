@@ -1,0 +1,86 @@
+.add-goal-modal {
+    width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+  
+  .add-goal-modal-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .add-goal-modal h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .add-goal-modal form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .add-goal-modal label {
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  
+  .add-goal-modal input[type="text"],
+  .add-goal-modal select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .add-goal-modal input[type="text"]::placeholder,
+  .add-goal-modal select::placeholder {
+    color: #999;
+  }
+  
+  .add-goal-modal button[type="submit"] {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .add-goal-modal button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .add-goal-modal button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .add-goal-modal button:hover {
+    background-color: #5a6268;
+  }

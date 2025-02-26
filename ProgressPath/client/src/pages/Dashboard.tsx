@@ -1,10 +1,19 @@
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import { AiOutlinePlus } from 'react-icons/ai';
+import GoalDisplay from '../components/PathBoard/GoalDisplay';
+import AddGoalModal from '../components/PathBoard/addgoalmodal';
 
 const Dashboard = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleClick = () => {
-    console.log("Clicked the + icon!");
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -23,9 +32,13 @@ const Dashboard = () => {
         />
       </div>
       <div style={{ marginTop: '50px', paddingLeft: '30px' }}>
+        <GoalDisplay />
+      </div>
+      <div style={{ marginTop: '50px', paddingLeft: '30px' }}>
         <h1>Follow Your Path</h1>
         <p>This is the path/goal tracker section placeholder</p>
       </div>
+      <AddGoalModal isOpen={isModalOpen} onRequestClose={handleCloseModal} />
     </div>
   );
 };
