@@ -1,4 +1,4 @@
-import './Header.css';
+import './header.css';
 import backgroundImage from "../../assets/PathArrows.jpg";
 
 const Header = () => { 
