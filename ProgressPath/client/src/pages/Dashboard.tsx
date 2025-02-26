@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import { AiOutlinePlus } from 'react-icons/ai';
-import GoalDisplay from '../components/PathBoard/GoalDisplay';
+import GoalDisplay from '../components/PathBoard/goaldisplay';
 import AddGoalModal from '../components/PathBoard/addgoalmodal';
 
 const Dashboard = () => {
