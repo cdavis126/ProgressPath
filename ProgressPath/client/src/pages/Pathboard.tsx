@@ -27,4 +27,3 @@ const Pathboard = () => {
 };
 
 export default Pathboard;
-
