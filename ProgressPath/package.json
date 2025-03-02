@@ -4,21 +4,23 @@
   "description": "bootcamp project 3",
   "main": "server.js",
   "type": "module",
-    "scripts": {
-      "test": "test",
-      "start": "cd server && npm run build && node dist/server.js",
-      "dev": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
-      "install": "cd server && npm i && cd ../client && npm i",
-      "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
-      "render-build": "npm install && npm run build",
-      "seed": "cd server && npm run seed"
+  "scripts": {
+    "test": "test",
+    "start": "cd server && npm run build && node dist/server.js",
+    "dev": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
+    "render-build": "npm install && npm run build",
+    "seed": "cd server && npm run seed"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/fullcalendar": "^3.8.0",
     "@types/jwt-decode": "^2.2.1",
     "@types/node": "^22.13.1",
-    "@types/react-dom": "^19.0.3",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
     "@types/react-router-dom": "^5.3.3",
     "concurrently": "^8.2.2",
     "nodemon": "^3.1.9",
@@ -27,6 +29,10 @@
   },
   "dependencies": {
     "@apollo/client": "^3.12.11",
+    "@fullcalendar/core": "^6.1.15",
+    "@fullcalendar/daygrid": "^6.1.15",
+    "@fullcalendar/interaction": "^6.1.15",
+    "@fullcalendar/react": "^6.1.15",
     "@types/express": "^5.0.0",
     "apollo-server-express": "^3.13.0",
     "express": "^4.21.2",
