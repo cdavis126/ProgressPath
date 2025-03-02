@@ -1,6 +1,7 @@
 import Nav from '../components/Navbar/NavLimited';
 import { Link } from "react-router-dom";
-import "/src/styles/Home.css";
+import "../assets/Styles/Home.css"; 
+
 
 const Home = () => {
   return (
