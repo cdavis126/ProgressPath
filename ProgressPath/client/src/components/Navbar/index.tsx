@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useState } from 'react';
 import AddGoalModal from '../DashBoard/addgoalmodal';
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "./navbar.css";
 
 const Navbar = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);

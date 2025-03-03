@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import { AiOutlinePlus } from 'react-icons/ai';
 import GoalDisplay from '../components/DashBoard/goaldisplay';
@@ -18,7 +17,6 @@ const Dashboard = () => {
 
   return (
     <div>
-      <Navbar />
       <Header />
       <div 
         style={{

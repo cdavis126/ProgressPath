@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
+    "start": "node dist/server.js",
     "start:prod": "NODE_ENV=production node dist/server.js",
     "watch": "nodemon dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
