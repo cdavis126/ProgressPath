@@ -10,6 +10,7 @@ import { Outlet } from "react-router-dom";
 import { AuthProvider } from "./context/authContext";
 import UserProvider from "./context/userContext";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { IdeaProvider } from "./context/ideaContext";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -36,11 +37,13 @@ function App() {
     <ApolloProvider client={client}>
       <AuthProvider>
         <UserProvider>
-        <div>
-          <main>
-            <Outlet />
-          </main>
-        </div>
+          <IdeaProvider>
+            <div>
+              <main>
+                <Outlet />
+              </main>
+            </div>
+          </IdeaProvider>
         </UserProvider>
       </AuthProvider>
     </ApolloProvider>
