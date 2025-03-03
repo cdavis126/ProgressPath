@@ -1,30 +1,52 @@
-import React from 'react';
-import { Card, Button } from 'react-bootstrap';
-import { FaHeart, FaExternalLinkAlt } from 'react-icons/fa';
-import Placeholder from '../../assets/placeholder-image.jpg';
+import { FaHeart, FaTrash, FaTasks, FaPaintBrush, FaDumbbell, FaBrain, FaBookReader } from "react-icons/fa";
+import { GiInnerSelf, GiKnifeFork } from "react-icons/gi";
+import "./ideacard.css";
 
-import './ideacard.css';
+const categories = [
+  { name: "Mindset", icon: <FaBrain />, color: "#d6f6dd" },
+  { name: "Creativity", icon: <FaPaintBrush />, color: "#dac4f7" },
+  { name: "Well-Being", icon: <GiInnerSelf />, color: "#f4989c" },
+  { name: "Nutrition", icon: <GiKnifeFork />, color: "#ebd2b4" },
+  { name: "Growth", icon: <FaBookReader />, color: "#acecf7" },
+  { name: "Fitness", icon: <FaDumbbell />, color: "#ffcc00" },
+  { name: "Productivity", icon: <FaTasks />, color: "#ff5f6d" },
+];
 
-const IdeaCard: React.FC = () => {
+interface IdeaCardProps {
+  title: string;
+  description: string;
+  categoryName: string;
+}
+
+const IdeaCard: React.FC<IdeaCardProps> = ({ title, description, categoryName }) => {
+  const category = categories.find((cat) => cat.name === categoryName) || categories[0];
+
   return (
-    <Card className="idea-card" style={{ maxWidth: '300px' }}>
-      <div className="idea-card-image">
-        <Card.Img variant="top" src={Placeholder} alt="Placeholder" className="idea-card-img" />
-        <Button variant="link" className="save-btn">
+    <div className="idea-card">
+      {/* Top Section (Category Icon + Name & Save Button) */}
+      <div className="idea-card-header">
+        <div className="idea-category">
+          <div className="category-icon" style={{ backgroundColor: category.color }}>
+            {category.icon}
+          </div>
+          <span className="category-name">{category.name}</span>
+        </div>
+        <button className="save-btn">
           <FaHeart className="heart-icon" />
-        </Button>
+        </button>
       </div>
-      <Card.Body>
-        <Card.Title className="idea-card-title">Idea Title</Card.Title>
-        <Card.Text className="idea-card-category">Category</Card.Text>
-        <Card.Text className="idea-card-description">
-          This is a short description. This section should not expand too much or show ellipses if the content is too long.
-        </Card.Text>
-        <Button variant="outline-primary" className="visit-btn">
-          <FaExternalLinkAlt /> Visit
-        </Button>
-      </Card.Body>
-    </Card>
+
+      {/* Title & Description */}
+      <h3 className="idea-card-title">{title}</h3>
+      <p className="idea-card-description">{description}</p>
+
+      {/* Bottom Section (Trash Icon) */}
+      <div className="idea-card-footer">
+        <button className="delete-btn">
+          <FaTrash />Delete
+        </button>
+      </div>
+    </div>
   );
 };
 

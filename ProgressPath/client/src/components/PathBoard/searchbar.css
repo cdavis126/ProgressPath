@@ -1,5 +1,5 @@
 .search-bar-container {
-  padding: 30px 30px 0px;
+  padding: 0px 30px 0px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -21,7 +21,7 @@
 
 .search-input {
   background-color: transparent;
-  border: 2px solid transparent;
+  border: 2px solid black;
   border-radius: 5px;
   padding: 8px 20px;
   font-size: 0.9rem;
@@ -31,8 +31,6 @@
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   box-sizing: border-box;
-  background-clip: padding-box;
-  border-image: linear-gradient(135deg, #d6f6dd, #dac4f7, #f4989c, #ebd2b4, #acecf7) 1; /* Apply gradient as border */
 }
 
 .search-icon {
@@ -50,8 +48,8 @@
 }
 
 .search-input:focus {
-  border-color: transparent;
-  box-shadow: 0px 0px 10px rgba(172, 206, 247, 0.5);
+  border-color: black;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 .search-input::placeholder {
@@ -66,6 +64,7 @@
     width: 80%;
   }
 }
+
 
 
 

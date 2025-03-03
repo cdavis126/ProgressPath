@@ -1,76 +1,122 @@
 .idea-card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .idea-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-  }
-  
-  .idea-card-image {
-    position: relative;
-  }
-  
-  .idea-card-img {
-    height: 200px;
-    object-fit: cover;
-    width: 100%;
-  }
-  
-  .save-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: transparent;
-    border: none;
-    color: #f4989c;
-    font-size: 1.0rem;
-  }
-  
-  .heart-icon {
-    transition: color 0.3s ease;
-  }
-  
-  .save-btn:hover .heart-icon {
-    color: #ff5f6d;
-  }
-  
-  .idea-card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    margin: 10px 0;
-  }
-  
-  .idea-card-category {
-    font-size: 1rem;
-    color: #6c5ce7;
-    margin: 5px 0;
-  }
-  
-  .idea-card-description {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.4;
-    margin-top: 10px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .visit-btn {
-    margin-top: 15px;
-    width: 100%;
-    border-radius: 20px;
-  }
+  width: 250px;
+  height: 250px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.idea-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.idea-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.idea-category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.category-name {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.save-btn {
+  background: transparent;
+  border: none;
+  color: #f4989c;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.save-btn:hover .heart-icon {
+  color: #ff5f6d;
+}
+
+.idea-card-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  margin: 8px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.idea-card-description {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.3;
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.idea-card-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.delete-btn {
+  width: 100px;
+  height: 30px;
+  border: 2px solid red;
+  background: transparent;
+  color: red;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  gap: 6px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.delete-btn svg {
+  font-size: 0.8rem;
+}
+
+.delete-btn:hover {
+  background: #f73e3ef5;
+  color: white;
+}
+
+
+
+
   
   
   

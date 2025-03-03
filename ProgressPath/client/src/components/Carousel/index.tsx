@@ -16,7 +16,7 @@ export default function App() {
             className="d-block w-100"
             src={SelfCare}
             alt="Self Care"
-            style={{ objectFit: 'cover', height: '50vh' }}
+            style={{ objectFit: 'cover', height: '35vh' }}
           />
           <Carousel.Caption>
             <h1 style={{ fontWeight: 'bold', color: 'black' }}>Well-Being</h1>
