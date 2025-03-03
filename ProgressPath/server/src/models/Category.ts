@@ -1,14 +1,16 @@
 import mongoose, { Schema, model, Document } from 'mongoose';
 
 export interface CategoryDocument extends Document {
-  _id: mongoose.Types.ObjectId;
-  name: 'Mindset' | 'Creativity' | 'Well-Being' | 'Nutrition' | 'Growth' | 'Fitness' | 'Productivity';
+  name: string;
+  icon: string;
+  color: string;
 }
 
 const categorySchema = new Schema<CategoryDocument>({
   name: {
     type: String,
     required: true,
+    unique: true,
     enum: [
       'Mindset',
       'Creativity',
@@ -19,9 +21,15 @@ const categorySchema = new Schema<CategoryDocument>({
       'Productivity',
     ],
   },
+  icon: {
+    type: String,
+    required: true,
+  },
+  color: {
+    type: String,
+    required: true,
+  },
 });
-
-categorySchema.index({ name: 1 });
 
 const Category = model<CategoryDocument>('Category', categorySchema);
 export default Category;

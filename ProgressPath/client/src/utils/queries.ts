@@ -4,50 +4,54 @@ export const GET_USER = gql`
   query GetUser {
     getUser {
       _id
-      username
-      email
       goals {
         _id
         title
+        description
+        motivation
+        status
         category {
           _id
           name
+          icon
+          color
         }
       }
       savedIdeas {
         _id
         title
+        description
         category {
           _id
           name
+          icon
+          color
+        }
+      }
+      hiddenIdeas {
+        _id
+        title
+        description
+        category {
+          _id
+          name
+          icon
+          color
         }
       }
     }
   }
 `;
 
-export const GET_IDEAS = gql`
-  query GetIdeas($filter: String, $category: ID) {
-    getIdeas(filter: $filter, category: $category) {
-      _id
-      title
-      category {
-        _id
-        name
-      }
-    }
-  }
-`;
 
-export const GET_IDEA = gql`
-  query GetIdea($id: ID!) {
-    getIdea(id: $id) {
+
+
+export const GET_IDEAS = gql`
+  query GetIdeas($category: ID) {
+    getIdeas(category: $category) {
       _id
       title
-      category {
-        _id
-        name
-      }
+      description
     }
   }
 `;
@@ -57,6 +61,8 @@ export const GET_CATEGORIES = gql`
     getCategories {
       _id
       name
+      icon
+      color
     }
   }
 `;
@@ -69,6 +75,8 @@ export const SEARCH_IDEAS = gql`
       category {
         _id
         name
+        icon
+        color
       }
     }
   }

@@ -6,8 +6,6 @@ export const ADD_USER = gql`
       token
       user {
         _id
-        username
-        email
       }
     }
   }
@@ -19,30 +17,6 @@ export const LOGIN_USER = gql`
       token
       user {
         _id
-        username
-        email
-        goals {
-          _id
-          title
-          description
-          motivation
-          status
-          category {
-            _id
-            name
-          }
-        }
-        savedIdeas {
-          _id
-          title
-          description
-          motivation
-          status
-          category {
-            _id
-            name
-          }
-        }
       }
     }
   }
@@ -55,11 +29,9 @@ export const LOGOUT_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation UpdateUser($username: String, $email: String) {
-    updateUser(username: $username, email: $email) {
+  mutation UpdateUser($input: UserUpdateInput!) {
+    updateUser(input: $input) {
       _id
-      username
-      email
       goals {
         _id
         title
@@ -68,23 +40,37 @@ export const UPDATE_USER = gql`
         status
         category {
           _id
+          icon
           name
+          color
         }
       }
       savedIdeas {
         _id
         title
         description
-        motivation
-        status
         category {
           _id
+          icon
           name
+          color
+        }
+      }
+      hiddenIdeas {
+        _id
+        title
+        description
+        category {
+          _id
+          icon
+          name
+          color
         }
       }
     }
   }
 `;
+
 
 export const UPDATE_PASSWORD = gql`
   mutation UpdatePassword($currentPassword: String!, $newPassword: String!) {
@@ -106,35 +92,32 @@ export const SAVE_IDEA = gql`
         _id
         title
         description
-        motivation
-        status
         category {
           _id
+          icon
           name
+          color
         }
       }
     }
   }
 `;
 
-export const DELETE_IDEA = gql`
-  mutation RemoveIdea($ideaId: ID!) {
-    removeIdea(ideaId: $ideaId) {
+export const HIDE_IDEA = gql`
+  mutation HideIdea($ideaId: ID!) {
+    hideIdea(ideaId: $ideaId) {
       _id
-      savedIdeas {
+      hiddenIdeas {
         _id
         title
         description
-        motivation
-        status
         category {
           _id
+          icon
           name
+          color
         }
       }
     }
   }
 `;
-
-
-

@@ -8,6 +8,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { Outlet } from "react-router-dom";
 import { AuthProvider } from "./context/authContext";
+import UserProvider from "./context/userContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const httpLink = createHttpLink({
@@ -34,11 +35,13 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <AuthProvider>
+        <UserProvider>
         <div>
           <main>
             <Outlet />
           </main>
         </div>
+        </UserProvider>
       </AuthProvider>
     </ApolloProvider>
   );
