@@ -137,7 +137,17 @@ const resolvers = {
 
       return await User.findByIdAndUpdate(context.user._id, update, { new: true }).populate("savedIdeas hiddenIdeas");
     },
+
+    deleteUser: async (_parent: unknown, _args: unknown, context: Context) => {
+      if (!context.user) throw new AuthenticationError("You need to be logged in!");
+
+      const deletedUser = await User.findByIdAndDelete(context.user._id);
+      if (!deletedUser) throw new AuthenticationError("User not found!");
+
+      return { message: "User successfully deleted." };
+    },
   },
 };
 
 export default resolvers;
+

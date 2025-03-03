@@ -1,50 +1,57 @@
-import { gql } from 'graphql-tag';
-
-const typeDefs = gql`
+const typeDefs = `
   type User {
     _id: ID!
     username: String!
     email: String!
     savedIdeas: [Idea]
+    hiddenIdeas: [Idea]
   }
+
+  type Category {
+    _id: ID!
+    name: String!
+    icon: String!
+    color: String!
+  }
+
   type Idea {
     _id: ID!
     title: String!
     description: String!
-    image: String!
-    category: Category
+    category: Category!
   }
-  type Category {
-    _id: ID!
-    name: String!
-  }
-  type Auth {
+
+  type AuthPayload {
     token: String!
     user: User!
   }
-  input UserInput {
-    username: String!
-    email: String!
-    password: String!
+
+  type DeleteResponse {
+    message: String!
   }
-  input IdeaInput {
-    _id: ID
-    title: String
-    description: String
-    image: String
-    category: ID
+
+  input UpdateUserInput {
+    username: String
+    email: String
+    password: String
   }
+
   type Query {
-    me: User
-    getIdeas(filter: String, category: ID): [Idea]
-    searchIdeas(searchTerm: String!): [Idea]
+    getUser: User
+    getIdeas(categoryId: ID): [Idea]!
+    getCategories: [Category]!
+    searchIdeas(searchTerm: String!): [Idea]!
   }
+
   type Mutation {
-    login(email: String!, password: String!): Auth!
-    addUser(username: String!, email: String!, password: String!): Auth!
-    saveIdea(ideaData: IdeaInput!): User
-    removeIdea(ideaId: ID!): User
-    updateUser(userId: ID!, username: String, email: String, password: String): User
+    addUser(username: String!, email: String!, password: String!): AuthPayload
+    loginUser(email: String!, password: String!): AuthPayload
+    updateUser(input: UpdateUserInput!): User
+    updatePassword(password: String!): User
+    logoutUser: Boolean
+    toggleSaveIdea(ideaId: ID!): User
+    toggleHideIdea(ideaId: ID!): User
+    deleteUser: DeleteResponse
   }
 `;
 
