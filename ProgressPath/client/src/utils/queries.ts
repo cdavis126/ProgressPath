@@ -4,19 +4,6 @@ export const GET_USER = gql`
   query GetUser {
     getUser {
       _id
-      goals {
-        _id
-        title
-        description
-        motivation
-        status
-        category {
-          _id
-          name
-          icon
-          color
-        }
-      }
       savedIdeas {
         _id
         title
@@ -43,15 +30,18 @@ export const GET_USER = gql`
   }
 `;
 
-
-
-
 export const GET_IDEAS = gql`
   query GetIdeas($category: ID) {
     getIdeas(category: $category) {
       _id
       title
       description
+      category {
+      _id
+      name
+      icon
+      color
+      }
     }
   }
 `;

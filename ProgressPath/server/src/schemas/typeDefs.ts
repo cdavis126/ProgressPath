@@ -38,7 +38,7 @@ const typeDefs = `
 
   type Query {
     getUser: User
-    getIdeas(categoryId: ID): [Idea]!
+    getIdeas(category: ID): [Idea]!
     getCategories: [Category]!
     searchIdeas(searchTerm: String!): [Idea]!
   }

@@ -24,7 +24,7 @@ interface AuthContextType {
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  register: (username: string, email: string, password: string) => Promise<void>;
+  signup: (username: string, email: string, password: string) => Promise<void>;
   refreshUser: () => Promise<void>;
 }
 
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(getUserFromToken());
   const [loading, setLoading] = useState(true);
 
-  const [registerUserMutation] = useMutation(ADD_USER);
+  const [signupUserMutation] = useMutation(ADD_USER);
   const [loginUserMutation] = useMutation(LOGIN_USER);
   const [logoutUserMutation] = useMutation(LOGOUT_USER);
 
@@ -84,10 +84,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     fetchUser();
   }, [token]);
 
-  // Register function
-  const register = async (username: string, email: string, password: string) => {
+  // Signup function
+  const signup = async (username: string, email: string, password: string) => {
     try {
-      const { data } = await registerUserMutation({ variables: { username, email, password } });
+      const { data } = await signupUserMutation({ variables: { username, email, password } });
 
       if (data?.addUser?.token) {
         Auth.login(data.addUser.token);
@@ -96,8 +96,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         apolloClient.resetStore();
       }
     } catch (error) {
-      console.error("Registration error:", error);
-      throw new Error("Failed to register.");
+      console.error("Signup error:", error);
+      throw new Error("Failed to signup.");
     }
   };
 
@@ -109,12 +109,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (data?.login?.token) {
         Auth.login(data.login.token);
         setToken(data.login.token);
-        setUser(getUserFromToken());
+        setUser(data.login.user);
         apolloClient.clearStore();
       }
     } catch (error) {
       console.error("Login error:", error);
-      throw new Error("Invalid credentials.");
+      throw new Error("Invalid");
     }
   };
 
@@ -132,7 +132,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, register, refreshUser: fetchUser }}>
+    <AuthContext.Provider value={{ user, token, login, logout, signup, refreshUser: fetchUser }}>
       {!loading ? children : <p>Loading...</p>}
     </AuthContext.Provider>
   );

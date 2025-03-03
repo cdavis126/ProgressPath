@@ -61,7 +61,7 @@ class AuthService {
       console.error("Invalid token on login:", error);
     }    
 
-    window.location.assign("/home");
+    window.location.assign("/dashboard");
   }
 
   logout() {

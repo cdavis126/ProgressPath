@@ -1,24 +1,30 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import NavLimited from "../components/Navbar/NavLimited"; 
-import "../assets/Styles/Signup.css";
+import { useState } from "react";
+import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authContext";
+import NavLimited from "../components/Navbar/NavLimited";
+import "../assets/styles/signup.css";
 
 const SignUp: React.FC = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ username: "", email: "", password: "" });
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const { signup } = useAuth();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Signup Data:", formData);
-    // TODO: Connect to backend later
+    setErrorMessage(null);
+
+    try {
+      await signup (formData.username, formData.email, formData.password);
+      navigate("/dashboard");
+    } catch (err: any) {
+      setErrorMessage(err.message || "Signup failed. Please try again.");
+    }
   };
 
   return (
@@ -31,26 +37,49 @@ const SignUp: React.FC = () => {
           {/* Left Side - Signup Form */}
           <Col md={6} className="form-section">
             <h2 className="text-dark">Sign Up</h2>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="SU_username" className="mt-3">
+            {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+            <Form onSubmit={handleSignUp}>
+              <Form.Group controlId="username" className="mt-3">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" name="SU_username" placeholder="Enter username" value={formData.username} onChange={handleChange} required />
+                <Form.Control
+                  type="text"
+                  name="username"
+                  placeholder="Enter username"
+                  value={formData.username}
+                  onChange={handleInputChange}
+                  required
+                />
               </Form.Group>
 
-              <Form.Group controlId="SU_email" className="mt-3">
+              <Form.Group controlId="email" className="mt-3">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" name="SU_email" placeholder="Enter email" value={formData.email} onChange={handleChange} required />
+                <Form.Control
+                  type="email"
+                  name="email"
+                  placeholder="Enter email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
               </Form.Group>
 
-              <Form.Group controlId="SU_password" className="mt-3">
+              <Form.Group controlId="password" className="mt-3">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" name="SU_password" placeholder="Create password" value={formData.password} onChange={handleChange} required />
+                <Form.Control
+                  type="password"
+                  name="password"
+                  placeholder="Create password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  required
+                />
               </Form.Group>
 
               <Button variant="primary" type="submit" className="mt-3">
                 Sign Up
               </Button>
             </Form>
+
             <p className="mt-3 login-text">
               Already a Member? <Link to="/login" className="bold-link">Login now!</Link>
             </p>

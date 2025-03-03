@@ -39,7 +39,7 @@ const IdeaContext = createContext<IdeaContextType | undefined>(undefined);
 
 export const IdeaProvider = ({ children }: { children: ReactNode }) => {
   const { data: userData } = useQuery(GET_USER);
-  const { data: ideasData } = useQuery<{ getIdeas: Idea[] }>(GET_IDEAS);
+  const { data: ideasData } = useQuery<{ getIdeas?: Idea[] }>(GET_IDEAS);
 
   const [toggleSaveIdeaMutation] = useMutation(TOGGLE_SAVE_IDEA);
   const [toggleHideIdeaMutation] = useMutation(TOGGLE_HIDE_IDEA);
@@ -49,21 +49,24 @@ export const IdeaProvider = ({ children }: { children: ReactNode }) => {
   const [hiddenIdeas, setHiddenIdeas] = useState<Idea[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const categories: Category[] = Array.from(
-    new Map(
-      (ideasData?.getIdeas || []).map((idea: Idea) => [idea.category._id, idea.category])
-    ).values()
-  ) || [];
-
   useEffect(() => {
     if (ideasData?.getIdeas) {
       setAllIdeas(ideasData.getIdeas);
+    } else {
+      setAllIdeas([]);
     }
+
     if (userData?.getUser) {
       setSavedIdeas(userData.getUser.savedIdeas || []);
       setHiddenIdeas(userData.getUser.hiddenIdeas || []);
     }
   }, [ideasData, userData]);
+
+  const categories: Category[] = Array.from(
+    new Map(
+      (ideasData?.getIdeas || []).filter((idea) => idea.category).map((idea) => [idea.category._id, idea.category])
+    ).values()
+  ) || [];
 
   const toggleSaveIdea = async (ideaId: string) => {
     try {
