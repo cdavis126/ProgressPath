@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_USER, GET_IDEAS } from "../utils/queries";
-import { SAVE_IDEA, HIDE_IDEA } from "../utils/mutations";
+import { TOGGLE_SAVE_IDEA, TOGGLE_HIDE_IDEA } from "../utils/mutations";
 
 interface Idea {
   _id: string;
@@ -18,20 +18,22 @@ interface Idea {
 interface IdeaContextType {
   visibleIdeas: Idea[];
   savedIdeas: Idea[];
+  hiddenIdeas: Idea[];
   selectedCategory: string | null;
-  handleSaveIdea: (ideaId: string) => Promise<void>;
-  handleHideIdea: (ideaId: string) => Promise<void>;
+  toggleSaveIdea: (ideaId: string) => Promise<void>;
+  toggleHideIdea: (ideaId: string) => Promise<void>;
   handleCategoryChange: (categoryId: string | null) => void;
 }
 
 const IdeaContext = createContext<IdeaContextType | undefined>(undefined);
 
 export const IdeaProvider = ({ children }: { children: ReactNode }) => {
-  const { data: userData, refetch: refetchUser } = useQuery(GET_USER);
+  // Fetch user & ideas
+  const { data: userData } = useQuery(GET_USER);
   const { data: ideasData } = useQuery(GET_IDEAS);
 
-  const [saveIdea] = useMutation(SAVE_IDEA, { onCompleted: refetchUser });
-  const [hideIdea] = useMutation(HIDE_IDEA, { onCompleted: refetchUser });
+  const [toggleSaveIdeaMutation] = useMutation(TOGGLE_SAVE_IDEA);
+  const [toggleHideIdeaMutation] = useMutation(TOGGLE_HIDE_IDEA);
 
   const [allIdeas, setAllIdeas] = useState<Idea[]>([]);
   const [savedIdeas, setSavedIdeas] = useState<Idea[]>([]);
@@ -48,22 +50,37 @@ export const IdeaProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [ideasData, userData]);
 
-  const handleSaveIdea = async (ideaId: string) => {
+  // Toggle Save Idea
+  const toggleSaveIdea = async (ideaId: string) => {
     try {
-      await saveIdea({ variables: { ideaId } });
+      await toggleSaveIdeaMutation({ variables: { ideaId } });
+
+      setSavedIdeas((prevSaved) =>
+        prevSaved.some((idea) => idea._id === ideaId)
+          ? prevSaved.filter((idea) => idea._id !== ideaId) // Remove if already saved
+          : [...prevSaved, allIdeas.find((idea) => idea._id === ideaId)!] // Add if not saved
+      );
     } catch (error) {
-      console.error("Error saving idea:", error);
+      console.error("Error toggling save:", error);
     }
   };
 
-  const handleHideIdea = async (ideaId: string) => {
+  // Toggle Hide Idea
+  const toggleHideIdea = async (ideaId: string) => {
     try {
-      await hideIdea({ variables: { ideaId } });
+      await toggleHideIdeaMutation({ variables: { ideaId } });
+
+      setHiddenIdeas((prevHidden) =>
+        prevHidden.some((idea) => idea._id === ideaId)
+          ? prevHidden.filter((idea) => idea._id !== ideaId) // Unhide if already hidden
+          : [...prevHidden, allIdeas.find((idea) => idea._id === ideaId)!] // Hide if not hidden
+      );
     } catch (error) {
-      console.error("Error removing idea:", error);
+      console.error("Error toggling hide:", error);
     }
   };
 
+  // Category Filter
   const handleCategoryChange = (categoryId: string | null) => {
     setSelectedCategory(categoryId);
   };
@@ -79,9 +96,10 @@ export const IdeaProvider = ({ children }: { children: ReactNode }) => {
       value={{
         visibleIdeas,
         savedIdeas,
+        hiddenIdeas,
         selectedCategory,
-        handleSaveIdea,
-        handleHideIdea: handleHideIdea,
+        toggleSaveIdea,
+        toggleHideIdea,
         handleCategoryChange,
       }}
     >

@@ -84,9 +84,9 @@ export const DELETE_USER = gql`
   }
 `;
 
-export const SAVE_IDEA = gql`
-  mutation SaveIdea($ideaId: ID!) {
-    saveIdea(ideaId: $ideaId) {
+export const TOGGLE_SAVE_IDEA = gql`
+  mutation ToggleSaveIdea($ideaId: ID!) {
+    toggleSaveIdea(ideaId: $ideaId) {
       _id
       savedIdeas {
         _id
@@ -94,8 +94,8 @@ export const SAVE_IDEA = gql`
         description
         category {
           _id
-          icon
           name
+          icon
           color
         }
       }
@@ -103,9 +103,10 @@ export const SAVE_IDEA = gql`
   }
 `;
 
-export const HIDE_IDEA = gql`
-  mutation HideIdea($ideaId: ID!) {
-    hideIdea(ideaId: $ideaId) {
+
+export const TOGGLE_HIDE_IDEA = gql`
+  mutation ToggleHideIdea($ideaId: ID!) {
+    toggleHideIdea(ideaId: $ideaId) {
       _id
       hiddenIdeas {
         _id
@@ -113,8 +114,8 @@ export const HIDE_IDEA = gql`
         description
         category {
           _id
-          icon
           name
+          icon
           color
         }
       }
