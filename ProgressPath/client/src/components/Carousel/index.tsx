@@ -29,7 +29,7 @@ export default function App() {
             className="d-block w-100"
             src={Fitness}
             alt="Fitness"
-            style={{ objectFit: 'cover', height: '50vh' }}
+            style={{ objectFit: 'cover', height: '35vh' }}
           />
           <Carousel.Caption>
             <h1 style={{ fontWeight: 'bold', color: 'black' }}>Fitness</h1>
@@ -42,7 +42,7 @@ export default function App() {
             className="d-block w-100"
             src={Mindfulness}
             alt="Mindfulness"
-            style={{ objectFit: 'cover', height: '50vh' }}
+            style={{ objectFit: 'cover', height: '35vh' }}
           />
           <Carousel.Caption>
             <h1 style={{ fontWeight: 'bold', color: 'black' }}>Mindset</h1>
@@ -55,7 +55,7 @@ export default function App() {
             className="d-block w-100"
             src={Nutrition}
             alt="Nutrition"
-            style={{ objectFit: 'cover', height: '50vh' }}
+            style={{ objectFit: 'cover', height: '35vh' }}
           />
           <Carousel.Caption>
             <h1 style={{ fontWeight: 'bold', color: 'white' }}>Nutrition</h1>
@@ -68,7 +68,7 @@ export default function App() {
             className="d-block w-100"
             src={Reading}
             alt="Reading"
-            style={{ objectFit: 'cover', height: '50vh' }}
+            style={{ objectFit: 'cover', height: '35vh' }}
           />
           <Carousel.Caption>
             <h1 style={{ fontWeight: 'bold', color: 'black' }}>Growth</h1>
@@ -81,7 +81,7 @@ export default function App() {
             className="d-block w-100"
             src={Creativity}
             alt="Creativity"
-            style={{ objectFit: 'cover', height: '50vh' }}
+            style={{ objectFit: 'cover', height: '35vh' }}
           />
           <Carousel.Caption>
             <h1 style={{ fontWeight: 'bold', color: 'black' }}>Creativity</h1>
@@ -94,7 +94,7 @@ export default function App() {
             className="d-block w-100"
             src={Productivity}
             alt="Productivity"
-            style={{ objectFit: 'cover', height: '50vh' }}
+            style={{ objectFit: 'cover', height: '35vh' }}
           />
           <Carousel.Caption>
             <h1 style={{ fontWeight: 'bold', color: 'black' }}>Productivity</h1>

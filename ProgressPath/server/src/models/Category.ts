@@ -12,6 +12,7 @@ const categorySchema = new Schema<CategoryDocument>({
     required: true,
     unique: true,
     enum: [
+      'Misc',
       'Mindset',
       'Creativity',
       'Well-Being',

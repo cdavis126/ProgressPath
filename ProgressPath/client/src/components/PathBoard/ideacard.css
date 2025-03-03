@@ -21,6 +21,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .idea-category {
@@ -29,21 +30,28 @@
   gap: 8px;
 }
 
+.category-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 5px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: white;
+  width: fit-content;
+  margin-bottom: 8px;
+}
+
 .category-icon {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
+  font-size: 0.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  color: white;
 }
 
 .category-name {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #333;
+  font-size: 0.8rem;
+  color: white;
 }
 
 .save-btn {
@@ -57,6 +65,19 @@
 
 .save-btn:hover .heart-icon {
   color: #ff5f6d;
+}
+
+.hide-btn {
+  background: transparent;
+  border: none;
+  color: #EBD2B4;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.hide-btn:hover .eye-icon {
+  color: #bfb4a5;
 }
 
 .idea-card-title {

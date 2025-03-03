@@ -64,7 +64,12 @@ const resolvers = {
     },
 
     getCategories: async () => {
-      return await Category.find();
+      try {
+        return await Category.find();
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+        throw new Error("Server error");
+      }
     },
 
     searchIdeas: async (_parent: unknown, { searchTerm }: { searchTerm: string }) => {

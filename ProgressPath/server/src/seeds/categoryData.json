@@ -1,13 +1,10 @@
 [
-    [
-        { "name": "Misc", "icon": "TbArrowsRandom", "color": "#6c5ce7" },
-        { "name": "Mindset", "icon": "FaBrain", "color": "#d6f6dd" },
-        { "name": "Creativity", "icon": "FaPaintBrush", "color": "#dac4f7" },
-        { "name": "Well-Being", "icon": "GiInnerSelf", "color": "#f4989c" },
-        { "name": "Nutrition", "icon": "GiKnifeFork", "color": "#ebd2b4" },
-        { "name": "Growth", "icon": "FaBookReader", "color": "#acecf7" },
-        { "name": "Fitness", "icon": "FaDumbbell", "color": "#ffcc00" },
-        { "name": "Productivity", "icon": "FaTasks", "color": "#ff5f6d" }
-      ]
-      
+  { "name": "Misc", "icon": "TbArrowsRandom", "color": "#6c5ce7" },
+  { "name": "Mindset", "icon": "FaBrain", "color": "#d6f6dd" },
+  { "name": "Creativity", "icon": "FaPaintBrush", "color": "#dac4f7" },
+  { "name": "Well-Being", "icon": "GiInnerSelf", "color": "#f4989c" },
+  { "name": "Nutrition", "icon": "GiKnifeFork", "color": "#ebd2b4" },
+  { "name": "Growth", "icon": "FaBookReader", "color": "#acecf7" },
+  { "name": "Fitness", "icon": "FaDumbbell", "color": "#ffcc00" },
+  { "name": "Productivity", "icon": "FaTasks", "color": "#ff5f6d" }
 ]
