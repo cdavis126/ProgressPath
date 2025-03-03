@@ -5,7 +5,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
-  .goal-display h1 {
+  .goal-display h3 {
     text-align: center;
     margin-bottom: 20px;
   }
@@ -25,7 +25,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .goal-card h3 {
+  .goal-card h5 {
     margin-top: 10px;
   }
   
@@ -35,13 +35,12 @@
     margin-bottom: 10px;
   }
   
-  h3 {
+  h5 {
     text-align: center; /* Centers the text */
-    font-family: "Courier New", Courier, monospace; /* Change the font */
     font-style: italic; /* Make it italic for a quote effect */
-    font-size: 1.5em; /* Increase font size */
+    font-size: 1.2em; /* Increase font size */
     font-weight: bold; /* Make it bold */
     color: #333; /* Change text color */
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }

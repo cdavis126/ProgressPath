@@ -7,78 +7,109 @@ import AddGoalModal from '../components/DashBoard/addgoalmodal';
 const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+  const handleClick = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
   return (
     <div>
+      {/* Header */}
       <Header />
-      <div 
-        style={{
-          marginTop: '50px', 
-          paddingLeft: '30px', 
-          paddingTop: '70px',
-          paddingBottom: '70px',
-          backgroundColor: '#f9f9f9', 
-          borderBottom: '3px solid #D6F6DD', 
-          borderTop: '3px solid #D6F6DD', 
-          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-          marginBottom: '50px',
-        }}
-        >
-        <h1>Map Your Path</h1>
-        <p>This is the calendar section placeholder</p>
-      </div>
 
-      <div style={{ marginTop: '70px', marginBottom: '70px', paddingLeft: '30px', display: 'flex', alignItems: 'center' }}>
-        <h1 style={{ marginRight: '10px', color: '#6c5ce7' }}>Create Your Path</h1>
-        <AiOutlinePlus 
-          className="bi bi-patch-plus-fill" 
-          onClick={handleClick} 
-          style={{
-            cursor: 'pointer', 
-            fontSize: '1.5rem', 
-            color: '#6c5ce7'
-          }}
-        />
-      </div>
+      {/* Main Content Wrapper */}
       <div 
+        className="main-content p-4 rounded shadow" 
         style={{
-          marginTop: '50px', 
-          paddingLeft: '30px', 
-          paddingBottom: '50px', 
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          width: '90%',
-          maxWidth: '2000px',
+          width: '95%',
+          maxWidth: '2000px', 
+          margin: '20px auto',
+          background: "linear-gradient(135deg, rgba(214, 246, 221, 0.3) 0%, rgba(218, 196, 247, 0.3) 25%, rgba(244, 152, 156, 0.3) 50%, rgba(235, 210, 180, 0.3) 75%, rgba(172, 236, 247, 0.3) 100%)",
+          zIndex: 1,
+          padding: 40,
+          borderRadius: 10,
+          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
         }}
       >
-        <GoalDisplay />
+        {/* Section: Map Your Path */}
+        <div style={{ marginBottom: '40px', textAlign: 'left' }}>
+          <h3 style={{ 
+            color: '#6c5ce7', 
+            fontWeight: 'normal', 
+            fontFamily: 'inherit', 
+            fontStyle: 'normal',
+            marginBottom: '5px' 
+          }}>
+            Map Your Path
+          </h3>
+          <p style={{ 
+            fontFamily: 'inherit', 
+            fontWeight: 'normal', 
+            marginTop: 0 
+          }}>
+            This is the calendar section placeholder
+          </p>
+        </div>
+
+        {/* Section: Create Your Path (Plus Icon) */}
+        <div style={{ marginBottom: '40px', display: 'flex', alignItems: 'center', textAlign: 'left' }}>
+          <h3 style={{ 
+            color: '#6c5ce7',
+            fontWeight: 'normal', 
+            fontFamily: 'inherit', 
+            fontStyle: 'normal',
+            marginRight: '10px',
+            marginBottom: 0,
+          }}>
+            Create Your Path
+          </h3>
+          <AiOutlinePlus 
+            onClick={handleClick} 
+            style={{
+              cursor: 'pointer', 
+              fontSize: '2rem', 
+              color: '#6c5ce7',
+              transition: '0.2s ease-in-out',
+            }}
+            className="plus-icon"
+          />
+        </div>
+
+        {/* Section: Goal Display */}
+        <div style={{ marginBottom: '40px', textAlign: 'left' }}>
+          <GoalDisplay />
+        </div>
+
+        {/* Section: Follow Your Path */}
+        <div style={{ marginBottom: '40px', textAlign: 'left' }}>
+          <h3 style={{ 
+            color: '#6c5ce7',
+            fontWeight: 'normal', 
+            fontFamily: 'inherit', 
+            fontStyle: 'normal',
+            marginBottom: '5px' 
+          }}>
+            Follow Your Path
+          </h3>
+          <p style={{ 
+            fontFamily: 'inherit', 
+            fontWeight: 'normal', 
+            marginTop: 0 
+          }}>
+            This is the path/goal tracker section placeholder
+          </p>
+        </div>
       </div>
-      <div 
-        style={{
-          marginTop: '50px', 
-          paddingLeft: '30px', 
-          paddingTop: '70px',
-          paddingBottom: '70px',
-          backgroundColor: '#f9f9f9', 
-          borderBottom: '3px solid #ACECF7', 
-          borderTop: '3px solid #ACECF7', 
-          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-          marginBottom: '15px',
-        }}
-        >
-        <h1>Follow Your Path</h1>
-        <p>This is the path/goal tracker section placeholder</p>
-      </div>
+
+      {/* Add Goal Modal */}
       <AddGoalModal isOpen={isModalOpen} onRequestClose={handleCloseModal} />
     </div>
   );
 };
 
 export default Dashboard;
+
+
+
+
+
+
+
