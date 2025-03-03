@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import Header from '../components/Header';
-import { AiOutlinePlus } from 'react-icons/ai';
-import GoalDisplay from '../components/DashBoard/goaldisplay';
-import AddGoalModal from '../components/DashBoard/addgoalmodal';
+import { useState } from "react";
+import Header from "../components/Header";
+import { AiOutlinePlus } from "react-icons/ai";
+import GoalDisplay from "../components/DashBoard/goaldisplay";
+import AddGoalModal from "../components/DashBoard/addgoalmodal"; 
+import GoalCalendar from "../components/DashBoard/GoalCalendar"; 
 
 const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,7 +30,7 @@ const Dashboard = () => {
           boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
         }}
       >
-        {/* Section: Map Your Path */}
+        {/* Section: Map Your Path (Goal Calendar Added) */}
         <div style={{ marginBottom: '40px', textAlign: 'left' }}>
           <h3 style={{ 
             color: '#6c5ce7', 
@@ -40,13 +41,14 @@ const Dashboard = () => {
           }}>
             Map Your Path
           </h3>
-          <p style={{ 
-            fontFamily: 'inherit', 
-            fontWeight: 'normal', 
-            marginTop: 0 
-          }}>
-            This is the calendar section placeholder
+          <p style={{ fontFamily: 'inherit', fontWeight: 'normal', marginTop: 0 }}>
+            Use the calendar to track your pathways.
           </p>
+
+          {/* ✅ Goal Calendar Component */}
+          <div style={{ marginTop: "20px" }}>
+            <GoalCalendar />
+          </div>
         </div>
 
         {/* Section: Create Your Path (Plus Icon) */}
@@ -89,23 +91,21 @@ const Dashboard = () => {
           }}>
             Follow Your Path
           </h3>
-          <p style={{ 
-            fontFamily: 'inherit', 
-            fontWeight: 'normal', 
-            marginTop: 0 
-          }}>
-            This is the path/goal tracker section placeholder
+          <p style={{ fontFamily: 'inherit', fontWeight: 'normal', marginTop: 0 }}>
+            This is the path/goal tracker section placeholder.
           </p>
         </div>
       </div>
 
-      {/* Add Goal Modal */}
+      {/* Add Goal Modal (Ensuring It Exists) */}
       <AddGoalModal isOpen={isModalOpen} onRequestClose={handleCloseModal} />
     </div>
   );
 };
 
 export default Dashboard;
+
+
 
 
 
