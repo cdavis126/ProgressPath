@@ -1,45 +1,109 @@
 [
-    {
-      "title": "Mindset",
-      "description": "Mindset plays a key role in shaping personal success.",
-      "image": "/client/src/assets/Mindset/Mind.png",
-      "category": "Mindset"
-    },
-    {
-      "title": "Creativity",
-      "description": "Explore various strategies to enhance creative thinking.",
-      "image": "/client/src/assets/Creativity/MultipleLightBulbs.png",
-      "category": "Creativity"
-    },
-    {
-      "title": "Well-Being",
-      "description": "Important well-being practices to improve quality of life.",
-      "image": "/client/src/assets/WellBeing/StressManagement.png",
-      "category": "Well-Being"
-    },
-    {
-      "title": "Nutrition",
-      "description": "Understanding the role of nutrition in overall health.",
-      "image": "/client/src/assets/Nutrition/Diet.png",
-      "category": "Nutrition"
-    },
-    {
-      "title": "Growth",
-      "description": "How a growth mindset leads to ongoing learning and personal growth.",
-      "image": "/client/src/assets/Growth/Journaling.png",
-      "category": "Growth"
-    },
-    {
-      "title": "Fitness",
-      "description": "Tips for staying motivated to achieve fitness goals.",
-      "image": "/client/src/assets/Fitness/Exercise.png",
-      "category": "Fitness"
-    },
-    {
-      "title": "Productivity",
-      "description": "Effective strategies to enhance productivity in everyday activities.",
-      "image": "/client/src/assets/Productivity/Planner.png",
-      "category": "Productivity"
-    }
+  {
+    "title": "Start a Daily Gratitude Practice",
+    "description": "Write down three things you’re grateful for every morning to shift your mindset towards positivity.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Reframe Negative Thoughts",
+    "description": "Identify a negative thought today and reframe it into a positive or growth-oriented perspective.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Try Meditation for 5 Minutes",
+    "description": "A short meditation session can improve focus and mental clarity. Try it today!",
+    "category": "Mindset"
+  },
+  {
+    "title": "Doodle for 10 Minutes",
+    "description": "Let your creativity flow by doodling freely without any judgment or purpose.",
+    "category": "Creativity"
+  },
+  {
+    "title": "Write a Short Story",
+    "description": "Challenge yourself to write a short story in 500 words or less. No rules, just creativity!",
+    "category": "Creativity"
+  },
+  {
+    "title": "Try a New Hobby",
+    "description": "Pick up a new creative hobby like painting, music, or photography to expand your skills.",
+    "category": "Creativity"
+  },
+  {
+    "title": "Take a 5-Minute Deep Breathing Break",
+    "description": "Practice deep breathing exercises to reduce stress and improve your well-being.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Go for a Nature Walk",
+    "description": "Spend 15 minutes outdoors to boost your mood and mental clarity.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Practice a Digital Detox",
+    "description": "Take a break from screens for at least one hour today to reset your mind.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Drink an Extra Glass of Water",
+    "description": "Stay hydrated! Challenge yourself to drink more water today.",
+    "category": "Nutrition"
+  },
+  {
+    "title": "Try a New Healthy Recipe",
+    "description": "Experiment with a new meal that includes whole, nutritious ingredients.",
+    "category": "Nutrition"
+  },
+  {
+    "title": "Eat Mindfully",
+    "description": "Slow down, chew thoroughly, and appreciate the flavors in your next meal.",
+    "category": "Nutrition"
+  },
+  {
+    "title": "Read 10 Pages of a Book",
+    "description": "Expand your knowledge by reading at least 10 pages of a book today.",
+    "category": "Growth"
+  },
+  {
+    "title": "Set a Small Weekly Goal",
+    "description": "Choose one small goal to accomplish by the end of the week and track your progress.",
+    "category": "Growth"
+  },
+  {
+    "title": "Step Outside Your Comfort Zone",
+    "description": "Do something today that makes you a little uncomfortable—growth happens outside your comfort zone!",
+    "category": "Growth"
+  },
+  {
+    "title": "Try a 15-Minute Workout",
+    "description": "A short workout session can reduce stress and improve mental clarity. Get moving!",
+    "category": "Fitness"
+  },
+  {
+    "title": "Stretch for 5 Minutes",
+    "description": "Take a short stretching break to improve flexibility and reduce tension.",
+    "category": "Fitness"
+  },
+  {
+    "title": "Take the Stairs Instead of the Elevator",
+    "description": "Make a simple change in your routine to add more physical activity to your day.",
+    "category": "Fitness"
+  },
+  {
+    "title": "Try the Pomodoro Technique",
+    "description": "Work for 25 minutes, then take a 5-minute break. Repeat to maximize focus!",
+    "category": "Productivity"
+  },
+  {
+    "title": "Plan Your Day in the Morning",
+    "description": "Start your day with a clear plan to stay organized and efficient.",
+    "category": "Productivity"
+  },
+  {
+    "title": "Declutter Your Workspace",
+    "description": "A clean workspace can help improve focus and productivity. Spend 10 minutes decluttering today.",
+    "category": "Productivity"
+  }
 ]
+
   
