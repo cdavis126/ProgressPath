@@ -1,71 +1,107 @@
-/* Login Page Layout */
-.login-container {
-    padding-top: 80px;
-}
-
-/* Left Column (Form Section) */
-.form-section {
-    background: white;
-    padding: 40px;
-    border-right: 2px solid #EBD2B4;
-}
-
-/* Form Styling */
-.form-section h2 {
-    color: black;
-}
-
-.form-section .btn-primary {
-    background-color: #F4989C;
-    border-color: #F4989C;
-}
-
-.form-section .btn-primary:hover {
-    background-color: #ACECF7;
-    border-color: #ACECF7;
-}
-
-/* Sign Up Link */
-.signup-text {
-    color: black;
-}
-
-.bold-link {
-    font-weight: bold;
-    color: #F4989C;
-    text-decoration: none;
-}
-
-.bold-link:hover {
-    color: #ACECF7;
-}
-
-/* Right Column (Marketing Section) */
-.marketing-section {
-    padding: 40px;
-    background: #D6F6DD;
-    text-align: center;
-}
-
-.marketing-header {
-    color: black;
-    font-weight: bold;
-}
-
-.marketing-list {
-    list-style: none;
-    padding: 0;
-}
-
-.marketing-list li {
-    font-size: 1.2rem;
+/* General Styles */
+.home-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px;
+  }
+  
+  /* Home Section */
+  .home-section {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Section Background Colors */
+  .home-section:nth-child(1) {
+    background-color: #D6F6DD;
+  }
+  
+  .home-section:nth-child(2) {
+    background-color: #DAC4F7;
+  }
+  
+  .home-section:nth-child(3) {
+    background-color: #F4989C;
+  }
+  
+  /* Section Layout */
+  .home-section.left {
+    flex-direction: row;
+  }
+  
+  .home-section.right {
+    flex-direction: row-reverse;
+  }
+  
+  /* Text Content */
+  .text-content {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .text-content h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .text-content p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .btn-primary {
+    display: inline-block;
+    padding: 10px 15px;
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(90deg, #4a3db7, #6c5ce7);
+  }
+  
+  /* Image Content */
+  .image-content {
+    flex: 1;
+    display: flex;
     justify-content: center;
-    gap: 10px;
-    margin: 10px 0;
-}
-
-.goal-text {
-    color: black;
-}
+    gap: 15px;
+  }
+  
+  .image-content img {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Hover Effect for Images */
+  .image-content img:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* ✅ Footer Styling */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #000;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 50px;
+  }
+  
