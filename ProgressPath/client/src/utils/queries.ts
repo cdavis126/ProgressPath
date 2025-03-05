@@ -45,9 +45,14 @@ export const GET_GOALS = gql`
       description
       category
       status
+      user {
+        _id
+        username
+      }
     }
   }
 `;
+
 
 export const GET_IDEAS = gql`
   query GetIdeas($category: ID) {

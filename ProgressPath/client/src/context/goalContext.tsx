@@ -1,8 +1,9 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import { useQuery, useMutation } from "@apollo/client";
-import { GET_USER } from "../utils/queries";
+import { createContext, useContext, useState, ReactNode } from "react";
+import { useMutation } from "@apollo/client";
 import { CREATE_GOAL, UPDATE_GOAL, DELETE_GOAL } from "../utils/mutations";
+import { useUser } from "./userContext";
 
+// Goal Interface
 interface Goal {
   _id: string;
   title: string;
@@ -11,6 +12,7 @@ interface Goal {
   status: "To Do" | "Active" | "Complete";
 }
 
+// Context Interface
 interface GoalsContextType {
   goals: Goal[];
   filteredGoals: Goal[];
@@ -32,26 +34,26 @@ interface GoalsContextType {
   refetchGoals: () => void;
 }
 
+// Create Context
 const GoalsContext = createContext<GoalsContextType | undefined>(undefined);
 
 export const GoalsProvider = ({ children }: { children: ReactNode }) => {
-  const { data, loading, refetch } = useQuery(GET_USER, { fetchPolicy: "network-only" });
-  const [createGoalMutation] = useMutation(CREATE_GOAL);
-  const [updateGoalMutation] = useMutation(UPDATE_GOAL);
-  const [deleteGoalMutation] = useMutation(DELETE_GOAL);
+  const { user, refreshUser, loading } = useUser();
 
   const [goal, setGoal] = useState<Goal | null>(null);
   const [filterStatus, setFilterStatus] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"edit" | "create">("create");
 
-  const goals: Goal[] = data?.getUser?.goals ?? [];
+  const [createGoalMutation] = useMutation(CREATE_GOAL);
+  const [updateGoalMutation] = useMutation(UPDATE_GOAL);
+  const [deleteGoalMutation] = useMutation(DELETE_GOAL);
 
-  useEffect(() => {
-    console.log("User data from GET_USER query:", data?.getUser);
-    console.log("All Goals:", goals);
-  }, [data]);
+  const goals: Goal[] = user?.goals ?? [];
 
+  if (loading) return <p>Loading Goals...</p>;
+
+  // Modals
   const openCreateModal = () => {
     setGoal(null);
     setModalMode("create");
@@ -70,47 +72,49 @@ export const GoalsProvider = ({ children }: { children: ReactNode }) => {
     setModalMode("create");
   };
 
+  // Create Goal
   const createGoal = async (title: string, description: string, category: string, status: string) => {
     try {
       console.log("Creating Goal:", { title, description, category, status });
 
-      const { data } = await createGoalMutation({
-        variables: { title, description, category, status },
-      });
+      const { data } = await createGoalMutation({ variables: { title, description, category, status } });
+
+      if (!data?.createGoal) throw new Error("Goal creation failed!");
 
       console.log("Goal Created Successfully:", data.createGoal);
-
-      await refetch();
+      await refreshUser();
     } catch (error: any) {
       console.error("Error Creating Goal:", error.message);
     }
   };
 
+  // Update Goal
   const updateGoal = async (id: string, updates: Partial<Goal>) => {
     try {
       console.log("Updating Goal:", { id, updates });
 
-      const { data } = await updateGoalMutation({
-        variables: { id, ...updates },
-      });
+      const { data } = await updateGoalMutation({ variables: { id, ...updates } });
 
-      console.log("Goal Updated:", data.updateGoal);
+      if (!data?.updateGoal) throw new Error("Goal update failed!");
 
-      await refetch();
+      console.log("Goal Updated Successfully:", data.updateGoal);
+      await refreshUser();
     } catch (error: any) {
       console.error("Error Updating Goal:", error.message);
     }
   };
 
+  // Delete Goal
   const deleteGoal = async (id: string) => {
     try {
       console.log("Deleting Goal with ID:", id);
 
       const { data } = await deleteGoalMutation({ variables: { id } });
 
-      console.log("Goal Deleted:", data.deleteGoal);
+      if (!data?.deleteGoal) throw new Error("Goal deletion failed!");
 
-      await refetch();
+      console.log("Goal Deleted Successfully:", data.deleteGoal);
+      await refreshUser();
     } catch (error: any) {
       console.error("Error Deleting Goal:", error.message);
     }
@@ -141,7 +145,7 @@ export const GoalsProvider = ({ children }: { children: ReactNode }) => {
         createGoal,
         updateGoal,
         deleteGoal,
-        refetchGoals: refetch,
+        refetchGoals: refreshUser,
       }}
     >
       {children}

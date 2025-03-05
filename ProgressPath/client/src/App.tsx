@@ -18,7 +18,12 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("id_token");
+  let token = localStorage.getItem("token");
+  
+  if (!token || token === "undefined" || token === "null") {
+    token = "";
+  }
+
   return {
     headers: {
       ...headers,
@@ -27,7 +32,6 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-// Initialize Apollo Client
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),

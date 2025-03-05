@@ -1,13 +1,19 @@
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
-import App from './App.jsx';
-import ErrorPage from './pages/Error';
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
-import Pathboard from './pages/Pathboard.js';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import App from "./App.jsx";
+import ErrorPage from "./pages/Error";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import Pathboard from "./pages/Pathboard.js";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import AuthService from "./utils/auth.js";
+
+// 🔒 Protected Route Wrapper
+const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
+  return AuthService.loggedIn() ? element : <Navigate to="/login" replace />;
+};
 
 const router = createBrowserRouter([
   {
@@ -17,25 +23,29 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
-      }, {
-        path: '/login',
-        element: <Login />
-      }, {
-        path: '/signup',
-        element: <Signup />
-      }, {
-        path: '/dashboard',
-        element: <Dashboard />
-      }, {
-        path: '/pathboard',
-        element: <Pathboard />
-      }
-    ]
+        element: AuthService.loggedIn() ? <Navigate to="/dashboard" /> : <Home />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
+      {
+        path: "/dashboard",
+        element: <ProtectedRoute element={<Dashboard />} />,
+      },
+      {
+        path: "/pathboard",
+        element: <ProtectedRoute element={<Pathboard />} />,
+      },
+    ],
   },
 ]);
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(<RouterProvider router={router} />);
 }

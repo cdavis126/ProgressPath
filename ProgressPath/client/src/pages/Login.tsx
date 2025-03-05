@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/authContext";
-import NavLimited from "../components/Navbar/NavLimited"; 
-import "../assets/styles/login.css"; 
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "../utils/mutations";
+import AuthService from "../utils/auth";
+import NavLimited from "../components/Navbar/NavLimited";
+import "../assets/styles/login.css";
 
 const Login: React.FC = () => {
-  const navigate = useNavigate();
-  const { login } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [loginUser] = useMutation(LOGIN_USER);
 
   // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   // Handle login form submission
@@ -24,9 +25,22 @@ const Login: React.FC = () => {
     setLoading(true);
 
     try {
-      await login(formData.email, formData.password);
-      navigate("/dashboard");
+      const { data } = await loginUser({
+        variables: { ...formData },
+      });
+
+      console.log("Debugging Login Response:", data); // ✅ Debugging response
+
+      if (!data || !data.loginUser || !data.loginUser.token) {
+        throw new Error("Login failed. No token received.");
+      }
+
+      console.log("Login Successful! Token:", data.loginUser.token);
+
+      AuthService.login(data.loginUser.token);
+
     } catch (error: any) {
+      console.error("Login error:", error);
       setErrorMessage(error.message || "Failed to log in. Please try again.");
     } finally {
       setLoading(false);
@@ -35,9 +49,9 @@ const Login: React.FC = () => {
 
   return (
     <>
-      {/* ✅ Added NavLimited */}
+      {/* ✅ Navbar */}
       <NavLimited />
-      
+
       <Container className="login-container mt-5">
         <Row className="align-items-center">
           {/* Left Side - Login Form */}
@@ -81,7 +95,7 @@ const Login: React.FC = () => {
               New user? <Link to="/signup" className="bold-link">Sign Up Now!</Link>
             </p>
           </Col>
-  
+
           {/* Right Side - Marketing Section */}
           <Col md={6} className="marketing-section">
             <h2 className="marketing-header">Congrats on your Progress! Continue Your Pathway Now.</h2>
@@ -98,3 +112,5 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+
+

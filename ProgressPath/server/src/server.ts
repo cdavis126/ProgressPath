@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import path from 'node:path';
-import db from './config/connection.js'
+import db from './config/connection.js';
 import dotenv from 'dotenv';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
@@ -16,12 +16,12 @@ const __dirname = dirname(__filename);
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
 });
 
 const startApolloServer = async () => {
   await server.start();
-  await db(); 
+  await db();
 
   const PORT = process.env.PORT || 3001;
   const app = express();
@@ -29,23 +29,27 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
-  app.use('/graphql', expressMiddleware(server as any,
-    {
-      context: authenticateToken as any
-    }
-  ));
+  app.use(
+    '/graphql',
+    expressMiddleware(server, {
+      context: async ({ req }) => {
+        const authContext = authenticateToken({ req });
+        console.log("Context from authenticateToken:", authContext);
+        return authContext;
+      }
+    })
+  );
 
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../../client/dist')));
-
     app.get('*', (_req: Request, res: Response) => {
       res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
     });
   }
 
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}!`);
-    console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+    console.log(`🚀 Server running on port ${PORT}!`);
+    console.log(`GraphQL Playground: http://localhost:${PORT}/graphql`);
   });
 };
 

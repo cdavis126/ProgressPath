@@ -25,50 +25,75 @@ class AuthService {
 
   loggedIn() {
     const token = this.getToken();
-    return !!token && !this.isTokenExpired(token);
+    if (!token) return false;
+
+    return !this.isTokenExpired(token);
   }
 
-  isTokenExpired(token: string) {
+  isTokenExpired(token: string): boolean {
     try {
       const decoded = jwtDecode<JwtPayload>(token);
-      return decoded?.exp ? decoded.exp < Date.now() / 1000 : false;
+      if (!decoded?.exp) return false;
+      return decoded.exp < Date.now() / 1000;
     } catch (err) {
       console.error("Token expiration check failed:", err);
       return true;
     }
   }
 
-  getToken(): string {
-    return localStorage.getItem("token") || "";
+  getToken(): string | null {
+    try {
+      const token = localStorage.getItem("token");
+      return token && token !== "undefined" && token !== "null" ? token : null;
+    } catch (error) {
+      console.error("Error retrieving token:", error);
+      return null;
+    }
   }
 
-  login(idToken: string) {
+  private handleAuth(idToken: string, redirectPath: string = "/dashboard") {
+    if (!idToken) {
+      console.error("No token provided for authentication.");
+      return;
+    }
+
     localStorage.setItem("token", idToken);
 
     try {
       const decoded = jwtDecode<ExtendedJwt>(idToken);
-      console.log("Decoded Token on Login:", decoded);
-    
-      const userId = decoded?.data?._id ?? "MISSING_USER_ID";
-      console.log("Extracted User ID:", userId);
-    
-      if (userId !== "MISSING_USER_ID") {
+      console.log("Decoded Token:", decoded);
+
+      const userId = decoded?.data?._id ?? null;
+      if (userId) {
         localStorage.setItem("userId", userId);
       } else {
         console.error("User ID not found in token!");
       }
     } catch (error) {
-      console.error("Invalid token on login:", error);
-    }    
+      console.error("Invalid token received:", error);
+    }
 
-    window.location.assign("/dashboard");
+    window.location.assign(redirectPath);
   }
 
-  logout() {
+  login(idToken: string) {
+    console.log("Logging in user...");
+    this.handleAuth(idToken, "/dashboard");
+  }
+
+  signup(idToken: string) {
+    console.log("Signing up user...");
+    this.handleAuth(idToken, "/dashboard");
+  }
+
+  logout(redirectPath: string = "/") {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
-    window.location.assign("/");
+    console.log("User logged out.");
+    window.location.assign(redirectPath);
   }
 }
 
 export default new AuthService();
+
+

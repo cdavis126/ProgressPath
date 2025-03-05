@@ -37,9 +37,16 @@ interface UpdateGoalArgs {
 const resolvers = {
   Query: {
     getUser: async (_parent: any, _args: any, context: Context) => {
-      if (!context.user) throw new AuthenticationError("You need to be logged in.");
-      return await User.findById(context.user._id).populate("goals savedIdeas hiddenIdeas");
+      console.log("Context in getUser:", context);
+      console.log("Context User in getUser:", context.user);
+      if (!context.user) {
+        throw new AuthenticationError("You need to be logged in.");
+      }
+      const user = await User.findById(context.user._id).populate("goals savedIdeas hiddenIdeas");
+      console.log("Retrieved User:", user);
+      return user;
     },
+    
 
     getIdeas: async (_parent: any, { categoryId }: { categoryId?: mongoose.Types.ObjectId }) => {
       const filter = categoryId ? { category: categoryId } : {};
@@ -48,9 +55,15 @@ const resolvers = {
 
     getGoals: async (_parent: any, _args: any, context: Context) => {
       if (!context.user) throw new AuthenticationError("You must be logged in.");
-      return await Goal.find({ user: context.user._id });
+      try {
+        const goals = await Goal.find({ user: context.user._id }).populate("user");
+        return goals;
+      } catch (error) {
+        console.error("Error fetching goals:", error);
+        throw new Error("Failed to retrieve goals.");
+      }
     },
-
+    
     getCategories: async () => {
       return await Category.find();
     },
@@ -129,9 +142,10 @@ const resolvers = {
       if (!context.user) throw new AuthenticationError("You must be logged in.");
       if (!title.trim()) throw new Error("Title is required.");
       try {
-        const goal = await Goal.create({ title, description, category, status, user: context.user._id });
+        const goal = await Goal.create({ title, description, category, status, user: context.user._id});
         await User.findByIdAndUpdate(context.user._id, { $push: { goals: goal._id } });
-        return goal;
+        const populatedGoal = await Goal.findById(goal._id).populate("user");
+        return populatedGoal;
       } catch (error) {
         console.error("Error creating goal:", error);
         throw new Error("Failed to create goal.");

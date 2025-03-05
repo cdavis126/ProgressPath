@@ -1,14 +1,23 @@
 import { createContext, ReactNode, useContext } from "react";
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation, useApolloClient } from "@apollo/client";
 import { UPDATE_USER, UPDATE_PASSWORD, DELETE_USER } from "../utils/mutations";
 import { GET_USER } from "../utils/queries";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./authContext";
 
+interface Goal {
+  _id: string;
+  title: string;
+  description: string;
+  category: string;
+  status: "To Do" | "Active" | "Complete";
+}
+
 interface User {
   _id: string;
   username: string;
   email: string;
+  goals: Goal[];
 }
 
 interface UserContextType {
@@ -24,18 +33,24 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 const UserContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const navigate = useNavigate();
+  const apolloClient = useApolloClient();
   const { user: authUser, logout } = useAuth();
 
-  const { data, loading, refetch } = useQuery(GET_USER, {fetchPolicy: "network-only", skip: !authUser });
+  const { data, loading, refetch } = useQuery(GET_USER, {
+    fetchPolicy: "network-only",
+    skip: !authUser?._id,
+  });
 
   const [updateUserMutation] = useMutation(UPDATE_USER);
   const [updatePasswordMutation] = useMutation(UPDATE_PASSWORD);
   const [deleteUserMutation] = useMutation(DELETE_USER);
 
+  const user = data?.getUser || authUser || null;
+
   const updateUser = async (username: string, email: string) => {
     try {
       await updateUserMutation({ variables: { username, email } });
-      refetch();
+      await refetch();
     } catch (error) {
       console.error("Error updating user:", error);
     }
@@ -52,6 +67,7 @@ const UserContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const deleteUser = async () => {
     try {
       await deleteUserMutation();
+      await apolloClient.clearStore();
       logout();
       navigate("/register");
     } catch (error) {
@@ -60,25 +76,16 @@ const UserContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <UserContext.Provider
-      value={{
-        user: data?.getUser || authUser,
-        updateUser,
-        updatePassword,
-        deleteUser,
-        refreshUser: refetch,
-        loading,
-      }}
-    >
+    <UserContext.Provider value={{ user, updateUser, updatePassword, deleteUser, refreshUser: refetch, loading }}>
       {children}
     </UserContext.Provider>
   );
 };
 
-export const User = () => {
+export const useUser = () => {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error("useUserContext must be used within a UserContextProvider");
+    throw new Error("useUser must be used within a UserContextProvider");
   }
   return context;
 };
