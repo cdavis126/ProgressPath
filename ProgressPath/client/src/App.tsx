@@ -11,6 +11,7 @@ import { AuthProvider } from "./context/authContext";
 import UserProvider from "./context/userContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { IdeaProvider } from "./context/ideaContext";
+import { GoalsProvider } from "./context/goalContext";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -38,11 +39,13 @@ function App() {
       <AuthProvider>
         <UserProvider>
           <IdeaProvider>
-            <div>
-              <main>
-                <Outlet />
-              </main>
-            </div>
+            <GoalsProvider>
+              <div>
+                <main>
+                  <Outlet />
+                </main>
+              </div>
+            </GoalsProvider>
           </IdeaProvider>
         </UserProvider>
       </AuthProvider>

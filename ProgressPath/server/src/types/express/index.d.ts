@@ -1,8 +1,7 @@
-declare namespace Express {
-  interface Request {
-    user?: {
-      _id: mongoose.Types.ObjectId | string;
-      username: string;
-    };
-  }
+export interface GraphQLContext {
+  user?: {
+    _id: string;
+    username: string;
+    email: string;
+  };
 }

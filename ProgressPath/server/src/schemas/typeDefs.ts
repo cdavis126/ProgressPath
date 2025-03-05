@@ -3,8 +3,9 @@ const typeDefs = `
     _id: ID!
     username: String!
     email: String!
-    savedIdeas: [Idea]
-    hiddenIdeas: [Idea]
+    goals: [Goal]!
+    savedIdeas: [Idea]!
+    hiddenIdeas: [Idea]!
   }
 
   type Category {
@@ -19,6 +20,15 @@ const typeDefs = `
     title: String!
     description: String!
     category: Category!
+  }
+
+  type Goal {
+    _id: ID!
+    title: String!
+    description: String!
+    category: String!
+    status: String!
+    user: User!
   }
 
   type AuthPayload {
@@ -39,6 +49,7 @@ const typeDefs = `
   type Query {
     getUser: User
     getIdeas(category: ID): [Idea]!
+    getGoals: [Goal]!
     getCategories: [Category]!
     searchIdeas(searchTerm: String!): [Idea]!
   }
@@ -51,6 +62,9 @@ const typeDefs = `
     logoutUser: Boolean
     toggleSaveIdea(ideaId: ID!): User
     toggleHideIdea(ideaId: ID!): User
+    createGoal(title: String!, description: String!, category: String!, status: String!): Goal
+    updateGoal(id: ID!, title: String, description: String, category: String, status: String): Goal
+    deleteGoal(id: ID!): String
     deleteUser: DeleteResponse
   }
 `;

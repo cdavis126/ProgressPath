@@ -6,6 +6,7 @@ export interface UserDocument extends Document {
   username: string;
   email: string;
   password: string;
+  goals: mongoose.Types.ObjectId[];
   savedIdeas: mongoose.Types.ObjectId[];
   hiddenIdeas: mongoose.Types.ObjectId[];
   isCorrectPassword(password: string): Promise<boolean>;
@@ -30,6 +31,12 @@ const userSchema = new Schema<UserDocument>(
       type: String,
       required: true,
     },
+    goals: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Goal",
+      },
+    ],
     savedIdeas: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -51,6 +58,7 @@ const userSchema = new Schema<UserDocument>(
   }
 );
 
+// Hash password before saving
 userSchema.pre("save", async function (next) {
   if (this.isModified("password") || this.isNew) {
     const saltRounds = 10;
@@ -59,11 +67,11 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+// Compare password for login
 userSchema.methods.isCorrectPassword = async function (password: string) {
   return await bcrypt.compare(password, this.password);
 };
 
 const User = model<UserDocument>("User", userSchema);
-export default User;
 
-
+export { User };

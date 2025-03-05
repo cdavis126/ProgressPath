@@ -1,16 +1,15 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useAuth } from "../../context/authContext";
+import { FiLogOut } from "react-icons/fi";
 import Typewriter from "typewriter-effect";
-import AddGoalModal from "../DashBoard/addgoalmodal";
 
-const Header = () => {
+interface HeaderProps {
+  setShowModal: (show: boolean) => void;
+}
+
+const Header = ({ setShowModal }: HeaderProps) => {
   const { user, logout } = useAuth();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   return (
     <>
@@ -60,17 +59,21 @@ const Header = () => {
             </h2>
           </div>
 
-          {/* Right Section: Bigger Icons - Plus, Pathboard, Search, Profile, Logout */}
+          {/* Right Section: Buttons & Icons */}
           <div className="d-flex align-items-center" style={{ gap: "14px" }}>
             
-            {/* Plus Icon - Open AddGoalModal */}
+            {/* Add Goal Button */}
             <button
-              onClick={openModal}
-              className="btn btn-outline-primary rounded-circle d-flex align-items-center justify-content-center"
-              style={{ width: "44px", height: "44px", padding: "0" }}
-              aria-label="Add New Goal"
+              className="btn rounded-pill"
+              style={{
+                backgroundColor: "#ACECF7",
+                borderColor: "#ACECF7",
+                color: "white",
+                padding: "6px 12px",
+              }}
+              onClick={() => setShowModal(true)}
             >
-              <i className="bi bi-patch-plus-fill" style={{ fontSize: "1.5rem", color: "#6c5ce7" }}></i>
+              Add a new Goal
             </button>
 
             {/* Pathboard Icon */}
@@ -92,36 +95,24 @@ const Header = () => {
               <button
                 onClick={logout}
                 className="btn btn-outline-danger rounded-circle d-flex align-items-center justify-content-center"
-                style={{ width: "44px", height: "44px", padding: "0" }}
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  padding: "0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
                 aria-label="Logout"
               >
-                <i className="bi bi-box-arrow-right" style={{ fontSize: "1.5rem" }}></i>
+                <FiLogOut />
               </button>
             )}
           </div>
         </div>
       </header>
-
-      {/* AddGoalModal */}
-      <AddGoalModal isOpen={isModalOpen} onRequestClose={closeModal} />
     </>
   );
 };
 
 export default Header;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

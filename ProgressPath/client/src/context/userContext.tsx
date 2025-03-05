@@ -5,14 +5,12 @@ import { GET_USER } from "../utils/queries";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./authContext";
 
-// User Type
 interface User {
   _id: string;
   username: string;
   email: string;
 }
 
-// Context Type
 interface UserContextType {
   user: User | null;
   updateUser: (username: string, email: string) => Promise<void>;
@@ -22,26 +20,18 @@ interface UserContextType {
   loading: boolean;
 }
 
-// Create Context
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-// UserContext Provider
 const UserContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const navigate = useNavigate();
   const { user: authUser, logout } = useAuth();
 
-  // Fetch user data if authenticated
-  const { data, loading, refetch } = useQuery(GET_USER, {
-    fetchPolicy: "network-only",
-    skip: !authUser,
-  });
+  const { data, loading, refetch } = useQuery(GET_USER, {fetchPolicy: "network-only", skip: !authUser });
 
-  // Mutations
   const [updateUserMutation] = useMutation(UPDATE_USER);
   const [updatePasswordMutation] = useMutation(UPDATE_PASSWORD);
   const [deleteUserMutation] = useMutation(DELETE_USER);
 
-  // Update user
   const updateUser = async (username: string, email: string) => {
     try {
       await updateUserMutation({ variables: { username, email } });
@@ -51,7 +41,6 @@ const UserContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-  // Update password
   const updatePassword = async (currentPassword: string, newPassword: string) => {
     try {
       await updatePasswordMutation({ variables: { currentPassword, newPassword } });
@@ -60,7 +49,6 @@ const UserContextProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-  // Delete user
   const deleteUser = async () => {
     try {
       await deleteUserMutation();

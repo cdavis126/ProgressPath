@@ -125,3 +125,41 @@ export const TOGGLE_HIDE_IDEA = gql`
     }
   }
 `;
+
+export const CREATE_GOAL = gql`
+  mutation CreateGoal($title: String!, $description: String!, $category: String!, $status: String!) {
+    createGoal(title: $title, description: $description, category: $category, status: $status) {
+      _id
+      title
+      description
+      category
+      status
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+export const UPDATE_GOAL = gql`
+  mutation UpdateGoal($_id: ID!, $title: String, $description: String, $category: String, $status: String) {
+    updateGoal(_id: $_id, title: $title, description: $description, category: $category, status: $status) {
+      _id
+      title
+      description
+      category
+      status
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+export const DELETE_GOAL = gql`
+  mutation DeleteGoal($id: ID!) {
+    deleteGoal(id: $id)
+  }
+`;

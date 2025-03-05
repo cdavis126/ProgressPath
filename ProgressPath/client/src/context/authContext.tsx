@@ -11,7 +11,7 @@ interface User {
   email: string;
 }
 
-// Extended JWT Interface
+// JWT Interface (ensure your backend returns these in the token)
 interface ExtendedJwt {
   id: string;
   username: string;
@@ -34,7 +34,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const apolloClient = useApolloClient();
   const [token, setToken] = useState<string | null>(Auth.getToken());
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
+  const [signupUserMutation] = useMutation(ADD_USER);
+  const [loginUserMutation] = useMutation(LOGIN_USER);
+  const [logoutUserMutation] = useMutation(LOGOUT_USER);
+
+  // Extract user details from JWT
   const getUserFromToken = (): User | null => {
     const profile = Auth.getProfile() as Partial<ExtendedJwt> | null;
 
@@ -44,14 +51,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return null;
   };
 
-  const [user, setUser] = useState<User | null>(getUserFromToken());
-  const [loading, setLoading] = useState(true);
-
-  const [signupUserMutation] = useMutation(ADD_USER);
-  const [loginUserMutation] = useMutation(LOGIN_USER);
-  const [logoutUserMutation] = useMutation(LOGOUT_USER);
-
-  // Fetch user from GraphQL API
+  // Fetch user data from GraphQL API
   const fetchUser = async () => {
     if (!token) {
       setUser(null);
@@ -63,7 +63,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const { data } = await apolloClient.query({ query: GET_USER, fetchPolicy: "network-only" });
 
       if (data?.getUser) {
-        setUser(data.getUser);
+        setUser({
+          _id: data.getUser._id,
+          username: data.getUser.username,
+          email: data.getUser.email,
+        });
       } else {
         Auth.logout();
         setToken(null);
@@ -81,6 +85,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Run fetchUser on token change
   useEffect(() => {
+    setUser(getUserFromToken()); // Initialize user from local storage
     fetchUser();
   }, [token]);
 
@@ -92,7 +97,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (data?.addUser?.token) {
         Auth.login(data.addUser.token);
         setToken(data.addUser.token);
-        setUser(getUserFromToken());
+        setUser({
+          _id: data.addUser.user._id,
+          username: data.addUser.user.username,
+          email: data.addUser.user.email,
+        });
         apolloClient.resetStore();
       }
     } catch (error) {
@@ -106,15 +115,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       const { data } = await loginUserMutation({ variables: { email, password } });
 
-      if (data?.login?.token) {
-        Auth.login(data.login.token);
-        setToken(data.login.token);
-        setUser(data.login.user);
+      if (data?.loginUser?.token) {
+        Auth.login(data.loginUser.token);
+        setToken(data.loginUser.token);
+        setUser({
+          _id: data.loginUser.user._id,
+          username: data.loginUser.user.username,
+          email: data.loginUser.user.email,
+        });
         apolloClient.clearStore();
       }
     } catch (error) {
       console.error("Login error:", error);
-      throw new Error("Invalid");
+      throw new Error("Invalid credentials.");
     }
   };
 
@@ -145,6 +158,7 @@ export const useAuth = () => {
   }
   return context;
 };
+
 
 
 
