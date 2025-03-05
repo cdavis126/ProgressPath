@@ -4,6 +4,7 @@ export const GET_USER = gql`
   query GetUser {
     getUser {
       _id
+      username
       goals {
         _id
         title
