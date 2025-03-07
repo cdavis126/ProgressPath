@@ -143,19 +143,14 @@ export const CREATE_GOAL = gql`
 `;
 
 export const UPDATE_GOAL = gql`
-  mutation UpdateGoal($_id: ID!, $title: String, $description: String, $category: String, $status: String) {
-    updateGoal(_id: $_id, title: $title, description: $description, category: $category, status: $status) {
-      _id
-      title
-      description
-      category
-      status
-      user {
-        _id
-        username
-      }
-    }
+  mutation UpdateGoal($updateGoalId: ID!, $title: String, $description: String, $category: String) {
+  updateGoal(id: $updateGoalId, title: $title, description: $description, category: $category) {
+    _id
+    title
+    category
+    description
   }
+}
 `;
 
 export const DELETE_GOAL = gql`

@@ -89,11 +89,11 @@ export const GoalsProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Update Goal
-  const updateGoal = async (id: string, updates: Partial<Goal>) => {
+  const updateGoal = async (updateGoalId: string, updates: Partial<Goal>) => {
     try {
-      console.log("Updating Goal:", { id, updates });
+      console.log("Updating Goal:", { updateGoalId, updates });
 
-      const { data } = await updateGoalMutation({ variables: { id, ...updates } });
+      const { data } = await updateGoalMutation({ variables: { updateGoalId, ...updates } });
 
       if (!data?.updateGoal) throw new Error("Goal update failed!");
 
