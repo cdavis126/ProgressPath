@@ -1,109 +1,382 @@
 [
   {
-    "title": "Start a Daily Gratitude Practice",
-    "description": "Write down three things you’re grateful for every morning to shift your mindset towards positivity.",
+    "title": "Take the Stairs Instead of the Elevator",
+    "description": "A simple change that adds more movement to your daily routine and improves heart health.",
+    "category": "Fitness"
+  },
+  {
+    "title": "Write a Letter to Your Future Self",
+    "description": "Reflect on where you are now and write a letter to your future self with hopes, dreams, and encouragement.",
     "category": "Mindset"
-  },
-  {
-    "title": "Reframe Negative Thoughts",
-    "description": "Identify a negative thought today and reframe it into a positive or growth-oriented perspective.",
-    "category": "Mindset"
-  },
-  {
-    "title": "Try Meditation for 5 Minutes",
-    "description": "A short meditation session can improve focus and mental clarity. Try it today!",
-    "category": "Mindset"
-  },
-  {
-    "title": "Doodle for 10 Minutes",
-    "description": "Let your creativity flow by doodling freely without any judgment or purpose.",
-    "category": "Creativity"
-  },
-  {
-    "title": "Write a Short Story",
-    "description": "Challenge yourself to write a short story in 500 words or less. No rules, just creativity!",
-    "category": "Creativity"
-  },
-  {
-    "title": "Try a New Hobby",
-    "description": "Pick up a new creative hobby like painting, music, or photography to expand your skills.",
-    "category": "Creativity"
-  },
-  {
-    "title": "Take a 5-Minute Deep Breathing Break",
-    "description": "Practice deep breathing exercises to reduce stress and improve your well-being.",
-    "category": "Well-Being"
-  },
-  {
-    "title": "Go for a Nature Walk",
-    "description": "Spend 15 minutes outdoors to boost your mood and mental clarity.",
-    "category": "Well-Being"
-  },
-  {
-    "title": "Practice a Digital Detox",
-    "description": "Take a break from screens for at least one hour today to reset your mind.",
-    "category": "Well-Being"
-  },
-  {
-    "title": "Drink an Extra Glass of Water",
-    "description": "Stay hydrated! Challenge yourself to drink more water today.",
-    "category": "Nutrition"
   },
   {
     "title": "Try a New Healthy Recipe",
-    "description": "Experiment with a new meal that includes whole, nutritious ingredients.",
+    "description": "Experiment with a nutritious meal using fresh, whole ingredients you’ve never tried before.",
     "category": "Nutrition"
   },
   {
-    "title": "Eat Mindfully",
-    "description": "Slow down, chew thoroughly, and appreciate the flavors in your next meal.",
+    "title": "Do a 24 Hour Digital Detox",
+    "description": "Challenge yourself to disconnect from screens for a full day and be fully present in the moment.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Sketch Your Dream Life",
+    "description": "Grab a notebook and visually map out your ideal future through sketches and doodles.",
+    "category": "Creativity"
+  },
+  {
+    "title": "Set a 7 Day Personal Challenge",
+    "description": "Pick one small, achievable goal and commit to doing it every day for a week.",
+    "category": "Growth"
+  },
+  {
+    "title": "Read a Book Outside Your Comfort Zone",
+    "description": "Choose a book from a genre or topic you wouldn’t normally read to expand your perspective.",
+    "category": "Growth"
+  },
+  {
+    "title": "Try the 2 Minute Rule",
+    "description": "If a task takes less than two minutes, do it immediately to stay productive.",
+    "category": "Productivity"
+  },
+  {
+    "title": "Drink an Extra Glass of Water",
+    "description": "Hydration is key! Challenge yourself to drink more water than usual today.",
     "category": "Nutrition"
   },
   {
-    "title": "Read 10 Pages of a Book",
-    "description": "Expand your knowledge by reading at least 10 pages of a book today.",
+    "title": "Learn 3 Fun Facts Today",
+    "description": "Broaden your knowledge by finding and sharing three interesting facts about any topic.",
     "category": "Growth"
   },
   {
-    "title": "Set a Small Weekly Goal",
-    "description": "Choose one small goal to accomplish by the end of the week and track your progress.",
-    "category": "Growth"
-  },
-  {
-    "title": "Step Outside Your Comfort Zone",
-    "description": "Do something today that makes you a little uncomfortable—growth happens outside your comfort zone!",
-    "category": "Growth"
-  },
-  {
-    "title": "Try a 15-Minute Workout",
-    "description": "A short workout session can reduce stress and improve mental clarity. Get moving!",
+    "title": "Try a 10 Minute Dance Break",
+    "description": "Put on your favorite music and dance like nobody’s watching—it’s great for both fitness and mood!",
     "category": "Fitness"
   },
   {
-    "title": "Stretch for 5 Minutes",
-    "description": "Take a short stretching break to improve flexibility and reduce tension.",
-    "category": "Fitness"
+    "title": "Reframe a Limiting Belief",
+    "description": "Identify a belief that’s holding you back and challenge yourself to see it from a different perspective.",
+    "category": "Mindset"
   },
   {
-    "title": "Take the Stairs Instead of the Elevator",
-    "description": "Make a simple change in your routine to add more physical activity to your day.",
+    "title": "Do a Random Act of Kindness",
+    "description": "Surprise someone with a small act of kindness it could brighten their day and yours too!",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Write a 5 Minute Journal Entry",
+    "description": "Spend just five minutes reflecting on your thoughts, goals, or experiences today.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Create a Vision Board",
+    "description": "Gather images, quotes, and symbols that represent your goals and dreams.",
+    "category": "Creativity"
+  },
+  {
+    "title": "Take a Walk Without Your Phone",
+    "description": "Go for a 15 minute walk without distractions and simply observe your surroundings.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Try a New Fitness Challenge",
+    "description": "Test your endurance with a plank challenge, push-up challenge, or a new workout routine.",
     "category": "Fitness"
   },
   {
     "title": "Try the Pomodoro Technique",
-    "description": "Work for 25 minutes, then take a 5-minute break. Repeat to maximize focus!",
+    "description": "Boost productivity by working in focused 25 minute intervals with short breaks.",
     "category": "Productivity"
   },
   {
-    "title": "Plan Your Day in the Morning",
-    "description": "Start your day with a clear plan to stay organized and efficient.",
-    "category": "Productivity"
+    "title": "Make a Gratitude List",
+    "description": "Write down five things you’re grateful for today to shift into a positive mindset.",
+    "category": "Mindset"
   },
   {
     "title": "Declutter Your Workspace",
-    "description": "A clean workspace can help improve focus and productivity. Spend 10 minutes decluttering today.",
+    "description": "A clean, organized space can improve focus and productivity. Spend 10 minutes tidying up.",
     "category": "Productivity"
+  },
+  {
+    "title": "Try an Art Medium You've Never Used Before",
+    "description": "Experiment with watercolor, charcoal, or digital drawing to expand your creativity.",
+    "category": "Creativity"
+  },
+  {
+    "title": "Listen to a Podcast on Self-Improvement",
+    "description": "Find an inspiring podcast episode and take notes on key takeaways.",
+    "category": "Growth"
+  },
+  {
+    "title": "Meal Prep for the Week",
+    "description": "Prepare healthy meals in advance to save time and eat better throughout the week.",
+    "category": "Nutrition"
+  },
+  {
+    "title": "Try a 5 Minute Guided Meditation",
+    "description": "Take a moment to center yourself with a short mindfulness practice.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Write a Poem or Short Story",
+    "description": "Challenge your creative side by crafting a piece of writing today.",
+    "category": "Creativity"
+  },
+  {
+    "title": "Learn a New Skill Online",
+    "description": "Watch a tutorial or take a mini-course on something you’ve always wanted to learn.",
+    "category": "Growth"
+  },
+  {
+    "title": "Schedule a Self Care Hour",
+    "description": "Dedicate 60 minutes to doing something that relaxes and rejuvenates you.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Practice Mindful Eating",
+    "description": "Slow down and truly savor your next meal—no screens, just awareness.",
+    "category": "Nutrition"
+  },
+  {
+    "title": "Wake Up 30 Minutes Earlier",
+    "description": "Give yourself extra time in the morning for a peaceful, intentional start to the day.",
+    "category": "Productivity"
+  },
+  {
+    "title": "Compliment Yourself in the Mirror",
+    "description": "Boost your confidence with a daily affirmation or self-compliment.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Try a No Sugar Day",
+    "description": "Challenge yourself to go 24 hours without added sugar and see how you feel.",
+    "category": "Nutrition"
+  },
+  {
+    "title": "Unsubscribe from Unwanted Emails",
+    "description": "Declutter your inbox and remove distractions by unsubscribing from unnecessary newsletters.",
+    "category": "Productivity"
+  },
+  {
+    "title": "Make a Bucket List",
+    "description": "Write down 10 things you want to experience in your lifetime.",
+    "category": "Growth"
+  },
+  {
+    "title": "Try a Cold Shower Challenge",
+    "description": "A cold shower can boost circulation and energy try it for 30 seconds today!",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Take a Power Nap",
+    "description": "A 20 minute nap can enhance focus and refresh your energy.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Say No to Something That Drains You",
+    "description": "Protect your energy by declining an unnecessary commitment.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Draw Your Dream House",
+    "description": "Sketch out the house of your dreams no limits, just creativity!",
+    "category": "Creativity"
+  },
+  {
+    "title": "Start a 'Wins' Journal",
+    "description": "Record small achievements each day to recognize your progress.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Go a Day Without Complaining",
+    "description": "Notice your thoughts and practice gratitude instead of dwelling on negativity.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Learn a Few Words in a New Language",
+    "description": "Pick a language you’re interested in and learn five new words today.",
+    "category": "Growth"
+  },
+  {
+    "title": "Try a Yoga Flow",
+    "description": "Stretch and strengthen your body with a simple yoga sequence.",
+    "category": "Fitness"
+  },
+  {
+    "title": "Go Outside for Sunrise or Sunset",
+    "description": "Take a moment to appreciate nature’s beauty at the start or end of the day.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Create a Personal Mission Statement",
+    "description": "Define your core values and what you want to achieve in life.",
+    "category": "Growth"
+  },
+  {
+    "title": "Try a New Hobby for 30 Minutes",
+    "description": "Explore something new, whether it’s painting, knitting, or playing an instrument.",
+    "category": "Creativity"
+  },
+  {
+    "title": "Write Down Your Top 3 Priorities for Tomorrow",
+    "description": "Set clear intentions for the next day to stay focused and productive.",
+    "category": "Productivity"
+  },
+  {
+    "title": "Do a Random Act of Self Care",
+    "description": "Treat yourself to something small that brings you joy, like a favorite snack or a relaxing bath.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Try a New Form of Exercise",
+    "description": "Step out of your comfort zone with a new workout class or outdoor activity.",
+    "category": "Fitness"
+  },
+  {
+    "title": "Write a Letter to Someone You Appreciate",
+    "description": "Express your gratitude and appreciation to someone who has made a positive impact on your life.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Create a 'No' List",
+    "description": "Identify things you want to say no to in order to protect your time and energy.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Try a New Type of Tea or Coffee",
+    "description": "Explore different flavors and find a new favorite beverage.",
+    "category": "Nutrition"
+  },
+  {
+    "title": "Spend 10 Minutes in Nature",
+    "description": "Take a walk, sit on a bench, or simply breathe in the fresh air to reconnect with nature.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Write Down Your Top 5 Goals for the Year",
+    "description": "Set clear, achievable goals to guide your actions and decisions.",
+    "category": "Growth"
+  },
+  {
+    "title": "Try a New Meditation Technique",
+    "description": "Explore different meditation styles, such as guided, mindfulness, or loving-kindness.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Create a 'Done' List",
+    "description": "Celebrate your accomplishments by writing down everything you’ve completed today.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Try a New Recipe with a Friend",
+    "description": "Cook together and enjoy the process of creating something delicious.",
+    "category": "Nutrition"
+  },
+  {
+    "title": "Spend 5 Minutes Stretching",
+    "description": "Relieve tension and improve flexibility with a quick stretching routine.",
+    "category": "Fitness"
+  },
+  {
+    "title": "Write Down Your Top 3 Values",
+    "description": "Identify what truly matters to you and use it as a guide for your decisions.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Try a New Form of Creative Expression",
+    "description": "Explore painting, writing, dancing, or any other form of creativity that interests you.",
+    "category": "Creativity"
+  },
+  {
+    "title": "Spend 10 Minutes Journaling",
+    "description": "Reflect on your thoughts, feelings, and experiences to gain clarity and insight.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Try a New Workout Playlist",
+    "description": "Create or find a playlist that motivates you to move and energizes your workout.",
+    "category": "Fitness"
+  },
+  {
+    "title": "Write Down Your Top 3 Affirmations",
+    "description": "Repeat positive affirmations to boost your confidence and self-belief.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Try a New Form of Relaxation",
+    "description": "Explore activities like deep breathing, aromatherapy, or a warm bath to unwind.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Spend 10 Minutes Reading a Book",
+    "description": "Escape into a different world and expand your knowledge with a good book.",
+    "category": "Growth"
+  },
+  {
+    "title": "Try a New Form of Mindfulness",
+    "description": "Explore mindfulness techniques like body scanning, mindful walking, or mindful eating.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Write Down Your Top 3 Dreams",
+    "description": "Visualize your dreams and aspirations to inspire your actions and decisions.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Try a New Form of Exercise with a Friend",
+    "description": "Share the experience of trying a new workout or activity together.",
+    "category": "Fitness"
+  },
+  {
+    "title": "Spend 10 Minutes in Silence",
+    "description": "Disconnect from distractions and find peace in the stillness.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Write Down Your Top 3 Lessons Learned",
+    "description": "Reflect on your experiences and identify valuable lessons to carry forward.",
+    "category": "Growth"
+  }, 
+  {
+    "title": "Try a New Form of Creativity with a Friend",
+    "description": "Collaborate on a creative project and enjoy the process of creating together.",
+    "category": "Creativity"
+  },
+  {
+    "title": "Spend 10 Minutes in Nature with a Friend",
+    "description": "Share the beauty of nature and connect with each other in a peaceful setting.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Write Down Your Top 3 Gratitudes",
+    "description": "Express gratitude for the positive aspects of your life to cultivate a positive mindset.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Try a New Form of Relaxation with a Friend",
+    "description": "Share relaxation techniques and enjoy the benefits of unwinding together.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Spend 10 Minutes Reading a Book with a Friend",
+    "description": "Share the joy of reading and discuss your thoughts on the book together.",
+    "category": "Growth"
+  },
+  {
+    "title": "Try a New Form of Mindfulness with a Friend",
+    "description": "Explore mindfulness techniques together and support each other in the practice.",
+    "category": "Well-Being"
+  },
+  {
+    "title": "Write Down Your Top 3 Dreams with a Friend",
+    "description": "Share your dreams and aspirations with each other to inspire and motivate one another.",
+    "category": "Mindset"
+  },
+  {
+    "title": "Try a New Form of Exercise with a Group",
+    "description": "Join a group workout or activity to enjoy the benefits of exercise in a supportive environment.",
+    "category": "Fitness"
   }
 ]
-
-  

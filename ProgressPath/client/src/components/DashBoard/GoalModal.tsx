@@ -100,9 +100,9 @@ const GoalModal = ({ show, handleClose, categories }: GoalModalProps) => {
           <Form.Group className="mb-3">
             <Form.Label>Path Category</Form.Label>
             <Form.Select name="category" value={localGoal.category} onChange={handleInputChange}>
-              {categories.map((cat) => (
-                <option key={cat.value} value={cat.value}>
-                  {cat.label}
+              {categories.map((category) => (
+                <option key={category.value} value={category.value}>
+                  {category.label}
                 </option>
               ))}
             </Form.Select>

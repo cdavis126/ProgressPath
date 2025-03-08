@@ -47,8 +47,9 @@ const Header = ({ setShowModal }: HeaderProps) => {
                   options={{
                     strings: [
                       `${user ? `Welcome, ${user.username}!` : "Welcome to ProgressPath!"} 👋`,
-                      "Small steps lead to big changes 🚶‍♂️",
-                      "Your habits shape your future! 🎯",
+                      "We're excited to see the path you choose to create! 🌟",
+                      "Remember, small steps lead to big changes 🚶‍♂️",
+                      "Your habits will shape your future tomorrow! 🎯",
                     ],
                     autoStart: true,
                     loop: true,
@@ -68,7 +69,9 @@ const Header = ({ setShowModal }: HeaderProps) => {
               style={{
                 backgroundColor: "#ACECF7",
                 borderColor: "#ACECF7",
-                color: "white",
+                color: "black",
+                fontSize: "18px",
+                fontWeight: "bold",
                 padding: "6px 12px",
               }}
               onClick={() => setShowModal(true)}
@@ -96,9 +99,10 @@ const Header = ({ setShowModal }: HeaderProps) => {
                 onClick={logout}
                 className="btn btn-outline-danger rounded-circle d-flex align-items-center justify-content-center"
                 style={{
-                  width: "36px",
-                  height: "36px",
+                  width: "44px",
+                  height: "44px",
                   padding: "0",
+                  fontSize: "1.5rem",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",

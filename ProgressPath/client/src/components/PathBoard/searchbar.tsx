@@ -1,40 +1,49 @@
-import { useState } from 'react';
-import { Form } from 'react-bootstrap';
-import { FaSearch } from 'react-icons/fa';
-import './searchbar.css';
+import { useState } from "react";
+import { Form, Button } from "react-bootstrap";
+import { FaSearch } from "react-icons/fa";
+import { AiOutlineClose } from "react-icons/ai"; // ✅ Import Clear (X) Icon
 
-const SearchBar = () => {
-  const [searchInput, setSearchInput] = useState('');
+interface SearchIdeasProps {
+  onSearch: (searchTerm: string) => void;
+  searchTerm: string;  // ✅ Add searchTerm prop
+  onClear: () => void; // ✅ Add onClear function
+}
+
+const SearchIdeas = ({ onSearch, searchTerm, onClear }: SearchIdeasProps) => {
+  const [searchInput, setSearchInput] = useState(searchTerm); // ✅ Sync with parent state
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(searchInput);
-    setSearchInput('');
+    if (!searchInput.trim()) return;
+    onSearch(searchInput.trim());
+  };
+
+  const handleClearSearch = () => {
+    setSearchInput(""); // ✅ Clear input field
+    onClear(); // ✅ Reset search in parent component
   };
 
   return (
-    <div 
-      className="search-bar-container" 
-      style={{ 
+    <div
+      style={{
         marginTop: "10px",
         display: "flex",
         justifyContent: "center",
-        width: "100%", 
+        width: "100%",
       }}
     >
-      <Form 
-        onSubmit={handleFormSubmit} 
-        className="search-form" 
-        style={{ 
+      <Form
+        onSubmit={handleFormSubmit}
+        style={{
           width: "70%",
           maxWidth: "800px",
         }}
       >
-        <div 
-          className="search-input-wrapper" 
-          style={{ 
-            position: "relative", 
-            width: "100%", 
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
           }}
         >
           <Form.Control
@@ -44,31 +53,72 @@ const SearchBar = () => {
             type="text"
             size="lg"
             placeholder="Search for an idea"
-            className="search-input"
             style={{
-              width: "100%", 
+              width: "100%",
               padding: "12px 30px",
-              borderRadius: "10px", 
-              border: "1px solid #ccc",
-              fontSize: "1rem",
+              borderRadius: "10px",
+              color: "#6c5ce7",
+              background: "rgba(255, 255, 255, 0.1)",
+              backdropFilter: "blur(10px)",
+              border: "2px solid #6c5ce7",
+              fontSize: "1.2rem",
+              outline: "none",
+              transition: "border-color 0.3s ease, box-shadow 0.3s ease",
+              boxShadow: isFocused ? "0 0 10px rgba(162, 155, 254, 0.5)" : "none",
             }}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
           />
-          <FaSearch 
-            className="search-icon" 
+
+          {/* Search Button */}
+          <Button
+            type="submit"
             style={{
               position: "absolute",
-              right: "15px",
+              right: searchInput ? "40px" : "10px", // ✅ Adjust position if clear button exists
               top: "50%",
               transform: "translateY(-50%)",
-              fontSize: "1.2rem",
-              color: "#6c5ce7",
-              cursor: "pointer",
+              background: "transparent",
+              border: "none",
+              padding: "5px",
             }}
-          />
+          >
+            <FaSearch
+              style={{
+                fontSize: "1.2rem",
+                color: "#6c5ce7",
+                cursor: "pointer",
+              }}
+            />
+          </Button>
+
+          {/* Clear (X) Button - Shows Only When Input is Not Empty */}
+          {searchInput && (
+            <Button
+              onClick={handleClearSearch}
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                background: "transparent",
+                border: "none",
+                padding: "5px",
+              }}
+            >
+              <AiOutlineClose
+                style={{
+                  fontSize: "1.2rem",
+                  color: "#ff4757",
+                  cursor: "pointer",
+                }}
+              />
+            </Button>
+          )}
         </div>
       </Form>
     </div>
   );
 };
 
-export default SearchBar;
+export default SearchIdeas;

@@ -4,7 +4,7 @@ import { CREATE_GOAL, UPDATE_GOAL, DELETE_GOAL } from "../utils/mutations";
 import { useUser } from "./userContext";
 
 // Goal Interface
-interface Goal {
+export interface Goal {
   _id: string;
   title: string;
   description: string;
@@ -15,7 +15,6 @@ interface Goal {
 // Context Interface
 interface GoalsContextType {
   goals: Goal[];
-  filteredGoals: Goal[];
   goal: Goal | null;
   setGoal: (goal: Goal | null) => void;
   loading: boolean;
@@ -25,8 +24,6 @@ interface GoalsContextType {
   openCreateModal: () => void;
   openEditModal: (goal: Goal) => void;
   closeModal: () => void;
-  filterStatus: string;
-  setFilterStatus: (status: string) => void;
   handleInput: (field: keyof Goal) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   createGoal: (title: string, description: string, category: string, status: string) => Promise<void>;
   updateGoal: (id: string, updates: Partial<Goal>) => Promise<void>;
@@ -36,12 +33,10 @@ interface GoalsContextType {
 
 // Create Context
 const GoalsContext = createContext<GoalsContextType | undefined>(undefined);
-
 export const GoalsProvider = ({ children }: { children: ReactNode }) => {
   const { user, refreshUser, loading } = useUser();
 
   const [goal, setGoal] = useState<Goal | null>(null);
-  const [filterStatus, setFilterStatus] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"edit" | "create">("create");
 
@@ -76,11 +71,8 @@ export const GoalsProvider = ({ children }: { children: ReactNode }) => {
   const createGoal = async (title: string, description: string, category: string, status: string) => {
     try {
       console.log("Creating Goal:", { title, description, category, status });
-
       const { data } = await createGoalMutation({ variables: { title, description, category, status } });
-
       if (!data?.createGoal) throw new Error("Goal creation failed!");
-
       console.log("Goal Created Successfully:", data.createGoal);
       await refreshUser();
     } catch (error: any) {
@@ -92,11 +84,8 @@ export const GoalsProvider = ({ children }: { children: ReactNode }) => {
   const updateGoal = async (updateGoalId: string, updates: Partial<Goal>) => {
     try {
       console.log("Updating Goal:", { updateGoalId, updates });
-
       const { data } = await updateGoalMutation({ variables: { updateGoalId, ...updates } });
-
       if (!data?.updateGoal) throw new Error("Goal update failed!");
-
       console.log("Goal Updated Successfully:", data.updateGoal);
       await refreshUser();
     } catch (error: any) {
@@ -108,11 +97,8 @@ export const GoalsProvider = ({ children }: { children: ReactNode }) => {
   const deleteGoal = async (id: string) => {
     try {
       console.log("Deleting Goal with ID:", id);
-
       const { data } = await deleteGoalMutation({ variables: { id } });
-
       if (!data?.deleteGoal) throw new Error("Goal deletion failed!");
-
       console.log("Goal Deleted Successfully:", data.deleteGoal);
       await refreshUser();
     } catch (error: any) {
@@ -129,7 +115,6 @@ export const GoalsProvider = ({ children }: { children: ReactNode }) => {
     <GoalsContext.Provider
       value={{
         goals,
-        filteredGoals: goals.filter((goal) => !filterStatus || goal.status === filterStatus),
         goal,
         setGoal,
         loading,
@@ -139,8 +124,6 @@ export const GoalsProvider = ({ children }: { children: ReactNode }) => {
         openCreateModal,
         openEditModal,
         closeModal,
-        filterStatus,
-        setFilterStatus,
         handleInput,
         createGoal,
         updateGoal,

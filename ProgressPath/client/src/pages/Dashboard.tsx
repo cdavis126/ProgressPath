@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { useGoals } from "../context/goalContext";
 import GoalModal from "../components/DashBoard/GoalModal";
@@ -8,6 +8,7 @@ import { FaTasks, FaPaintBrush, FaDumbbell, FaBrain, FaBookReader } from "react-
 import { TbArrowsRandom } from "react-icons/tb";
 import { GiInnerSelf, GiKnifeFork } from "react-icons/gi";
 import "../assets/Styles/Dashboard.css";
+import Carousel from "../components/Carousel";
 
 // Category Styles & Options
 const categoryStyles = {
@@ -38,6 +39,9 @@ const Dashboard = () => {
     refetchGoals,
   } = useGoals();
 
+  // ✅ Add state for active tab
+  const [activeTab, setActiveTab] = useState<"calendar" | "goals">("goals");
+
   useEffect(() => {
     refetchGoals();
   }, []);
@@ -51,10 +55,17 @@ const Dashboard = () => {
     }
   };
 
+  // Tab Headers
+  const tabHeaders = {
+    calendar: { title: "Map Your Path", description: "Use the calendar to track your path!" },
+    goals: { title: "Create Your Path..and..Follow Your Progress", description: "Motivation is what gets you started. A Habit is what keeps you going." },
+  };
+
   return (
     <div>
       {/* Header */}
       <Header setShowModal={openCreateModal} />
+      <Carousel />
 
       {/* Main Content Wrapper */}
       <div
@@ -70,42 +81,87 @@ const Dashboard = () => {
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
         }}
       >
-        {/* Section: Map Your Path */}
-        <div style={{ marginBottom: "40px", textAlign: "left" }}>
-          <h3 style={{ color: "#6c5ce7", fontWeight: "normal", marginBottom: "5px" }}>Map Your Path</h3>
-          <p style={{ marginTop: 0 }}>Use the calendar to track your pathways.</p>
+        {/* Navigation Tabs */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div>
+            <h2 style={{ color: "#6c5ce7", marginBottom: "5px", fontWeight: "normal", fontFamily: "inherit" }}>
+              {tabHeaders[activeTab].title}
+            </h2>
+            <p style={{ fontSize: "22px", fontFamily: "inherit", marginTop: 0, marginBottom: 15 }}>
+              {tabHeaders[activeTab].description}
+            </p>
+          </div>
+          <div style={{ display: "flex", gap: "15px", background: "transparent" }}>
+            {Object.keys(tabHeaders).map((tab) => (
+              <span
+                key={tab}
+                onClick={() => setActiveTab(tab as "calendar" | "goals")}
+                style={{
+                  cursor: "pointer",
+                  fontSize: "20px",
+                  fontWeight: activeTab === tab ? "bold" : "normal",
+                  color: activeTab === tab ? "#6c5ce7" : "#bbb",
+                  padding: "8px 16px",
+                  transition: "all 0.3s ease-in-out",
+                  position: "relative",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#6c5ce7")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = activeTab === tab ? "#6c5ce7" : "#bbb")}
+              >
+                {tab === "calendar" ? "Calendar" : "Goals"}
 
-          {/* Goal Calendar Component */}
-          <div style={{ marginTop: "20px" }}>
-            <GoalCalendar />
+                {/* Underline for active tab */}
+                {activeTab === tab && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "2px",
+                      backgroundColor: "#6c5ce7",
+                    }}
+                  ></div>
+                )}
+              </span>
+            ))}
           </div>
         </div>
 
-        {/* Section: Create Your Path */}
-        <div>
-          <h3 className="mb-0">Create Your Path... Follow Your Progress</h3>
-          <p className="text-muted mb-0">"Motivation is what gets you started. A Habit is what keeps you going."</p>
-        </div>
-
-        {/* Goal Grid */}
-        <div className="goal-grid mt-3">
-          {goals.map((goal) => (
-            <GoalCard
-              key={goal._id}
-              goal={goal}
-              onDelete={() => deleteGoal(goal._id)}
-              onStatusChange={handleStatusChange}
-              handleDetails={() => openEditModal(goal)}
-              className="mb-4"
-              categories={categoryStyles}
-            />
-          ))}
-
-          {/* Add Goal Button */}
-          <div className="add-goal-card" onClick={openCreateModal}>
-            <p>+ Add New Goal</p>
+        {/* Show Calendar only on the "Calendar" tab */}
+        {activeTab === "calendar" && (
+          <div style={{ marginBottom: "40px", textAlign: "left" }}>
+            {/* Goal Calendar Component */}
+            <div style={{ marginTop: "20px" }}>
+              <GoalCalendar />
+            </div>
           </div>
-        </div>
+        )}
+
+        {/* Show Goals only on the "Goals" tab */}
+        {activeTab === "goals" && (
+          <>
+            {/* Goal Grid */}
+            <div className="goal-grid mt-3">
+              {goals.map((goal) => (
+                <GoalCard
+                  key={goal._id}
+                  goal={goal}
+                  onDelete={() => deleteGoal(goal._id)}
+                  onStatusChange={handleStatusChange}
+                  handleDetails={() => openEditModal(goal)}
+                  className="mb-4"
+                  categories={categoryStyles}
+                />
+              ))}
+
+              {/* Add Goal Button */}
+              <div className="add-goal-card" onClick={openCreateModal}>
+                <p>+ Add New Goal</p>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Goal Modal */}
@@ -115,6 +171,7 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 
 
 

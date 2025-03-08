@@ -13,11 +13,20 @@ interface Goal {
   status: "To Do" | "Active" | "Complete";
 }
 
-interface User {
+interface Idea {
+  _id: string;
+  title: string;
+  description: string;
+  category: string;
+}
+
+export interface User {
   _id: string;
   username: string;
   email: string;
+  password: string;
   goals: Goal[];
+  savedIdeas: Idea[];
 }
 
 interface UserContextType {
@@ -25,7 +34,7 @@ interface UserContextType {
   updateUser: (username: string, email: string) => Promise<void>;
   updatePassword: (currentPassword: string, newPassword: string) => Promise<void>;
   deleteUser: () => Promise<void>;
-  refreshUser: () => void;
+  refreshUser: () => void; 
   loading: boolean;
 }
 

@@ -5,7 +5,6 @@ const typeDefs = `
     email: String!
     goals: [Goal]!
     savedIdeas: [Idea]!
-    hiddenIdeas: [Idea]!
   }
 
   type Category {
@@ -19,7 +18,7 @@ const typeDefs = `
     _id: ID!
     title: String!
     description: String!
-    category: Category!
+    category: Category
   }
 
   type Goal {
@@ -46,6 +45,19 @@ const typeDefs = `
     password: String
   }
 
+  input CategoryInput {
+    _id: ID!
+    name: String!
+    icon: String!
+    color: String!
+  }
+  input IdeaInput {
+    _id: ID!
+    title: String!
+    description: String!
+    category: CategoryInput!
+  }
+
   type Query {
     getUser: User
     getIdeas(category: ID): [Idea]!
@@ -60,8 +72,8 @@ const typeDefs = `
     updateUser(input: UpdateUserInput!): User
     updatePassword(password: String!): User
     logoutUser: Boolean
-    toggleSaveIdea(ideaId: ID!): User
-    toggleHideIdea(ideaId: ID!): User
+    saveIdea(ideaData: IdeaInput!): User
+    removeIdea(ideaId: ID!): User
     createGoal(title: String!, description: String!, category: String!, status: String!): Goal
     updateGoal(id: ID!, title: String, description: String, category: String, status: String): Goal
     deleteGoal(id: ID!): String

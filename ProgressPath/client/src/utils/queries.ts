@@ -1,7 +1,7 @@
 import { gql } from "graphql-tag";
 
 export const GET_USER = gql`
-  query GetUser {
+ query GetUser {
     getUser {
       _id
       username
@@ -13,17 +13,6 @@ export const GET_USER = gql`
         status
       }
       savedIdeas {
-        _id
-        title
-        description
-        category {
-          _id
-          name
-          icon
-          color
-        }
-      }
-      hiddenIdeas {
         _id
         title
         description
@@ -54,7 +43,6 @@ export const GET_GOALS = gql`
   }
 `;
 
-
 export const GET_IDEAS = gql`
   query GetIdeas($category: ID) {
     getIdeas(category: $category) {
@@ -83,10 +71,11 @@ export const GET_CATEGORIES = gql`
 `;
 
 export const SEARCH_IDEAS = gql`
-  query SearchIdeas($searchTerm: String!) {
+  query searchIdeas($searchTerm: String!) {
     searchIdeas(searchTerm: $searchTerm) {
       _id
       title
+      description
       category {
         _id
         name
@@ -96,5 +85,3 @@ export const SEARCH_IDEAS = gql`
     }
   }
 `;
-
-

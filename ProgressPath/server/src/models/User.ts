@@ -8,7 +8,6 @@ export interface UserDocument extends Document {
   password: string;
   goals: mongoose.Types.ObjectId[];
   savedIdeas: mongoose.Types.ObjectId[];
-  hiddenIdeas: mongoose.Types.ObjectId[];
   isCorrectPassword(password: string): Promise<boolean>;
 }
 
@@ -38,12 +37,6 @@ const userSchema = new Schema<UserDocument>(
       },
     ],
     savedIdeas: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Idea",
-      },
-    ],
-    hiddenIdeas: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Idea",

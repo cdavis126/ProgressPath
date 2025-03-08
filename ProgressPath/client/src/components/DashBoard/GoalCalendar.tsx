@@ -45,8 +45,6 @@ const GoalCalendar: React.FC = () => {
 
   return (
     <div>
-      <h2>Goal Calendar</h2>
-
       {/* FullCalendar Component */}
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}

@@ -1,4 +1,5 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,9 +8,9 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { Outlet } from "react-router-dom";
+
 import { AuthProvider } from "./context/authContext";
 import UserProvider from "./context/userContext";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { IdeaProvider } from "./context/ideaContext";
 import { GoalsProvider } from "./context/goalContext";
 
@@ -18,12 +19,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  let token = localStorage.getItem("token");
-  
-  if (!token || token === "undefined" || token === "null") {
-    token = "";
-  }
-
+  const token = localStorage.getItem("token") || "";
   return {
     headers: {
       ...headers,
@@ -34,7 +30,19 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      User: {
+        fields: {
+          savedIdeas: {
+            merge(_, incoming) {
+              return incoming;
+            },
+          },
+        },
+      },
+    },
+  }),
 });
 
 function App() {
@@ -44,11 +52,9 @@ function App() {
         <UserProvider>
           <IdeaProvider>
             <GoalsProvider>
-              <div>
-                <main>
-                  <Outlet />
-                </main>
-              </div>
+              <main>
+                <Outlet />
+              </main>
             </GoalsProvider>
           </IdeaProvider>
         </UserProvider>
@@ -58,4 +64,3 @@ function App() {
 }
 
 export default App;
-

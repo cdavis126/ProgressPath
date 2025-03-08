@@ -1,26 +1,10 @@
-import { FaHeart, FaEyeSlash, FaTasks, FaPaintBrush, FaDumbbell, FaBrain, FaBookReader } from "react-icons/fa";
+import { useState } from "react";
+import { FaTasks, FaPaintBrush, FaDumbbell, FaBrain, FaBookReader} from "react-icons/fa";
 import { GiInnerSelf, GiKnifeFork } from "react-icons/gi";
 import { TbArrowsRandom } from "react-icons/tb";
+import { Heart, HeartFill } from "react-bootstrap-icons";
 import "./ideacard.css";
 import { useIdeas } from "../../context/ideaContext";
-
-const iconMap: Record<string, JSX.Element> = {
-  TbArrowsRandom: <TbArrowsRandom />,
-  FaBrain: <FaBrain />,
-  FaPaintBrush: <FaPaintBrush />,
-  GiInnerSelf: <GiInnerSelf />,
-  GiKnifeFork: <GiKnifeFork />,
-  FaBookReader: <FaBookReader />,
-  FaDumbbell: <FaDumbbell />,
-  FaTasks: <FaTasks />,
-};
-
-const defaultCategory: Category = {
-  _id: "default",
-  name: "Misc",
-  icon: "TbArrowsRandom",
-  color: "#6c5ce7",
-};
 
 interface Category {
   _id: string;
@@ -35,46 +19,93 @@ interface Idea {
   description: string;
   category?: Category | null;
   isSaved: boolean;
-  isHidden: boolean;
 }
 
 interface IdeaCardProps {
-  idea?: Idea;
+  idea: Idea;
 }
 
-const IdeaCard: React.FC<IdeaCardProps> = ({ idea }) => {
-  const { toggleSaveIdea, toggleHideIdea } = useIdeas();
+// Icon Mapping
+const iconMap: Record<string, JSX.Element> = {
+  TbArrowsRandom: <TbArrowsRandom />,
+  FaBrain: <FaBrain />,
+  FaPaintBrush: <FaPaintBrush />,
+  GiInnerSelf: <GiInnerSelf />,
+  GiKnifeFork: <GiKnifeFork />,
+  FaBookReader: <FaBookReader />,
+  FaDumbbell: <FaDumbbell />,
+  FaTasks: <FaTasks />,
+};
 
-  if (!idea) {
+// Default Category
+const defaultCategory: Category = {
+  _id: "default",
+  name: "Misc",
+  icon: "TbArrowsRandom",
+  color: "#6c5ce7",
+};
+
+const IdeaCard: React.FC<IdeaCardProps> = ({ idea }) => {
+  const { saveIdea, removeIdea } = useIdeas();
+  const [isSaved, setIsSaved] = useState(idea.isSaved);
+
+  if (!idea || !idea._id) {
     return <div className="idea-card">Loading...</div>;
   }
 
   const category = idea.category ?? defaultCategory;
   const categoryIcon = iconMap[category.icon] || <TbArrowsRandom />;
 
+  // Handle Save/Remove Click
+  const handleSaveClick = async () => {
+    if (!idea) {
+      console.error("Error: Tried to save an undefined idea");
+      return;
+    }
+  
+    const formattedIdea = {
+      ...idea,
+      category:
+        typeof idea.category === "string"
+          ? { _id: idea.category, name: "", icon: "", color: "" }
+          : defaultCategory,
+    };
+  
+    if (isSaved) {
+      await removeIdea(idea._id); // Wait for removal
+    } else {
+      await saveIdea(formattedIdea); // Wait for save
+    }
+  
+    // Only update state after successful API response
+    setIsSaved(!isSaved);
+  };
+  
+
   return (
     <div className="idea-card">
-      {/* Top Row: Hide and Save Buttons */}
+      {/* First Row: Category Badge & Save Button */}
       <div className="idea-card-header">
-        <button className="hide-btn" onClick={() => toggleHideIdea(idea._id)}>
-          <FaEyeSlash className="eye-icon" />
-        </button>
-        <button
-          className={`save-btn ${idea.isSaved ? "saved" : ""}`}
-          onClick={() => toggleSaveIdea(idea._id)}
+        {/* Category Badge */}
+        <div
+          className="category-badge"
+          style={{ backgroundColor: category.color }}
         >
-          <FaHeart className="heart-icon" />
+          <span className="category-icon">{categoryIcon}</span>
+          <span className="category-name">{category.name}</span>
+        </div>
+
+        {/* Save/Remove Button */}
+        <button
+          onClick={handleSaveClick}
+          style={{ background: "none", border: "none", cursor: "pointer" }}
+        >
+          {isSaved ? <HeartFill color="red" size={20} /> : <Heart color="black" size={20} />}
         </button>
       </div>
 
       {/* Title */}
       <h4 className="idea-card-title">{idea.title}</h4>
-
-      {/* Category Badge (Icon + Name inside a colored pill) */}
-      <div className="category-badge" style={{ backgroundColor: category.color }}>
-        <span className="category-icon">{categoryIcon}</span>
-        <span className="category-name">{category.name}</span>
-      </div>
 
       {/* Description */}
       <p className="idea-card-description">{idea.description}</p>
@@ -83,4 +114,3 @@ const IdeaCard: React.FC<IdeaCardProps> = ({ idea }) => {
 };
 
 export default IdeaCard;
-

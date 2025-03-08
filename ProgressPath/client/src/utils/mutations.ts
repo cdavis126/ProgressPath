@@ -35,41 +35,8 @@ export const UPDATE_USER = gql`
   mutation UpdateUser($input: UserUpdateInput!) {
     updateUser(input: $input) {
       _id
-      goals {
-        _id
-        title
-        description
-        motivation
-        status
-        category {
-          _id
-          icon
-          name
-          color
-        }
-      }
-      savedIdeas {
-        _id
-        title
-        description
-        category {
-          _id
-          icon
-          name
-          color
-        }
-      }
-      hiddenIdeas {
-        _id
-        title
-        description
-        category {
-          _id
-          icon
-          name
-          color
-        }
-      }
+      username
+      email
     }
   }
 `;
@@ -87,10 +54,12 @@ export const DELETE_USER = gql`
   }
 `;
 
-export const TOGGLE_SAVE_IDEA = gql`
-  mutation ToggleSaveIdea($ideaId: ID!) {
-    toggleSaveIdea(ideaId: $ideaId) {
+export const SAVE_IDEA = gql`
+  mutation saveIdea($ideaData: IdeaInput!) {
+    saveIdea(ideaData: $ideaData) {
       _id
+      username
+      email
       savedIdeas {
         _id
         title
@@ -106,12 +75,13 @@ export const TOGGLE_SAVE_IDEA = gql`
   }
 `;
 
-
-export const TOGGLE_HIDE_IDEA = gql`
-  mutation ToggleHideIdea($ideaId: ID!) {
-    toggleHideIdea(ideaId: $ideaId) {
-      _id
-      hiddenIdeas {
+export const REMOVE_IDEA = gql`
+  mutation removeIdea($ideaId: ID!) {
+    removeIdea(ideaId: $ideaId) {
+       _id
+      username
+      email
+      savedIdeas {
         _id
         title
         description
