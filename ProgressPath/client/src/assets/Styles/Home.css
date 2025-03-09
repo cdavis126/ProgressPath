@@ -3,15 +3,15 @@
   width: 100vw !important;
   max-width: 100%;
   margin: 0 auto;
-  padding: 0;
+  padding-top: 15px; /* ✅ Adds small spacing between navbar & Section 1 */
 }
 
-/* ✅ General Section Styles */
+/* ✅ General Section Styles (Tighter Spacing) */
 .home-section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 50px 8%;
+  padding: 40px 8%; /* ✅ Reduced padding for less white space */
   width: 100%;
   min-height: 85vh;
   box-sizing: border-box;
@@ -69,13 +69,13 @@
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* ✅ Center GIF Between Sections */
+/* ✅ Center GIF Between Sections (Reduced Extra White Space) */
 .section-break {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 15px 0;
+  padding: 5px 0; /* ✅ Reduced spacing between sections */
 }
 
 /* ✅ Fix Last Arrow Before Footer */
@@ -84,7 +84,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 15px 0;
+  padding: 5px 0; /* ✅ Reduced space above arrow */
 }
 
 .centered-arrow {
@@ -128,6 +128,7 @@
     margin-bottom: 15px;
   }
 }
+
 
 
 
