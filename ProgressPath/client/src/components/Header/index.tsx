@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useAuth } from "../../context/authContext";
 import { FiLogOut } from "react-icons/fi";
 import Typewriter from "typewriter-effect";
+import UserProfile from "../Profile/UserProfile"; // Import profile modal
 
 interface HeaderProps {
   setShowModal: (show: boolean) => void;
@@ -10,6 +12,7 @@ interface HeaderProps {
 
 const Header = ({ setShowModal }: HeaderProps) => {
   const { user, logout } = useAuth();
+  const [showProfile, setShowProfile] = useState(false); // Profile modal state
 
   return (
     <>
@@ -23,9 +26,9 @@ const Header = ({ setShowModal }: HeaderProps) => {
       >
         <div className="container-fluid d-flex justify-content-between align-items-center" style={{ padding: "0 16px" }}>
           
-          {/* Left Section: ProgressPath Logo */}
+          {/* Left Section: ProgressPath Logo - Now links to Home Page */}
           <div className="d-flex align-items-center">
-            <Link to="/dashboard" className="text-dark" aria-label="Go to Dashboard">
+            <Link to="/home" className="text-dark" aria-label="Go to Home">
               <i className="bi bi-sign-intersection-y-fill" style={{ fontSize: "1.5rem", cursor: "pointer" }}></i>
             </Link>
           </div>
@@ -86,12 +89,15 @@ const Header = ({ setShowModal }: HeaderProps) => {
               <i className="bi bi-search-heart" style={{ fontSize: "1.5rem" }}></i>
             </Link>
 
-            {/* Profile Icon */}
-            <Link to="/profile" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center"
+            {/* Profile Icon (Opens Profile Modal) */}
+            <button
+              onClick={() => setShowProfile(true)} // Opens modal
+              className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center"
               style={{ width: "44px", height: "44px", padding: "0" }}
-              aria-label="Profile">
+              aria-label="Profile"
+            >
               <i className="bi bi-person-circle" style={{ fontSize: "1.5rem" }}></i>
-            </Link>
+            </button>
 
             {/* Logout Button */}
             {user && (
@@ -115,6 +121,9 @@ const Header = ({ setShowModal }: HeaderProps) => {
           </div>
         </div>
       </header>
+
+      {/* Profile Modal (Opens when user clicks profile icon) */}
+      <UserProfile isOpen={showProfile} onClose={() => setShowProfile(false)} />
     </>
   );
 };

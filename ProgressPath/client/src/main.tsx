@@ -1,14 +1,14 @@
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
-import App from "./App.jsx";
+import App from "./App";
 import ErrorPage from "./pages/Error";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import Pathboard from "./pages/Pathboard.js";
+import Pathboard from "./pages/Pathboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import AuthService from "./utils/auth.js";
+import AuthService from "./utils/auth";
 
 // 🔒 Protected Route Wrapper
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
@@ -23,7 +23,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: AuthService.loggedIn() ? <Navigate to="/dashboard" /> : <Home />,
+        element: <Home />, // Always show Home page at `/`
+      },
+      {
+        path: "/home",
+        element: <Home />, // Explicit route for `/home`
       },
       {
         path: "/login",

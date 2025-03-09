@@ -29,7 +29,7 @@ const Login: React.FC = () => {
         variables: { ...formData },
       });
 
-      console.log("Debugging Login Response:", data); // ✅ Debugging response
+      console.log("Debugging Login Response:", data); // Debugging response
 
       if (!data || !data.loginUser || !data.loginUser.token) {
         throw new Error("Login failed. No token received.");
@@ -49,7 +49,7 @@ const Login: React.FC = () => {
 
   return (
     <>
-      {/* ✅ Navbar */}
+      {/*  Navbar */}
       <NavLimited />
 
       <Container className="login-container mt-5">

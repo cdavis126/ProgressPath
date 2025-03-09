@@ -35,7 +35,7 @@ const SignUp: React.FC = () => {
 
       console.log("Signup Successful! Token:", data.addUser.token);
 
-      // ✅ Corrected to use AuthService.login() instead of AuthService.signup()
+      // Corrected to use AuthService.login() instead of AuthService.signup()
       AuthService.login(data.addUser.token);
 
     } catch (err: any) {

@@ -2,7 +2,6 @@ node_modules
 goaldisplay.css
 goaldisplay.tsx
 .env
-UserProfile.tsx
 
 # Logs
 logs
