@@ -1,7 +1,9 @@
-Cherieschema.sql
 node_modules
 goaldisplay.css
 goaldisplay.tsx
+.env
+UserProfile.tsx
+UserProfile.css
 
 # Logs
 logs

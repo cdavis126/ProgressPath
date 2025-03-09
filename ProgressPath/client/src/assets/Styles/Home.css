@@ -1,138 +1,139 @@
-/* General Styles */
+/* ✅ Prevent Navbar from Messing with Sections */
 .home-container {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* ✅ Fixing Section Heights & Background Colors */
+  width: 100vw !important;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* ✅ General Section Styles */
+.home-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px 8%;
+  width: 100%;
+  min-height: 85vh;
+  box-sizing: border-box;
+}
+
+/* ✅ Background Colors */
+.home-section:nth-of-type(1) {
+  background-color: #D6F6DD;
+}
+
+.home-section:nth-of-type(2) {
+  background-color: #ACECF7 !important;
+}
+
+.home-section:nth-of-type(3) {
+  background-color: #EBD2B4;
+}
+
+/* ✅ Force Section 2 to Flip */
+.flipped {
+  flex-direction: row-reverse !important;
+}
+
+/* ✅ Ensure Images Stack in Sections */
+.stacked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* ✅ Text Content Formatting */
+.text-content {
+  flex: 1;
+  max-width: 500px;
+  text-align: left;
+}
+
+/* ✅ Gradient Text for Section Titles */
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #F4989C, #DAC4F7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ✅ Image Hover Effect */
+.image-content img:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* ✅ Center GIF Between Sections */
+.section-break {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 15px 0;
+}
+
+/* ✅ Fix Last Arrow Before Footer */
+.section-break-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 15px 0;
+}
+
+.centered-arrow {
+  display: block;
+  margin: 0 auto;
+}
+
+/* ✅ GIF Sizing */
+.section-break-gif {
+  width: 60px;
+  height: auto;
+  opacity: 0.9;
+  animation: pulse 2s infinite;
+}
+
+/* ✅ Footer */
+.custom-footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #dac4f7 0%, #f4989c 100%);
+  border-top: 3px solid #EBD2B4;
+  box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Mobile Fixes */
+@media (max-width: 768px) {
   .home-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px 8%;
-    width: 100vw;
-    min-height: 85vh;
-    box-sizing: border-box;
-    margin: 0;
-  }
-  
-  /* ✅ Background Colors (Fixed Last Section) */
-  .home-section:nth-of-type(1) {
-    background-color: #D6F6DD;
-  }
-  
-  .home-section:nth-of-type(2) {
-    background-color: #DAC4F7;
-  }
-  
-  /*  FORCING Last Section Background to Work */
-  .home-section:nth-of-type(3), 
-  .home-section:last-of-type {
-    background-color: #EBD2B4 !important; /* ✅ Forces color to apply */
-  }
-  
-  /* ✅ Fix Alignment Issues in Section 2 */
-  .flipped {
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  /* ✅ Keep Image Formatting Intact */
-  .image-content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    max-width: 500px;
-    position: relative;
-  }
-  
-  /* ✅ Restoring Image Styling (Collage Effect) */
-  .image-content.collage img {
-    width: 150px;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: absolute;
-  }
-  
-  /* ✅ Collage Image Positions */
-  .top {
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-3deg);
-  }
-  
-  .left {
-    bottom: -10px;
-    left: -20px;
-    transform: rotate(4deg);
-  }
-  
-  .right {
-    bottom: -10px;
-    right: -20px;
-    transform: rotate(-4deg);
-  }
-  
-  /* ✅ Fix Right Image in Last Section */
-  .move-left {
-    right: -30px;
-  }
-  
-  /* ✅ Hover Effect */
-  .image-content img:hover {
-    transform: scale(1.05) rotate(0deg);
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25);
-  }
-  
-  /* ✅ Fix GIF Section (Reduce Padding) */
-  .section-break {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 3px 0;
-  }
-  
-  .section-break-gif {
-    width: 50px;
-    height: auto;
-    opacity: 0.9;
-    animation: pulse 2s infinite;
-  }
-  
-  /* ✅ GIF Animation */
-  @keyframes pulse {
-    0% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.1); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.8; }
-  }
-  
-  /* ✅ Add Section Break Before Footer */
-  .section-break-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 10px 0;
-  }
-  
-  /* ✅ Footer */
-  .custom-footer {
+    flex-direction: column;
     text-align: center;
-    padding: 20px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(135deg, #dac4f7 0%, #f4989c 100%);
-    border-top: 3px solid #EBD2B4;
-    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
-    margin: 0;
   }
+
+  .flipped {
+    flex-direction: column-reverse !important;
+  }
+
+  .image-content img {
+    width: 80%;
+    margin-bottom: 15px;
+  }
+}
+
+
+
+
+
+
   
   
   
