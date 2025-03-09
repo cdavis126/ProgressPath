@@ -1,23 +1,23 @@
-/* ✅ Prevent Navbar from Messing with Sections */
+/*  Prevent Navbar from Messing with Sections */
 .home-container {
   width: 100vw !important;
   max-width: 100%;
   margin: 0 auto;
-  padding-top: 15px; /* ✅ Adds small spacing between navbar & Section 1 */
+  padding-top: 15px; /*  Adds small spacing between navbar & Section 1 */
 }
 
-/* ✅ General Section Styles (Tighter Spacing) */
+/*  General Section Styles (Tighter Spacing) */
 .home-section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 40px 8%; /* ✅ Reduced padding for less white space */
+  padding: 40px 8%; /* Reduced padding for less white space */
   width: 100%;
   min-height: 85vh;
   box-sizing: border-box;
 }
 
-/* ✅ Background Colors */
+/* Background Colors */
 .home-section:nth-of-type(1) {
   background-color: #D6F6DD;
 }
@@ -30,12 +30,12 @@
   background-color: #EBD2B4;
 }
 
-/* ✅ Force Section 2 to Flip */
+/* Force Section 2 to Flip */
 .flipped {
   flex-direction: row-reverse !important;
 }
 
-/* ✅ Ensure Images Stack in Sections */
+/* Ensure Images Stack in Sections */
 .stacked {
   display: flex;
   flex-direction: column;
@@ -43,14 +43,14 @@
   gap: 15px;
 }
 
-/* ✅ Text Content Formatting */
+/* Text Content Formatting */
 .text-content {
   flex: 1;
   max-width: 500px;
   text-align: left;
 }
 
-/* ✅ Gradient Text for Section Titles */
+/* Gradient Text for Section Titles */
 .section-title {
   font-size: 2.5rem;
   font-weight: bold;
@@ -63,19 +63,19 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* ✅ Image Hover Effect */
+/* Image Hover Effect */
 .image-content img:hover {
   transform: scale(1.1);
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* ✅ Center GIF Between Sections (Reduced Extra White Space) */
+/* Center GIF Between Sections (Reduced Extra White Space) */
 .section-break {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 5px 0; /* ✅ Reduced spacing between sections */
+  padding: 5px 0; /* Reduced spacing between sections */
 }
 
 /* ✅ Fix Last Arrow Before Footer */
@@ -84,7 +84,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 5px 0; /* ✅ Reduced space above arrow */
+  padding: 5px 0; /* Reduced space above arrow */
 }
 
 .centered-arrow {
@@ -92,7 +92,7 @@
   margin: 0 auto;
 }
 
-/* ✅ GIF Sizing */
+/* GIF Sizing */
 .section-break-gif {
   width: 60px;
   height: auto;
@@ -100,7 +100,7 @@
   animation: pulse 2s infinite;
 }
 
-/* ✅ Footer */
+/* Footer */
 .custom-footer {
   text-align: center;
   padding: 20px;
@@ -112,7 +112,7 @@
   box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* ✅ Mobile Fixes */
+/* Mobile Fixes */
 @media (max-width: 768px) {
   .home-section {
     flex-direction: column;
