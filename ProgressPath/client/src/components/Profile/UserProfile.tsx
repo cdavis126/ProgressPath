@@ -8,7 +8,6 @@ import {
   MDBTypography as ProfileTypography,
   MDBTextArea as ProfileTextArea,
   MDBBtn as ProfileBtn,
-  MDBIcon as ProfileIcon,
 } from "mdb-react-ui-kit";
 import { useAuth } from "../../context/authContext";
 import { useMutation } from "@apollo/client";
@@ -17,8 +16,21 @@ import "./UserProfile.css";
 
 // Icons for Avatar Selection
 import { TbArrowsRandom } from "react-icons/tb";
-import { FaBrain, FaPaintBrush, FaBookReader, FaDumbbell, FaTasks, FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaBrain, FaPaintBrush, FaBookReader, FaDumbbell, FaTasks } from "react-icons/fa";
 import { GiInnerSelf, GiKnifeFork } from "react-icons/gi";
+
+interface UserProfileProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+interface ProfileState {
+  name: string;
+  pathway: string;
+  location: string;
+  about: string;
+  avatar: string;
+}
 
 const iconMap: Record<string, { element: JSX.Element; label: string }> = {
   TbArrowsRandom: { element: <TbArrowsRandom />, label: "Progressing" },
@@ -31,21 +43,18 @@ const iconMap: Record<string, { element: JSX.Element; label: string }> = {
   FaTasks: { element: <FaTasks />, label: "Accomplishing" },
 };
 
-const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
+const UserProfile: React.FC<UserProfileProps> = ({ isOpen, onClose }) => {
   const { user, logout } = useAuth();
   const [deleteUser] = useMutation(DELETE_USER);
 
-  // ✅ Pull email from JWT
-  const userEmail = user?.email || "";
+  const userEmail: string = user?.email || "No email found";
 
-  const [profile, setProfile] = useState({
+  const [profile, setProfile] = useState<ProfileState>({
     name: "",
     pathway: "",
     location: "",
     about: "",
-    facebook: "",
-    instagram: "",
-    avatar: "FaBrain", // Default avatar
+    avatar: "FaBrain",
   });
 
   useEffect(() => {
@@ -84,7 +93,6 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
   return (
     <div className={`profile-modal ${isOpen ? "show" : ""}`} style={{ display: isOpen ? "flex" : "none" }}>
       <div className="profile-modal-content">
-        {/* ✅ Close Button */}
         <button className="close-button" onClick={onClose}>✖</button>
 
         <ProfileContainer>
@@ -93,11 +101,12 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
               <ProfileCard className="profile-card">
                 <ProfileRow className="g-0">
                   
-                  {/* ✅ LEFT SIDE */}
-                  <ProfileCol md="5" className="gradient-custom text-center text-white profile-left">
-                    <div className="profile-avatar">{iconMap[profile.avatar].element}</div>
+                  {/* ✅ LEFT SIDE FIXED */}
+                  <ProfileCol md="5" className="profile-left">
+                    <div className="profile-avatar">
+                      {iconMap[profile.avatar as keyof typeof iconMap].element}
+                    </div>
 
-                    {/* ✅ Editable Name Input */}
                     <input
                       type="text"
                       name="name"
@@ -107,10 +116,8 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
                       className="profile-name-input"
                     />
 
-                    {/* ✅ "Your Pathway" - Updates from Right Side */}
                     <p className="profile-pathway">{profile.pathway || "Select Your Pathway"}</p>
 
-                    {/* ✅ "I'm..." Dropdown (Now Updates Icon & Displays Selection) */}
                     <select className="form-select pathway-dropdown" name="avatar" value={profile.avatar} onChange={handleAvatarChange}>
                       <option value="">I'm...</option>
                       {Object.keys(iconMap).map((key) => (
@@ -119,16 +126,15 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
                     </select>
                   </ProfileCol>
 
-                  {/* ✅ RIGHT SIDE */}
+                  {/* ✅ RIGHT SIDE FIXES */}
                   <ProfileCol md="7">
                     <ProfileCardBody className="p-4">
                       <ProfileTypography tag="h6" className="profile-section-header">Profile Information</ProfileTypography>
-                      <hr className="profile-divider small-margin-divider" />
+                      <hr className="profile-divider" />
 
-                      {/* ✅ Email (Now Visible & Styled) */}
-                      <p className="profile-email">{userEmail}</p>
+                      {/* ✅ EMAIL FIXED */}
+                      <p className="profile-email-box">{userEmail}</p>
 
-                      {/* ✅ Pathway Dropdown (Updates Left Side Too) */}
                       <label className="profile-label">Select Your Pathway</label>
                       <select className="form-select mt-2" name="pathway" value={profile.pathway} onChange={handleChange}>
                         <option value="">Select Your Pathway</option>
@@ -142,30 +148,15 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
                         <option value="Other">Other</option>
                       </select>
 
-                      {/* ✅ Location (Now BELOW Pathway) */}
                       <label className="profile-label mt-2">Location</label>
                       <input type="text" name="location" value={profile.location} onChange={handleChange} className="profile-location mt-2" placeholder="Enter your location" />
 
-                      {/* ✅ About Section */}
-                      <ProfileTextArea label="About" name="about" value={profile.about} onChange={handleChange} maxLength={300} className="mt-3" placeholder="Tell us about yourself!"/>
+                      <label className="profile-label mt-2">About</label>
+                      <ProfileTextArea label="" name="about" value={profile.about} onChange={handleChange} maxLength={300} className="mt-2" placeholder="Tell us about yourself!"/>
 
-                      {/* ✅ Social Media Inputs */}
-                      <div className="profile-social-section">
-                        <div className="social-input">
-                          <FaFacebook />
-                          <input type="text" name="facebook" value={profile.facebook} onChange={handleChange} placeholder="Facebook Username" />
-                        </div>
-                        <div className="social-input">
-                          <FaInstagram />
-                          <input type="text" name="instagram" value={profile.instagram} onChange={handleChange} placeholder="Instagram Username" />
-                        </div>
-                      </div>
-
-                      {/* ✅ Buttons (Delete Profile is now DARK PINK) */}
+                      {/* ✅ DELETE BUTTON FINAL FIX */}
                       <ProfileBtn className="mt-3 profile-btn" block onClick={handleSaveProfile}>Save Profile</ProfileBtn>
-                      <ProfileBtn className="mt-2 delete-profile-btn dark-pink-btn" block onClick={handleDeleteProfile}>
-                        <ProfileIcon fas icon="trash" className="delete-icon" /> Delete Profile
-                      </ProfileBtn>
+                      <ProfileBtn className="mt-2 delete-profile-btn" block onClick={handleDeleteProfile}>Delete Profile</ProfileBtn>
 
                     </ProfileCardBody>
                   </ProfileCol>
@@ -181,6 +172,14 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
 };
 
 export default UserProfile;
+
+
+
+
+
+
+
+
 
 
 

@@ -13,18 +13,18 @@
   overflow: hidden;
 }
 
-/*  MODAL CONTAINER: HEIGHT REDUCED */
+/*  MODAL CONTAINER: FINAL SIZE FIX */
 .profile-card {
   width: 950px;
   max-width: 100%;
-  height: 600px; /* ⬇ REDUCED HEIGHT BY 20PX */
+  height: 510px; /*  SHORTENED ANOTHER 25PX */
   border-radius: 12px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   display: flex;
 }
 
-/*  LEFT SIDE - GRADIENT NOW FULLY EXTENDED */
+/*  LEFT SIDE - FULL GRADIENT */
 .profile-left {
   flex: 1.7;
   text-align: center;
@@ -36,17 +36,18 @@
   padding: 30px;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
-  height: 100%; /*  FIXED FULL HEIGHT */
+  height: 100%; /* FULL HEIGHT */
 }
 
-/* ICON POSITION FIXED */
+/*  ICON POSITION FIXED */
 .profile-avatar {
   font-size: 5rem;
   margin-top: 10px;
   margin-bottom: 15px;
+  color: white !important;
 }
 
-/* "ENTER YOUR NAME" FIXED */
+/*  NAME & PATHWAY TEXT FIXED */
 .profile-name-input {
   background: none;
   border: none;
@@ -58,21 +59,14 @@
   padding: 5px;
 }
 
-/* "ENTER YOUR NAME" TEXT COLOR FIXED */
-.profile-name-input::placeholder {
-  color: #b3126a;
-  font-weight: bold;
-}
-
-/* "YOUR PATHWAY" TEXT FIXED */
+/*  PATHWAY TEXT COLOR BACK TO PURPLE */
 .profile-pathway {
-  color: #6c63ff;
-  font-size: 1.2rem;
-  margin-top: 10px;
+  color: #6c63ff; /* Purple restored */
+  font-size: 1.3rem;
   font-weight: bold;
 }
 
-/* DROPDOWN BUTTON NOW DISPLAYS CORRECTLY */
+/*  "I'M..." DROPDOWN */
 .pathway-dropdown {
   background: rgba(255, 255, 255, 0.3);
   color: white;
@@ -84,13 +78,12 @@
   text-align: center;
 }
 
-/* RIGHT SIDE - SPACING FIXED */
+/*  RIGHT SIDE - FIXED SPACING & INPUT STYLES */
 .profile-right {
   flex: 2.2;
-  padding: 25px;
+  padding: 20px;
 }
 
-/* PROFILE INFO HEADER - RESTORED */
 .profile-section-header {
   font-size: 1.4rem;
   color: #f4989c;
@@ -98,78 +91,52 @@
   text-align: center;
 }
 
-/* INFO LINE - GRADIENT RESTORED */
 .profile-divider {
   background: linear-gradient(to right, #f4989c, #dac4f7);
   height: 4px;
   border: none;
   margin-top: 6px;
-  margin-bottom: 3px; /* ⬇️ REDUCED SPACING */
+  margin-bottom: 2px;
 }
 
-/* LOCATION - MATCHES OTHER FORM FILLS */
-.profile-location {
-  background: white; /* ✅ FIXED MATCHING FORM FILL STYLE */
-  border: 2px solid #acecf7;
-  border-radius: 6px;
-  padding: 10px;
-  width: 100%;
-  font-size: 1rem;
-  color: black;
-}
-
-/*  EMAIL FIELD - NOW SHOWS & MATCHES SPACING */
-.profile-email {
+/* EMAIL FIELD - BORDER COMPLETELY REMOVED */
+.profile-email-box {
   color: #b3126a;
   font-size: 1.1rem;
   font-weight: bold;
-  background: none;
-  border: none;
-  padding: 8px 0;
+  background: white;
+  border: none; /* COMPLETELY REMOVED BORDER */
+  border-radius: 6px;
+  padding: 10px;
   width: 100%;
   text-align: center;
+  margin-bottom: 10px;
+  outline: none !important;
 }
 
-/*  FIXED SPACING FOR EMAIL & LOCATION */
-.profile-email:focus,
-.profile-location:focus {
-  outline: none;
-  border: none;
-}
-
-/*  SOCIAL MEDIA INPUTS - ICONS SPACED */
-.profile-social-icons {
-  display: flex;
-  flex-direction: column;
-  gap: 8px; /* ✅ FIXED: SPACED PROPERLY */
-  margin-top: 10px;
-}
-
-/*  ICONS NOW INSIDE FORM FIELD */
-.profile-social-icons .social-input {
-  display: flex;
-  align-items: center;
+/* LOCATION + ALL FORM FILLS - ALL NOW HAVE BLUE BORDER */
+.profile-location,
+.profile-textarea,
+.profile-select {
   background: white;
-  padding: 10px;
-  border: 2px solid #acecf7;
+  border: 2px solid #acecf7; /*  ALL NOW HAVE A BLUE BORDER */
   border-radius: 6px;
-  gap: 8px; /*  FIXED: 8PX SPACE BETWEEN ICON & TEXT */
-}
-
-/* SOCIAL MEDIA FORM FILL - MATCHES OTHER INPUTS */
-.profile-social-icons input {
-  flex: 1;
-  background: none;
-  border: none;
+  padding: 10px;
+  width: 100%;
   font-size: 1rem;
   color: black;
+  outline: none !important;
 }
 
-.profile-social-icons input:focus {
-  outline: none;
+/* FORM LABELS NOW BLUE */
+.profile-label {
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-bottom: 2px;
+  color: #6c63ff; /*  Labels now BLUE */
 }
 
-/*  BUTTONS NOW FULLY VISIBLE */
+/* BUTTONS NOW MATCH IN SIZE */
 .profile-btn,
 .delete-profile-btn {
   display: block;
@@ -181,18 +148,19 @@
   margin-top: 10px;
 }
 
-/*  DELETE PROFILE BUTTON IS NOW DARK PINK */
+/* DELETE PROFILE BUTTON - GREEN OR ORANGE, WITH WHITE TEXT */
 .delete-profile-btn {
-  background-color: #b3126a;
-  color: white;
+  background-color: #D6F6DD !important; /* ✅ Green */
+  color: white !important; /*  WHITE TEXT FIXED */
+  width: 100%;
 }
 
 .delete-profile-btn:hover {
-  background-color: #acecf7;
+  background-color: #EBD2B4; /*  Off-orange */
   color: black;
 }
 
-/*  CLOSE BUTTON - NOW VISIBLE */
+/* CLOSE BUTTON - NOW VISIBLE */
 .close-button {
   position: absolute;
   top: 5px;
@@ -209,7 +177,7 @@
   color: #f4989c;
 }
 
-/*  RESPONSIVE FIXES */
+/* RESPONSIVE FIXES */
 @media (max-width: 768px) {
   .profile-card {
     flex-direction: column;
@@ -222,6 +190,22 @@
     padding: 25px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
