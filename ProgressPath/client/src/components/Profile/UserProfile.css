@@ -13,20 +13,20 @@
   overflow: hidden;
 }
 
-/*  MODAL CONTAINER: FINAL SIZE FIXED */
+/*  MODAL CONTAINER: HEIGHT REDUCED */
 .profile-card {
-  width: 950px; /* ⬅️ WIDER NOW */
+  width: 950px;
   max-width: 100%;
-  height: 650px; /* ⬇️ REDUCED HEIGHT BY 30PX */
+  height: 600px; /* ⬇ REDUCED HEIGHT BY 20PX */
   border-radius: 12px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   display: flex;
 }
 
-/* LEFT SIDE - NOW FULLY EXTENDED */
+/*  LEFT SIDE - GRADIENT NOW FULLY EXTENDED */
 .profile-left {
-  flex: 1.7; /* ⬆️ MADE WIDER */
+  flex: 1.7;
   text-align: center;
   background: linear-gradient(to right bottom, #dac4f7, #f4989c);
   display: flex;
@@ -36,25 +36,25 @@
   padding: 30px;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
-  height: 100%; /* FIXED: FULL HEIGHT */
+  height: 100%; /*  FIXED FULL HEIGHT */
 }
 
-/*  ICON POSITION FIXED */
+/* ICON POSITION FIXED */
 .profile-avatar {
   font-size: 5rem;
-  margin-top: 10px; /* ⬆️ Moved up */
+  margin-top: 10px;
   margin-bottom: 15px;
 }
 
-/* "ENTER YOUR NAME" – NOW FIXED */
+/* "ENTER YOUR NAME" FIXED */
 .profile-name-input {
-  background: none; /* ⬅️ REMOVED WHITE BOX */
+  background: none;
   border: none;
   color: white;
   font-size: 1.5rem;
   text-align: center;
   font-weight: bold;
-  width: 95%;
+  width: 100%;
   padding: 5px;
 }
 
@@ -86,7 +86,7 @@
 
 /* RIGHT SIDE - SPACING FIXED */
 .profile-right {
-  flex: 2.2; /* ⬆️ Slightly wider */
+  flex: 2.2;
   padding: 25px;
 }
 
@@ -104,24 +104,23 @@
   height: 4px;
   border: none;
   margin-top: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 3px; /* ⬇️ REDUCED SPACING */
 }
 
-/*  LOCATION - ADDED BACK */
+/* LOCATION - MATCHES OTHER FORM FILLS */
 .profile-location {
+  background: white; /* ✅ FIXED MATCHING FORM FILL STYLE */
+  border: 2px solid #acecf7;
+  border-radius: 6px;
+  padding: 10px;
+  width: 100%;
+  font-size: 1rem;
   color: black;
-  font-size: 1.1rem;
-  font-weight: bold;
-  background: none;
-  border: none;
-  padding: 8px 0;
-  width: 100%;
-  text-align: center;
 }
 
-/* EMAIL FIELD - NOW VISIBLE */
+/*  EMAIL FIELD - NOW SHOWS & MATCHES SPACING */
 .profile-email {
-  color: #b3126a; /* Dark pink */
+  color: #b3126a;
   font-size: 1.1rem;
   font-weight: bold;
   background: none;
@@ -131,17 +130,18 @@
   text-align: center;
 }
 
+/*  FIXED SPACING FOR EMAIL & LOCATION */
 .profile-email:focus,
 .profile-location:focus {
   outline: none;
   border: none;
 }
 
-/* SOCIAL MEDIA INPUTS - ICON INSIDE */
+/*  SOCIAL MEDIA INPUTS - ICONS SPACED */
 .profile-social-icons {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px; /* ✅ FIXED: SPACED PROPERLY */
   margin-top: 10px;
 }
 
@@ -151,15 +151,22 @@
   align-items: center;
   background: white;
   padding: 10px;
-  border: 2px solid #acecf7; /* FIXED TO GREEN */
+  border: 2px solid #acecf7;
   border-radius: 6px;
-  gap: 7px; /* ⬆️ SPACING FIXED */
+  gap: 8px; /*  FIXED: 8PX SPACE BETWEEN ICON & TEXT */
 }
 
-/* ICONS INSIDE INPUT FIELD */
-.profile-social-icons .social-input i {
-  font-size: 1.4rem;
-  color: #f4989c;
+/* SOCIAL MEDIA FORM FILL - MATCHES OTHER INPUTS */
+.profile-social-icons input {
+  flex: 1;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: black;
+}
+
+.profile-social-icons input:focus {
+  outline: none;
 }
 
 /*  BUTTONS NOW FULLY VISIBLE */
@@ -174,9 +181,9 @@
   margin-top: 10px;
 }
 
-/*  DELETE PROFILE BUTTON RESTORED */
+/*  DELETE PROFILE BUTTON IS NOW DARK PINK */
 .delete-profile-btn {
-  background-color: #ff4d4d;
+  background-color: #b3126a;
   color: white;
 }
 
@@ -215,6 +222,8 @@
     padding: 25px;
   }
 }
+
+
 
 
 
