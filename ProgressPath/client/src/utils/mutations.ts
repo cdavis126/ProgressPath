@@ -113,12 +113,13 @@ export const CREATE_GOAL = gql`
 `;
 
 export const UPDATE_GOAL = gql`
-  mutation UpdateGoal($updateGoalId: ID!, $title: String, $description: String, $category: String) {
-  updateGoal(id: $updateGoalId, title: $title, description: $description, category: $category) {
+mutation UpdateGoal($updateGoalId: ID!, $title: String, $description: String, $category: String, $status: String) {
+  updateGoal(id: $updateGoalId, title: $title, description: $description, category: $category, status: $status) {
     _id
-    title
+    status
     category
     description
+    title
   }
 }
 `;
