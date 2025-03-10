@@ -1,0 +1,262 @@
+/* GoalCalendar.css */
+
+/* Overall Container - Increased Width and Spacing */
+.GoalCalendar {
+    max-width: 1400px;  /* Increased width for the container */
+    margin: 30px auto;   /* Added margin for spacing */
+    padding: 30px;       /* Increased padding for a spacious look */
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #fad0c4 100%);
+    border-radius: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    font-family: 'Comic Sans MS', 'Arial', sans-serif;
+    color: #fff;
+  }
+  
+  /* Title and Subtitle */
+  .GoalCalendar h2 {
+    text-align: center;
+    font-size: 36px;  /* Increased font size */
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .GoalCalendar p {
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 25px;
+  }
+  
+  /* FullCalendar Styling - Increased Size */
+  .fc {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    font-size: 16px;
+  }
+  
+  /* Clear Borders for Each Day */
+  .fc td, .fc th {
+    border: 1px solid #ccc !important;  /* Darker and more visible borders */
+  }
+  
+  .fc .fc-toolbar-title {
+    font-size: 24px;
+    color: #ff6b81;
+  }
+  
+  .fc .fc-button {
+    background-color: #ff6b81;
+    border: none;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .fc .fc-button:hover {
+    background-color: #ff4757;
+  }
+  
+  .fc .fc-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  .fc-daygrid-day {
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: 1px solid #ccc;  /* Darker border for each day cell */
+  }
+  
+  .fc-daygrid-day:hover {
+    background-color: #f9c6d3;
+  }
+  
+  .fc-day-today {
+    background-color: #ffeaa7 !important;
+    border-radius: 5px;
+  }
+  
+  /* Improved Event Styling */
+  .fc-event {
+    color: #fff !important;
+    border-radius: 5px !important;
+    padding: 3px 7px !important;
+    font-size: 14px !important;
+  }
+  
+  /* Event Color Variations for Each Pathway */
+  .fc-event.Meditation {
+    background-color: #74b9ff !important;
+    border-color: #74b9ff !important;
+  }
+  
+  .fc-event.Sleeping {
+    background-color: #55efc4 !important;
+    border-color: #55efc4 !important;
+  }
+  
+  .fc-event.Fitness {
+    background-color: #ffeaa7 !important;
+    border-color: #ffeaa7 !important;
+  }
+  
+  .fc-event.Nutrition {
+    background-color: #fab1a0 !important;
+    border-color: #fab1a0 !important;
+  }
+  
+  .fc-event.Mindfulness {
+    background-color: #a29bfe !important;
+    border-color: #a29bfe !important;
+  }
+  
+  /* Dropdown Styling for Pathway Colors */
+  select option {
+    padding: 5px;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  select option[value="Meditation"] {
+    background-color: #74b9ff;
+  }
+  
+  select option[value="Sleeping"] {
+    background-color: #55efc4;
+  }
+  
+  select option[value="Fitness"] {
+    background-color: #ffeaa7;
+  }
+  
+  select option[value="Nutrition"] {
+    background-color: #fab1a0;
+  }
+  
+  select option[value="Mindfulness"] {
+    background-color: #a29bfe;
+  }
+  
+  select option:hover {
+    filter: brightness(90%);
+  }
+  
+  /* Modal Overlay */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+  }
+  
+  .modal-content h3 {
+    color: #ff6b81;
+    margin-bottom: 15px;
+  }
+  
+  .modal-content form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-content label {
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .modal-content input,
+  .modal-content select,
+  .modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+  }
+  
+  .modal-content input:focus,
+  .modal-content select:focus,
+  .modal-content textarea:focus {
+    border-color: #ff6b81;
+    outline: none;
+  }
+  
+  /* Modal Buttons */
+  .modal-content button {
+    background-color: #ff6b81;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .modal-content button:hover {
+    background-color: #ff4757;
+  }
+  
+  .modal-content .cancel-button {
+    background-color: #ffa502;
+    margin-top: 10px;
+  }
+  
+  .modal-content .cancel-button:hover {
+    background-color: #e67e22;
+  }
+  
+  /* Required Field Asterisk */
+  .modal-content .required {
+    color: red;
+  }
+  
+  /* Calendar Navigation Styling */
+  .fc-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .fc-toolbar .fc-toolbar-title {
+    font-size: 24px;
+    color: #ff6b81;
+  }
+  
+  .fc-toolbar .fc-button-group .fc-button {
+    background-color: #ff6b81;
+    border-radius: 5px;
+    color: #fff;
+  }
+  
+  .fc-toolbar .fc-button-group .fc-button:hover {
+    background-color: #ff4757;
+  }
+  

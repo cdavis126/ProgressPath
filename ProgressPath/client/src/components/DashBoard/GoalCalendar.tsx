@@ -3,6 +3,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { EventInput } from "@fullcalendar/core";
+import "./GoalCalendar.css";  // ✅ Import the CSS file
 
 const GoalCalendar: React.FC = () => {
   const [events, setEvents] = useState<EventInput[]>([]);
@@ -15,7 +16,13 @@ const GoalCalendar: React.FC = () => {
     date: "",
   });
 
-  const pathways = ["Meditation", "Sleeping", "Fitness", "Nutrition", "Mindfulness"]; // ✅ Dynamic values
+  const pathways = [
+    { name: "Meditation", color: "#74b9ff" },
+    { name: "Sleeping", color: "#55efc4" },
+    { name: "Fitness", color: "#ffeaa7" },
+    { name: "Nutrition", color: "#fab1a0" },
+    { name: "Mindfulness", color: "#a29bfe" },
+  ]; // ✅ Dynamic values with colors
 
   const handleDateClick = (info: any) => {
     setNewEvent({ ...newEvent, date: info.dateStr });
@@ -36,6 +43,7 @@ const GoalCalendar: React.FC = () => {
         location: newEvent.location,
         additionalInfo: newEvent.additionalInfo,
       },
+      className: newEvent.pathway.replace(/\s+/g, ''),
     };
 
     setEvents([...events, eventToAdd]);
@@ -44,117 +52,79 @@ const GoalCalendar: React.FC = () => {
   };
 
   return (
-    <div>
-      {/* FullCalendar Component */}
+    <div className="GoalCalendar">
+      <h2>Map Your Path</h2>
+      <p>Use the calendar to track your path!</p>
+
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         editable={true}
         selectable={true}
         events={events}
-        dateClick={handleDateClick} // ✅ Click date to open modal
+        dateClick={handleDateClick}
       />
 
       {/* ✅ Event Form Modal */}
       {showModal && (
-        <div
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            backgroundColor: "#fff",
-            padding: "20px",
-            boxShadow: "0px 4px 6px rgba(0,0,0,0.1)",
-            zIndex: 1000,
-            borderRadius: "8px",
-            width: "400px",
-          }}
-        >
-          <h3>Add New Event</h3>
-          <form onSubmit={handleSubmit}>
-            {/* Event Title */}
-            <label>
-              Event Title: <span style={{ color: "red" }}>*</span>
-            </label>
-            <input
-              type="text"
-              value={newEvent.title}
-              onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
-              required
-              style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
-            />
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Add New Event</h3>
+            <form onSubmit={handleSubmit}>
+              <label>
+                Event Title: <span className="required">*</span>
+              </label>
+              <input
+                type="text"
+                value={newEvent.title}
+                onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
+                required
+              />
 
-            {/* Pathway (Dropdown) */}
-            <label>Pathway:</label>
-            <select
-              value={newEvent.pathway}
-              onChange={(e) => setNewEvent({ ...newEvent, pathway: e.target.value })}
-              required
-              style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
-            >
-              <option value="">Select Pathway</option>
-              {pathways.map((path) => (
-                <option key={path} value={path}>
-                  {path}
-                </option>
-              ))}
-            </select>
+              <label>Pathway:</label>
+              <select
+                value={newEvent.pathway}
+                onChange={(e) => setNewEvent({ ...newEvent, pathway: e.target.value })}
+                required
+              >
+                <option value="">Select Pathway</option>
+                {pathways.map((path) => (
+                  <option
+                    key={path.name}
+                    value={path.name}
+                    style={{
+                      backgroundColor: path.color,
+                      color: "#fff",
+                    }}
+                  >
+                    {path.name}
+                  </option>
+                ))}
+              </select>
 
-            {/* Location */}
-            <label>Location:</label>
-            <input
-              type="text"
-              value={newEvent.location}
-              onChange={(e) => setNewEvent({ ...newEvent, location: e.target.value })}
-              style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
-            />
+              <label>Location:</label>
+              <input
+                type="text"
+                value={newEvent.location}
+                onChange={(e) => setNewEvent({ ...newEvent, location: e.target.value })}
+              />
 
-            {/* Additional Info (500 character limit) */}
-            <label>Additional Information (max 500 characters):</label>
-            <textarea
-              value={newEvent.additionalInfo}
-              onChange={(e) =>
-                setNewEvent({ ...newEvent, additionalInfo: e.target.value.slice(0, 500) })
-              }
-              maxLength={500}
-              rows={4}
-              style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
-            />
+              <label>Additional Information (max 500 characters):</label>
+              <textarea
+                value={newEvent.additionalInfo}
+                onChange={(e) =>
+                  setNewEvent({ ...newEvent, additionalInfo: e.target.value.slice(0, 500) })
+                }
+                maxLength={500}
+                rows={4}
+              />
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              style={{
-                backgroundColor: "#6c5ce7",
-                color: "#fff",
-                padding: "10px",
-                width: "100%",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-              }}
-            >
-              Add Event
+              <button type="submit">Add Event</button>
+            </form>
+            <button className="cancel-button" onClick={() => setShowModal(false)}>
+              Cancel
             </button>
-          </form>
-
-          {/* Cancel Button */}
-          <button
-            onClick={() => setShowModal(false)}
-            style={{
-              marginTop: "10px",
-              backgroundColor: "#ff4757",
-              color: "#fff",
-              padding: "8px",
-              width: "100%",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Cancel
-          </button>
+          </div>
         </div>
       )}
     </div>
@@ -162,12 +132,3 @@ const GoalCalendar: React.FC = () => {
 };
 
 export default GoalCalendar;
-
-
-
-
-
-
-
-
-
