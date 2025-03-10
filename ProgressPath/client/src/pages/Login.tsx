@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
 import AuthService from "../utils/auth";
 import NavLimited from "../components/Navbar/NavLimited";
-import "../assets/styles/login.css";
+import "../assets/Styles/Login.css";
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });

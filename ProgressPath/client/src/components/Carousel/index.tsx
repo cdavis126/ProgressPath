@@ -1,9 +1,9 @@
 import { Carousel } from 'react-bootstrap';
-import SelfCare from '../../assets/WellBeing/SelfCare.png';
+import SelfCare from '../../assets/WellBeing/StressManagement.png';
 import Fitness from '../../assets/Fitness/Fitness.jpg';
-import Mindfulness from '../../assets/Mindset/Mindfulness.png';
-import Nutrition from '../../assets/Nutrition/Nutrition.jpg';
-import Reading from '../../assets/Growth/Reading.png';
+import Mindfulness from '../../assets/Mindset/Mind.png';
+import Nutrition from '../../assets/Nutrition/Diet.png';
+import Reading from '../../assets/Growth/Plant.png';
 import Creativity from '../../assets/Creativity/Creativity.png';
 import Productivity from '../../assets/Productivity/TaskNote.jpg';
 
@@ -58,9 +58,9 @@ export default function App() {
             style={{ objectFit: 'cover', height: '35vh' }}
           />
           <Carousel.Caption>
-            <h1 style={{ fontWeight: 'bold', color: 'white' }}>Nutrition</h1>
-            <p style={{ fontSize: '1.5rem', color: 'white' }}>"A healthy outside starts from the inside."</p>
-            <p style={{ fontStyle: 'italic', color: 'white' }}>- Robert Urich</p>
+            <h1 style={{ fontWeight: 'bold', color: 'black' }}>Nutrition</h1>
+            <p style={{ fontSize: '1.5rem', color: 'black' }}>"A healthy outside starts from the inside."</p>
+            <p style={{ fontStyle: 'italic', color: 'black' }}>- Robert Urich</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item interval={2000}>
@@ -71,9 +71,9 @@ export default function App() {
             style={{ objectFit: 'cover', height: '35vh' }}
           />
           <Carousel.Caption>
-            <h1 style={{ fontWeight: 'bold', color: 'black' }}>Growth</h1>
-            <p style={{ fontSize: '1.5rem', color: 'black' }}>"Change is inevitable. Growth is optional."</p>
-            <p style={{ fontStyle: 'italic', color: 'black' }}>- John Maxwell</p>
+            <h1 style={{ fontWeight: 'bold', color: 'white' }}>Growth</h1>
+            <p style={{ fontSize: '1.5rem', color: 'white' }}>"Change is inevitable. Growth is optional."</p>
+            <p style={{ fontStyle: 'italic', color: 'white' }}>- John Maxwell</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item interval={2000}>
