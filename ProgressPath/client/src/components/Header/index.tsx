@@ -26,9 +26,9 @@ const Header = ({ setShowModal }: HeaderProps) => {
       >
         <div className="container-fluid d-flex justify-content-between align-items-center" style={{ padding: "0 16px" }}>
           
-          {/* Left Section: ProgressPath Logo - Now links to Home Page */}
+          {/* Left Section: ProgressPath Logo - Now links to Dashboard Page */}
           <div className="d-flex align-items-center">
-            <Link to="/home" className="text-dark" aria-label="Go to Home">
+            <Link to="/dashboard" className="text-dark" aria-label="Go to Dashboard">
               <i className="bi bi-sign-intersection-y-fill" style={{ fontSize: "1.5rem", cursor: "pointer" }}></i>
             </Link>
           </div>
@@ -129,3 +129,4 @@ const Header = ({ setShowModal }: HeaderProps) => {
 };
 
 export default Header;
+
