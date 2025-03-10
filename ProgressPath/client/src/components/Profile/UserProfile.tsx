@@ -34,7 +34,7 @@ const iconMap: Record<string, { element: JSX.Element; label: string }> = {
 const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
   const { user, logout } = useAuth();
   const [deleteUser] = useMutation(DELETE_USER);
-  
+
   // ✅ Ensure email is pulled from JWT
   const userEmail = user?.email || "";
 
@@ -84,7 +84,7 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
   return (
     <div className={`profile-modal ${isOpen ? "show" : ""}`} style={{ display: isOpen ? "flex" : "none" }}>
       <div className="profile-modal-content">
-        {/* ✅ Close Button (Now Fully Visible) */}
+        {/* ✅ Close Button */}
         <button className="close-button" onClick={onClose}>✖</button>
 
         <ProfileContainer>
@@ -107,10 +107,10 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
                       className="profile-name-input"
                     />
 
-                    {/* ✅ "Your Pathway" - Shows Selected Pathway */}
+                    {/*  "Your Pathway" - Updates from Right Side */}
                     <p className="profile-pathway">{profile.pathway || "Select Your Pathway"}</p>
 
-                    {/* ✅ "I'm..." Dropdown (Updates Icon) */}
+                    {/*  "I'm..." Dropdown (Now Updates Icon & Displays Selection) */}
                     <select className="form-select pathway-dropdown" name="avatar" value={profile.avatar} onChange={handleAvatarChange}>
                       <option value="">I'm...</option>
                       {Object.keys(iconMap).map((key) => (
@@ -119,16 +119,16 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
                     </select>
                   </ProfileCol>
 
-                  {/* ✅ RIGHT SIDE */}
+                  {/*  RIGHT SIDE */}
                   <ProfileCol md="7">
                     <ProfileCardBody className="p-4">
                       <ProfileTypography tag="h6" className="profile-section-header">Profile Information</ProfileTypography>
                       <hr className="profile-divider" />
 
-                      {/* ✅ Email (Now Visible & Styled) */}
+                      {/* Email (Now Visible & Styled) */}
                       <p className="profile-email">{userEmail}</p>
 
-                      {/* ✅ Pathway Dropdown */}
+                      {/* Pathway Dropdown (Updates Left Side Too) */}
                       <label className="profile-label">Select Your Pathway</label>
                       <select className="form-select mt-2" name="pathway" value={profile.pathway} onChange={handleChange}>
                         <option value="">Select Your Pathway</option>
@@ -142,9 +142,14 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
                         <option value="Other">Other</option>
                       </select>
 
+                      {/* Location (Now BELOW Pathway) */}
+                      <label className="profile-label mt-2">Location</label>
+                      <input type="text" name="location" value={profile.location} onChange={handleChange} className="profile-location mt-2" placeholder="Enter your location" />
+
+                      {/*  About Section */}
                       <ProfileTextArea label="About" name="about" value={profile.about} onChange={handleChange} maxLength={300} className="mt-3" placeholder="Tell us about yourself!"/>
 
-                      {/* ✅ Social Media Inputs - Icons Inside Fields */}
+                      {/*  Social Media Inputs */}
                       <div className="profile-social-section">
                         <div className="social-input">
                           <FaFacebook />
@@ -156,9 +161,9 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
                         </div>
                       </div>
 
-                      {/* ✅ Buttons (Now Perfectly Visible) */}
+                      {/*  Buttons (Delete Profile is now DARK PINK) */}
                       <ProfileBtn className="mt-3 profile-btn" block onClick={handleSaveProfile}>Save Profile</ProfileBtn>
-                      <ProfileBtn className="mt-2 delete-profile-btn" block onClick={handleDeleteProfile}>
+                      <ProfileBtn className="mt-2 delete-profile-btn dark-pink-btn" block onClick={handleDeleteProfile}>
                         <ProfileIcon fas icon="trash" className="delete-icon" /> Delete Profile
                       </ProfileBtn>
 
@@ -176,6 +181,9 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
 };
 
 export default UserProfile;
+
+
+
 
 
 
