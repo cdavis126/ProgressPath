@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import AuthService from "../utils/auth";
 import NavLimited from "../components/Navbar/NavLimited";
-import "../assets/styles/signup.css";
+import "../assets/Styles/Signup.css";
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState({ username: "", email: "", password: "" });
