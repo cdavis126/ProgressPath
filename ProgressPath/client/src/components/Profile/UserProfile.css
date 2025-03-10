@@ -1,72 +1,208 @@
-/* Profile Modal Background (Semi-Transparent Overlay) */
+/* ✅ MODAL: WIDER, FULLY CENTERED */
 .profile-modal {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 999;
-}
-
-/* Profile Card Background - Gradient (Matches Navbar) */
-.gradient-custom {
-  background: linear-gradient(to right bottom, #dac4f7, #f4989c);
-}
-
-/*  Profile Avatar */
-.profile-avatar {
-  font-size: 3rem;
-  margin-top: 20px;
-  color: #ffffff; /* White icons for contrast */
-}
-
-/*  Avatar Dropdown */
-.avatar-select {
-  margin-top: 10px;
-  background: #dac4f7;
-  color: white;
-  border: 1px solid white;
-  border-radius: 5px;
-}
-
-/* Card Styling */
-.profile-card {
-  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Input Fields */
-input,
-textarea,
-select {
-  background-color: #ebd2b4;
-  border: 2px solid #acecf7;
-  color: black;
-  padding: 8px;
+/* ✅ MODAL CONTAINER: FINAL SIZE FIXED */
+.profile-card {
+  width: 980px; /* ⬅️ SLIGHTLY WIDER */
+  max-width: 100%;
+  height: 670px; /* ⬇️ SLIGHTLY REDUCED HEIGHT */
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  display: flex;
+}
+
+/* ✅ LEFT SIDE - FIXED WIDTH & SPACING */
+.profile-left {
+  flex: 1.8; /* ⬆️ SLIGHTLY WIDER */
+  text-align: center;
+  background: linear-gradient(to right bottom, #dac4f7, #f4989c);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 30px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  min-height: 100%;
+}
+
+/* ✅ FIXED ICON POSITION */
+.profile-avatar {
+  font-size: 5rem;
+  margin-top: 15px; /* ⬆️ Moved up */
+  margin-bottom: 15px;
+}
+
+/* ✅ "ENTER YOUR NAME" FIXED */
+.profile-name-input {
+  background: none; /* ⬅️ REMOVED WHITE BOX */
+  border: none;
+  color: white;
+  font-size: 1.4rem; /* ⬇️ SLIGHTLY SMALLER */
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+  padding: 5px;
+}
+
+/* ✅ PLACEHOLDER TEXT - DARKER */
+.profile-name-input::placeholder {
+  color: #b3126a;
+  font-weight: bold;
+}
+
+/* ✅ "YOUR PATHWAY" TEXT FIXED */
+.profile-pathway {
+  color: #6c63ff;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* ✅ "I'M ..." DROPDOWN BUTTON FIXED */
+.pathway-dropdown {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+  border: 2px solid white;
   border-radius: 5px;
+  padding: 10px;
+  width: 100%;
   font-size: 1rem;
+  text-align: center;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: #f4989c;
+/* ✅ "I'M ..." DEFAULT TEXT */
+.pathway-dropdown option[value=""] {
+  font-weight: bold;
+  color: #6c63ff;
+}
+
+/* ✅ RIGHT SIDE - SPACING FIXED */
+.profile-right {
+  flex: 2.2; /* ⬆️ Slightly wider */
+  padding: 25px;
+}
+
+/* ✅ PROFILE INFO HEADER - RESTORED */
+.profile-section-header {
+  font-size: 1.4rem;
+  color: #f4989c;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ✅ INFO LINE - GRADIENT RESTORED */
+.profile-divider {
+  background: linear-gradient(to right, #f4989c, #dac4f7);
+  height: 4px;
+  border: none;
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+/* ✅ FIX SPACING BETWEEN FORM FIELDS */
+.profile-right label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: bold;
+  margin-bottom: 3px; /* ⬇️ LESS SPACE */
+}
+
+/* ✅ FIXED EMAIL FIELD (NON-EDITABLE) */
+.profile-email {
+  color: #b3126a; /* Dark pink */
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: none;
+  border: none;
+  padding: 8px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.profile-email:focus {
+  outline: none;
+  border: none;
+}
+
+/* ✅ ABOUT SECTION PLACEHOLDER FIXED */
+.profile-about {
+  color: #b3126a; /* Dark pink */
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* ✅ SOCIAL MEDIA INPUTS - ICON INSIDE */
+.profile-social-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* ✅ FIXED FACEBOOK & IG ICONS INSIDE FORM FIELD */
+.profile-social-icons .social-input {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 10px;
+  border: 2px solid #acecf7; /* ✅ GREEN BORDER FIXED */
+  border-radius: 6px;
+  width: 100%;
+}
+
+/* ✅ FIXED ICON SPACING */
+.profile-social-icons .social-input i {
+  font-size: 1.4rem;
+  margin-right: 7px; /* ⬆️ ADDED SPACING */
+  color: #f4989c;
+}
+
+/* ✅ FIX FORM FILL ALIGNMENT */
+.profile-social-icons input {
+  background: none;
+  border: none;
+  flex: 1;
+  font-size: 1rem;
+  color: black;
+  padding-left: 5px;
+}
+
+.profile-social-icons input:focus {
   outline: none;
 }
 
-/* Save Button */
+/* ✅ BUTTONS - FIXED SPACING & VISIBILITY */
+.profile-btn,
+.delete-profile-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* ✅ SAVE PROFILE BUTTON */
 .profile-btn {
   background-color: #f4989c;
   color: white;
-  font-weight: bold;
-  padding: 10px 15px;
-  border-radius: 8px;
-  transition: 0.3s ease-in-out;
+  transition: 0.3s;
 }
 
 .profile-btn:hover {
@@ -74,18 +210,10 @@ select:focus {
   color: black;
 }
 
-/* Delete Profile Button */
+/* ✅ DELETE PROFILE BUTTON */
 .delete-profile-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: #ff4d4d;
   color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  padding: 10px;
-  margin-top: 10px;
-  transition: 0.3s ease-in-out;
 }
 
 .delete-profile-btn:hover {
@@ -93,43 +221,47 @@ select:focus {
   color: black;
 }
 
-/* Delete Icon */
-.delete-icon {
-  margin-right: 5px;
-  font-size: 1.2rem;
+/* ✅ CLOSE BUTTON - NOW VISIBLE */
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #ff4d4d;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* Section Headers */
-.profile-section-header {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #f4989c;
-  margin-bottom: 5px;
-}
-
-/* Social Media Input Fields */
-.profile-social-input {
-  background: #dac4f7;
-  border: 1px solid #acecf7;
-  color: black;
-  padding: 8px;
-  border-radius: 5px;
-}
-
-/* Social Icons */
-.profile-social-icons {
-  display: flex;
-  justify-content: flex-start;
-  gap: 15px;
-  margin-top: 10px;
-}
-
-.profile-social-icons a {
-  color: #acecf7;
-  font-size: 1.4rem;
-  transition: 0.3s ease-in-out;
-}
-
-.profile-social-icons a:hover {
+.close-button:hover {
   color: #f4989c;
 }
+
+/* ✅ RESPONSIVE FIXES */
+@media (max-width: 768px) {
+  .profile-card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .profile-left,
+  .profile-right {
+    width: 100%;
+    padding: 25px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,7 +6,6 @@ import {
   MDBCard as ProfileCard,
   MDBCardBody as ProfileCardBody,
   MDBTypography as ProfileTypography,
-  MDBInput as ProfileInput,
   MDBTextArea as ProfileTextArea,
   MDBBtn as ProfileBtn,
   MDBIcon as ProfileIcon,
@@ -18,28 +17,31 @@ import "./UserProfile.css";
 
 // Icons for Avatar Selection
 import { TbArrowsRandom } from "react-icons/tb";
-import { FaBrain, FaPaintBrush, FaBookReader, FaDumbbell, FaTasks } from "react-icons/fa";
+import { FaBrain, FaPaintBrush, FaBookReader, FaDumbbell, FaTasks, FaFacebook, FaInstagram } from "react-icons/fa";
 import { GiInnerSelf, GiKnifeFork } from "react-icons/gi";
 
-const iconMap: Record<string, JSX.Element> = {
-  TbArrowsRandom: <TbArrowsRandom style={{ fontSize: "2rem" }} />,
-  FaBrain: <FaBrain style={{ fontSize: "2rem" }} />,
-  FaPaintBrush: <FaPaintBrush style={{ fontSize: "2rem" }} />,
-  GiInnerSelf: <GiInnerSelf style={{ fontSize: "2rem" }} />,
-  GiKnifeFork: <GiKnifeFork style={{ fontSize: "2rem" }} />,
-  FaBookReader: <FaBookReader style={{ fontSize: "2rem" }} />,
-  FaDumbbell: <FaDumbbell style={{ fontSize: "2rem" }} />,
-  FaTasks: <FaTasks style={{ fontSize: "2rem" }} />,
+const iconMap: Record<string, { element: JSX.Element; label: string }> = {
+  TbArrowsRandom: { element: <TbArrowsRandom />, label: "Progressing" },
+  FaBrain: { element: <FaBrain />, label: "Learning" },
+  FaPaintBrush: { element: <FaPaintBrush />, label: "Creating" },
+  GiInnerSelf: { element: <GiInnerSelf />, label: "Mindful" },
+  GiKnifeFork: { element: <GiKnifeFork />, label: "Nourishing" },
+  FaBookReader: { element: <FaBookReader />, label: "Reading" },
+  FaDumbbell: { element: <FaDumbbell />, label: "Flexing" },
+  FaTasks: { element: <FaTasks />, label: "Accomplishing" },
 };
 
 const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
   const { user, logout } = useAuth();
   const [deleteUser] = useMutation(DELETE_USER);
+  
+  // ✅ Ensure email is pulled from JWT
+  const userEmail = user?.email || "";
+
   const [profile, setProfile] = useState({
     name: "",
     pathway: "",
     location: "",
-    email: user?.email || "",
     about: "",
     facebook: "",
     instagram: "",
@@ -53,7 +55,7 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
     }
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
 
@@ -82,52 +84,87 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
   return (
     <div className={`profile-modal ${isOpen ? "show" : ""}`} style={{ display: isOpen ? "flex" : "none" }}>
       <div className="profile-modal-content">
-        <button className="close-button" onClick={onClose}>
-          ✖
-        </button>
+        {/* ✅ Close Button (Now Fully Visible) */}
+        <button className="close-button" onClick={onClose}>✖</button>
 
-        <ProfileContainer className="py-5">
+        <ProfileContainer>
           <ProfileRow className="justify-content-center">
-            <ProfileCol lg="6">
-              <ProfileCard className="mb-3">
+            <ProfileCol lg="8">
+              <ProfileCard className="profile-card">
                 <ProfileRow className="g-0">
-                  <ProfileCol md="4" className="gradient-custom text-center text-white">
-                    <div className="profile-avatar">{iconMap[profile.avatar]}</div>
-                    <ProfileTypography tag="h5">{profile.name || "Your Name"}</ProfileTypography>
-                    <ProfileTypography tag="h6">{profile.pathway || "Your Pathway"}</ProfileTypography>
+                  
+                  {/* ✅ LEFT SIDE */}
+                  <ProfileCol md="5" className="gradient-custom text-center text-white profile-left">
+                    <div className="profile-avatar">{iconMap[profile.avatar].element}</div>
 
-                    <select className="form-select avatar-select" name="avatar" value={profile.avatar} onChange={handleAvatarChange}>
+                    {/* ✅ Editable Name Input */}
+                    <input
+                      type="text"
+                      name="name"
+                      value={profile.name}
+                      onChange={handleChange}
+                      placeholder="Enter Your Name"
+                      className="profile-name-input"
+                    />
+
+                    {/* ✅ "Your Pathway" - Shows Selected Pathway */}
+                    <p className="profile-pathway">{profile.pathway || "Select Your Pathway"}</p>
+
+                    {/* ✅ "I'm..." Dropdown (Updates Icon) */}
+                    <select className="form-select pathway-dropdown" name="avatar" value={profile.avatar} onChange={handleAvatarChange}>
+                      <option value="">I'm...</option>
                       {Object.keys(iconMap).map((key) => (
-                        <option key={key} value={key}>
-                          {key}
-                        </option>
+                        <option key={key} value={key}>{iconMap[key].label}</option>
                       ))}
                     </select>
                   </ProfileCol>
 
-                  <ProfileCol md="8">
+                  {/* ✅ RIGHT SIDE */}
+                  <ProfileCol md="7">
                     <ProfileCardBody className="p-4">
-                      <ProfileTypography tag="h6">Profile Information</ProfileTypography>
-                      <hr />
+                      <ProfileTypography tag="h6" className="profile-section-header">Profile Information</ProfileTypography>
+                      <hr className="profile-divider" />
 
-                      <ProfileInput label="Name" type="text" name="name" value={profile.name} onChange={handleChange} />
-                      <ProfileInput label="Location" type="text" name="location" value={profile.location} onChange={handleChange} className="mt-3" />
-                      <ProfileInput label="Email" type="email" name="email" value={profile.email} readOnly className="mt-3" />
+                      {/* ✅ Email (Now Visible & Styled) */}
+                      <p className="profile-email">{userEmail}</p>
 
-                      <ProfileTextArea label="About" name="about" value={profile.about} onChange={handleChange} maxLength={300} className="mt-3" />
+                      {/* ✅ Pathway Dropdown */}
+                      <label className="profile-label">Select Your Pathway</label>
+                      <select className="form-select mt-2" name="pathway" value={profile.pathway} onChange={handleChange}>
+                        <option value="">Select Your Pathway</option>
+                        <option value="Mindset">Mindset</option>
+                        <option value="Creativity">Creativity</option>
+                        <option value="Well-Being">Well-Being</option>
+                        <option value="Nutrition">Nutrition</option>
+                        <option value="Growth">Growth</option>
+                        <option value="Fitness">Fitness</option>
+                        <option value="Productivity">Productivity</option>
+                        <option value="Other">Other</option>
+                      </select>
 
-                      <ProfileInput label="Facebook" type="text" name="facebook" value={profile.facebook} onChange={handleChange} className="mt-3" />
-                      <ProfileInput label="Instagram" type="text" name="instagram" value={profile.instagram} onChange={handleChange} className="mt-3" />
+                      <ProfileTextArea label="About" name="about" value={profile.about} onChange={handleChange} maxLength={300} className="mt-3" placeholder="Tell us about yourself!"/>
 
-                      <ProfileBtn className="mt-4 profile-btn" block onClick={handleSaveProfile}>
-                        Save Profile
-                      </ProfileBtn>
+                      {/* ✅ Social Media Inputs - Icons Inside Fields */}
+                      <div className="profile-social-section">
+                        <div className="social-input">
+                          <FaFacebook />
+                          <input type="text" name="facebook" value={profile.facebook} onChange={handleChange} placeholder="Facebook Username" />
+                        </div>
+                        <div className="social-input">
+                          <FaInstagram />
+                          <input type="text" name="instagram" value={profile.instagram} onChange={handleChange} placeholder="Instagram Username" />
+                        </div>
+                      </div>
 
+                      {/* ✅ Buttons (Now Perfectly Visible) */}
+                      <ProfileBtn className="mt-3 profile-btn" block onClick={handleSaveProfile}>Save Profile</ProfileBtn>
                       <ProfileBtn className="mt-2 delete-profile-btn" block onClick={handleDeleteProfile}>
                         <ProfileIcon fas icon="trash" className="delete-icon" /> Delete Profile
                       </ProfileBtn>
+
                     </ProfileCardBody>
                   </ProfileCol>
+
                 </ProfileRow>
               </ProfileCard>
             </ProfileCol>
@@ -139,5 +176,14 @@ const UserProfile: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpe
 };
 
 export default UserProfile;
+
+
+
+
+
+
+
+
+
 
 
