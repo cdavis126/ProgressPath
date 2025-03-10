@@ -14,16 +14,18 @@ import { useMutation } from "@apollo/client";
 import { DELETE_USER } from "../../utils/mutations";
 import "./UserProfile.css";
 
-// Icons for Avatar Selection
+// Icons
 import { TbArrowsRandom } from "react-icons/tb";
 import { FaBrain, FaPaintBrush, FaBookReader, FaDumbbell, FaTasks } from "react-icons/fa";
 import { GiInnerSelf, GiKnifeFork } from "react-icons/gi";
 
+// Interface for component props
 interface UserProfileProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+// Profile state interface
 interface ProfileState {
   name: string;
   pathway: string;
@@ -32,6 +34,7 @@ interface ProfileState {
   avatar: string;
 }
 
+// Icon map
 const iconMap: Record<string, { element: JSX.Element; label: string }> = {
   TbArrowsRandom: { element: <TbArrowsRandom />, label: "Progressing" },
   FaBrain: { element: <FaBrain />, label: "Learning" },
@@ -101,10 +104,10 @@ const UserProfile: React.FC<UserProfileProps> = ({ isOpen, onClose }) => {
               <ProfileCard className="profile-card">
                 <ProfileRow className="g-0">
                   
-                  {/* ✅ LEFT SIDE FIXED */}
+                  {/* ✅ LEFT SIDE - FIXED GRADIENT, ICON UPDATING */}
                   <ProfileCol md="5" className="profile-left">
                     <div className="profile-avatar">
-                      {iconMap[profile.avatar as keyof typeof iconMap].element}
+                      {iconMap[profile.avatar]?.element || <FaBrain />}
                     </div>
 
                     <input
@@ -132,7 +135,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ isOpen, onClose }) => {
                       <ProfileTypography tag="h6" className="profile-section-header">Profile Information</ProfileTypography>
                       <hr className="profile-divider" />
 
-                      {/* ✅ EMAIL FIXED */}
+                      {/* ✅ EMAIL FIXED (NO BORDER) */}
                       <p className="profile-email-box">{userEmail}</p>
 
                       <label className="profile-label">Select Your Pathway</label>
@@ -151,10 +154,11 @@ const UserProfile: React.FC<UserProfileProps> = ({ isOpen, onClose }) => {
                       <label className="profile-label mt-2">Location</label>
                       <input type="text" name="location" value={profile.location} onChange={handleChange} className="profile-location mt-2" placeholder="Enter your location" />
 
+                      {/* ✅ ABOUT FIXED (NOW ABOVE FORM FILL) */}
                       <label className="profile-label mt-2">About</label>
-                      <ProfileTextArea label="" name="about" value={profile.about} onChange={handleChange} maxLength={300} className="mt-2" placeholder="Tell us about yourself!"/>
+                      <ProfileTextArea name="about" value={profile.about} onChange={handleChange} maxLength={300} className="mt-2 profile-textarea" placeholder="Tell us about yourself!"/>
 
-                      {/* ✅ DELETE BUTTON FINAL FIX */}
+                      {/* ✅ FIXED DELETE PROFILE BUTTON */}
                       <ProfileBtn className="mt-3 profile-btn" block onClick={handleSaveProfile}>Save Profile</ProfileBtn>
                       <ProfileBtn className="mt-2 delete-profile-btn" block onClick={handleDeleteProfile}>Delete Profile</ProfileBtn>
 
@@ -172,6 +176,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ isOpen, onClose }) => {
 };
 
 export default UserProfile;
+
 
 
 
