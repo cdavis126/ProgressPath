@@ -57,8 +57,8 @@ const Dashboard = () => {
 
   // Tab Headers
   const tabHeaders = {
-    calendar: { title: "Map Your Path", description: "Use the calendar to track your path!" },
-    goals: { title: "Create Your Path..and..Follow Your Progress", description: "Motivation is what gets you started. A Habit is what keeps you going." },
+    calendar: { title: "Map Your Path", description: "Map your paths, follow your progress and stay on course." },
+    goals: { title: "Create Your Path", description: "Motivation is what gets you started. A Habit is what keeps you going." },
   };
 
   return (
