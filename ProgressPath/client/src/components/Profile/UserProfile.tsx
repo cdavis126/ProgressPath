@@ -50,7 +50,13 @@ const UserProfile: React.FC<UserProfileProps> = ({ isOpen, onClose }) => {
   const { user, logout } = useAuth();
   const [deleteUser] = useMutation(DELETE_USER);
 
-  const userEmail: string = user?.email || "No email found";
+  // Debugging: Check what `useAuth()` is returning
+  useEffect(() => {
+    console.log("User from useAuth:", user);
+  }, [user]);
+
+  // Fix: Change fallback message if email is missing
+  const userEmail: string = user?.email || "Welcome to ProgressPath!";
 
   const [profile, setProfile] = useState<ProfileState>({
     name: "",
@@ -104,7 +110,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ isOpen, onClose }) => {
               <ProfileCard className="profile-card">
                 <ProfileRow className="g-0">
                   
-                  {/* ✅ LEFT SIDE - FIXED GRADIENT, ICON UPDATING */}
+                  {/*  LEFT SIDE - FIXED GRADIENT, ICON UPDATING */}
                   <ProfileCol md="5" className="profile-left">
                     <div className="profile-avatar">
                       {iconMap[profile.avatar]?.element || <FaBrain />}
@@ -129,13 +135,13 @@ const UserProfile: React.FC<UserProfileProps> = ({ isOpen, onClose }) => {
                     </select>
                   </ProfileCol>
 
-                  {/* ✅ RIGHT SIDE FIXES */}
+                  {/* RIGHT SIDE FIXES */}
                   <ProfileCol md="7">
                     <ProfileCardBody className="p-4">
                       <ProfileTypography tag="h6" className="profile-section-header">Profile Information</ProfileTypography>
                       <hr className="profile-divider" />
 
-                      {/* ✅ EMAIL FIXED (NO BORDER) */}
+                      {/* EMAIL FIXED (NO BORDER) */}
                       <p className="profile-email-box">{userEmail}</p>
 
                       <label className="profile-label">Select Your Pathway</label>
@@ -154,11 +160,11 @@ const UserProfile: React.FC<UserProfileProps> = ({ isOpen, onClose }) => {
                       <label className="profile-label mt-2">Location</label>
                       <input type="text" name="location" value={profile.location} onChange={handleChange} className="profile-location mt-2" placeholder="Enter your location" />
 
-                      {/* ✅ ABOUT FIXED (NOW ABOVE FORM FILL) */}
+                      {/*  ABOUT FIXED (NOW ABOVE FORM FILL) */}
                       <label className="profile-label mt-2">About</label>
                       <ProfileTextArea name="about" value={profile.about} onChange={handleChange} maxLength={300} className="mt-2 profile-textarea" placeholder="Tell us about yourself!"/>
 
-                      {/* ✅ FIXED DELETE PROFILE BUTTON */}
+                      {/* FIXED DELETE PROFILE BUTTON */}
                       <ProfileBtn className="mt-3 profile-btn" block onClick={handleSaveProfile}>Save Profile</ProfileBtn>
                       <ProfileBtn className="mt-2 delete-profile-btn" block onClick={handleDeleteProfile}>Delete Profile</ProfileBtn>
 
@@ -176,6 +182,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ isOpen, onClose }) => {
 };
 
 export default UserProfile;
+
 
 
 
